@@ -40,6 +40,8 @@ object TronBuild extends Build {
         (state: State) => "%s> ".format(Project.extract(state).currentProject.id)
     }
 
+  lazy val dist = TaskKey[Unit]("dist")
+
   lazy val tron = Project(id = "smehotron", base = file("."))
     .settings(scalacOptions := sharedScalacSettings)
     .settings(commonProjectSettings: _*)
@@ -54,7 +56,7 @@ object TronBuild extends Build {
 //      ,initialCommands in (Test, console) := """ammonite.Main().run()"""
     )
     .settings(
-      TaskKey[Unit]("dist") := {
+      dist := {
         import scala.collection.JavaConversions._
         import java.nio.file._
         import java.nio.file.attribute.PosixFilePermission._
@@ -65,6 +67,7 @@ object TronBuild extends Build {
           Set(OWNER_EXECUTE, OWNER_READ, OWNER_WRITE))
         sbt.IO.copyDirectory(new File("saxon"),new File("dist/saxon"),false,true)
         sbt.IO.copyDirectory(new File("schematron"),new File("dist/schematron"),false,true)
-      }
+      },
+      dist <<= dist.dependsOn(assembly)
     )
 }

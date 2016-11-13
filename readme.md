@@ -1,1 +1,5 @@
-TBD
+to build
+
+```
+sbt dist
+```

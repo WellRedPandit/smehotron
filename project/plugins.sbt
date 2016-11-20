@@ -1,7 +1,3 @@
-resolvers ++= Seq(
-  "Typesafe repository" at "http://repo.typesafe.com/typesafe/releases/",
-  "local maven" at "file://" + Path.userHome.absolutePath + "/.m2/repository")
-
 addSbtPlugin("com.timushev.sbt" % "sbt-updates" % "0.2.0")
 
 addSbtPlugin("net.virtual-void" % "sbt-dependency-graph" % "0.8.2")

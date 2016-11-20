@@ -41,3 +41,4 @@ test-output/
 
 node-ui/.tmp/
 .DS_Store
+*_git

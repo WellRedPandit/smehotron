@@ -31,6 +31,7 @@ class Smehotron (val theRoot: Option[Path], cats: Seq[String]) extends LazyLoggi
   def doStep(num: Int, in: String, xsl: String, suffix: String = "") = {
     val out = if (suffix.size > 0 ) in + suffix
               else in.replaceAll("\\.\\d+$","") + "." + num
+    // TODO: skip (and log) if out newer than in
     val cmd1 = log(mkCmd(in, out, xsl))
     if(Cmd.run(cmd1).succeeded)
       Option(out)
@@ -59,26 +60,33 @@ class Smehotron (val theRoot: Option[Path], cats: Seq[String]) extends LazyLoggi
 case class MainArgs(rules: Option[File] = None, xml: Option[File] = None, cfg: Option[File] = None)
 
 object Smehotron extends LazyLogging {
-  val parser = new scopt.OptionParser[MainArgs]("scopt") {
+  val parser = new scopt.OptionParser[MainArgs]("smehotron") {
     head("smehotron", "1.0.1")
 
-    opt[File]('c', "cfg").required()
+    opt[File]('c', "cfg").minOccurs(1).maxOccurs(1)
       .valueName("<config-file>")
       .action( (x, c) => c.copy(cfg = Option(x)) )
       .validate( x => if( x.exists() ) success else failure("config does not exist") )
-      .text("config is required")
+      .text("config (required)")
 
-    opt[File]('s', "sch").optional()
+    opt[File]('s', "sch").minOccurs(0).maxOccurs(1)
       .valueName("<schematron-rules>")
       .action( (x, c) => c.copy(rules = Option(x)) )
       .validate( x => if( x.exists() ) success else failure("schematron file does not exist") )
-      .text("schematron file is required")
+      .text("schematron file (optional)")
 
-    opt[File]('x', "xml").optional()
+    opt[File]('x', "xml").minOccurs(0).maxOccurs(1)
       .valueName("<xml-file>")
       .action( (x, c) => c.copy(xml = Option(x)) )
       .validate( x => if( x.exists() ) success else failure("xml file does not exist") )
-      .text("xml file is required")
+      .text("xml file (optional)")
+
+    checkConfig( c =>
+      if( (c.xml.isEmpty && c.rules.nonEmpty) || (c.xml.nonEmpty && c.rules.isEmpty) )
+        failure("xml and sch should either be both defined or both omitted")
+      else
+        success
+    )
   }
 
   def apply(root:String, cats: Seq[String]) =  new Smehotron(Option(abs(root)), cats)
@@ -97,7 +105,6 @@ object Smehotron extends LazyLogging {
             tron.validate(cfg)
           case _ => throw new RuntimeException("rules and xml – both or neither")
         }
-
       case None => /*ignore*/
     }
   }

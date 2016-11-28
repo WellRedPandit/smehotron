@@ -1,7 +1,6 @@
 import sbt._
 
 object V {
-  val ammonite =  "0.8.0"
   val config = "1.3.1"
   val logback = "1.1.7"
   val scala = "2.11.8"
@@ -16,8 +15,6 @@ object V {
 }
 
 object Deps {
-  val ammoniteOps = "com.lihaoyi" %% "ammonite-ops" % V.ammonite
-  val ammoniteRepl = "com.lihaoyi" % "ammonite-repl" % V.ammonite cross CrossVersion.full
   val commonsIo = "commons-io" % "commons-io" % V.commonsIo
   val config = "com.typesafe" % "config" % V.config
   val slf4j = "org.slf4j" % "slf4j-api" % V.slf4j

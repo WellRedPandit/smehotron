@@ -45,13 +45,12 @@ object TronBuild extends Build {
     .settings(commonProjectSettings: _*)
     .settings(name := "smehotron",
       libraryDependencies ++=
-        compile(ammoniteOps ++ config ++ slf4j ++ logback ++ scalaLogging ++ commonsIo ++ scopt ++ ssc) ++
-        test(ammoniteRepl ++ scalaCheck ++ scalaTest))
+        compile(config ++ slf4j ++ logback ++ scalaLogging ++ commonsIo ++ scopt ++ ssc) ++
+        test(scalaCheck ++ scalaTest))
     .settings(//test in assembly := {},
       assemblyJarName in assembly := "smehotron.jar",
       mainClass in assembly := Some("wrp.smehotron.Smehotron"),
       initialCommands in (Test, console) := """import wrp.smehotron._"""
-//      ,initialCommands in (Test, console) := """ammonite.Main().run()"""
     )
     .settings(
       dist := {

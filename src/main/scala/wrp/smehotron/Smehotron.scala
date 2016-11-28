@@ -1,15 +1,15 @@
 package wrp.smehotron
 
-import utils.PathOps._
 import java.io.File
 import java.nio.file.Path
 
-import ammonite.ops.Shellout._
-import com.typesafe.config.ConfigFactory
 import com.typesafe.scalalogging.LazyLogging
-import eri.commons.config.SSConfig
+import wrp.smehotron.utils.Cmd
+import wrp.smehotron.utils.PathOps._
 
-//import scala.collection.JavaConversions._
+import scala.xml.{Elem, XML}
+
+//import scala.collection.JavaConverters._
 
 class Smehotron (val theRoot: Option[Path], cats: Seq[String]) extends LazyLogging
 {
@@ -17,6 +17,9 @@ class Smehotron (val theRoot: Option[Path], cats: Seq[String]) extends LazyLoggi
   lazy val tronDir = jarDir/"schematron"
   lazy val saxonDir = jarDir/"saxon"
   lazy val saxonClasspath = s"${saxonDir}${File.separator}saxon.he.9.7.0.7.jar${File.pathSeparator}${saxonDir}${File.separator}resolver.jar"
+
+  // TODO: implement
+  def validate(cfg: Elem) = ???
 
   def validate(rulesFile: String, docFile: String) =
     for (step1 <- doStep(1, rulesFile, s"$tronDir${File.separator}iso_dsdl_include.xsl");
@@ -29,7 +32,7 @@ class Smehotron (val theRoot: Option[Path], cats: Seq[String]) extends LazyLoggi
     val out = if (suffix.size > 0 ) in + suffix
               else in.replaceAll("\\.\\d+$","") + "." + num
     val cmd1 = log(mkCmd(in, out, xsl))
-    if(log(%%(cmd1)(ammonite.ops.Path(pwd))).exitCode == 0)
+    if(Cmd.run(cmd1).succeeded)
       Option(out)
     else
       None
@@ -65,13 +68,13 @@ object Smehotron extends LazyLogging {
       .validate( x => if( x.exists() ) success else failure("config does not exist") )
       .text("config is required")
 
-    opt[File]('s', "sch").required()
+    opt[File]('s', "sch").optional()
       .valueName("<schematron-rules>")
       .action( (x, c) => c.copy(rules = Option(x)) )
       .validate( x => if( x.exists() ) success else failure("schematron file does not exist") )
       .text("schematron file is required")
 
-    opt[File]('x', "xml").required()
+    opt[File]('x', "xml").optional()
       .valueName("<xml-file>")
       .action( (x, c) => c.copy(xml = Option(x)) )
       .validate( x => if( x.exists() ) success else failure("xml file does not exist") )
@@ -84,10 +87,17 @@ object Smehotron extends LazyLogging {
     val jar = new File(getClass.getProtectionDomain.getCodeSource.getLocation.toURI)
     parser.parse(args, MainArgs()) match {
       case Some(opts) =>
-        val cfg = new SSConfig(ConfigFactory.parseFile(opts.cfg.get).resolve())
-        val cats = cfg.catalogs.as[Seq[String]]
+        val cfg = XML.loadFile(opts.cfg.get)
+        val cats = (cfg \\ "catalog").map(_.text)
         val tron = Smehotron(jar.getParent, cats)
-        tron.validate(opts.rules.get.getAbsolutePath, opts.xml.get.getAbsolutePath)
+        (opts.rules, opts.xml) match {
+          case (Some(rules), Some(xml)) =>
+            tron.validate(rules.getAbsolutePath, xml.getAbsolutePath)
+          case (None, None) =>
+            tron.validate(cfg)
+          case _ => throw new RuntimeException("rules and xml – both or neither")
+        }
+
       case None => /*ignore*/
     }
   }

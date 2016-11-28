@@ -1,0 +1,6 @@
+<?xml version="1.0" standalone="yes" ?>
+
+<catalogs>
+  <catalog>/path/to/NLM-v3.0-Tag-Set/catalog-NLM-v3.0.xml</catalog>
+  <catalog>/path/to/MathML2.xml</catalog>
+</catalogs>

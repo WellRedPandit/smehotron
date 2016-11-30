@@ -59,6 +59,12 @@ object TronBuild extends Build {
         sbt.IO.copyDirectory(new File("saxon"), new File("dist/saxon"), false, true)
         sbt.IO.copyDirectory(new File("schematron"), new File("dist/schematron"), false, true)
       },
-      dist <<= dist.dependsOn(assembly)
+      dist <<= dist.dependsOn(assembly),
+      initialCommands in console :=
+        """
+          |import wrp.smehotron._
+          |import scala.concurrent.ExecutionContext.Implicits.global
+          |import scala.util._
+          | """.stripMargin
     )
 }

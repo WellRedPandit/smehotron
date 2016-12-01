@@ -37,7 +37,7 @@ object Cmd extends StrictLogging {
   def run(cmd: Seq[String]) = {
     assert(cmd.size > 0, "command must have a head")
     logger.debug(cmd.map("\"" + _ + "\"").mkString(" "))
-    val cltr = OutErrCollector(s"<${cmd.head}>")
+    val cltr = OutErrCollector() // s"<${cmd.head}>"
     val plogger = ProcessLogger(cltr.fout, cltr.ferr)
     val exc = cmd ! plogger
     logger.debug(s"exit code: $exc")

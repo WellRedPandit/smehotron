@@ -51,7 +51,6 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem, force: Boolean = false) ex
   def doStep(num: Int, in: String, xsl: String, suffix: String = "") = {
     val out = if (suffix.size > 0) in + suffix else in.replaceAll("\\.\\d+$", "") + "." + num
     val outf = new File(out)
-    // TODO: skip (and log) if out newer than in
     if (outf.exists() && FileUtils.isFileNewer(outf, new File(in)) && !force) {
       logger.debug(s"$out is newer than $in, skipping regeneration...")
       Option(out)

@@ -1,3 +1,6 @@
+*.sch.*
+*.svrl
+
 *.local
 *.local.*
 

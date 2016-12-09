@@ -12,7 +12,7 @@ import scala.xml.{Elem, XML}
 
 //import scala.collection.JavaConverters._
 
-class Smehotron(val theRoot: Option[Path], cfg: Elem, force: Boolean = false) extends LazyLogging {
+class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>, force: Boolean = false) extends LazyLogging {
   val jarDir = theRoot.get
   lazy val tronDir = jarDir / "schematron"
   lazy val saxonDir = jarDir / "saxon"
@@ -98,16 +98,16 @@ case class MainArgs(rules: Option[File] = None,
 
 object Smehotron extends LazyLogging {
   val parser = new scopt.OptionParser[MainArgs]("smehotron") {
-    head("smehotron", "1.0.1")
+    head("smehotron", "1.0.2")
 
-    opt[File]('c', "cfg").minOccurs(1).maxOccurs(1)
+    opt[File]('c', "cfg").minOccurs(0).maxOccurs(1)
       .valueName("<config-file>")
       .action((x, c) => c.copy(cfg = Option(x)))
       .validate(x => if (x.exists() && x.isFile) success else failure("config either does not exist or not a file"))
-      .text("config (required)")
+      .text("config (optional)")
 
     opt[File]('s', "sch").minOccurs(0).maxOccurs(1)
-      .valueName("<schematron-rules>")
+      .valueName("<rules>")
       .action((x, c) => c.copy(rules = Option(x)))
       .validate(x => if (x.exists() && x.isFile) success else failure("schematron file either does not exist or not a file"))
       .text("schematron file (optional)")
@@ -119,10 +119,10 @@ object Smehotron extends LazyLogging {
       .text("xml file (optional)")
 
     opt[File]('r', "root").minOccurs(0).maxOccurs(1)
-      .valueName("<path-to-file>")
+      .valueName("<path/to/dir>")
       .action((x, c) => c.copy(root = Option(x)))
       .validate(x => if (x.exists() && x.isDirectory) success else failure("root either does not exist or not a directory"))
-      .text("path to root (optional)")
+      .text("path to a root dir (optional)")
 
     opt[Unit]('f', "force").minOccurs(0).maxOccurs(1)
       .valueName("<force-compile>")
@@ -132,12 +132,14 @@ object Smehotron extends LazyLogging {
     checkConfig(c =>
       if ((c.xml.isEmpty && c.rules.nonEmpty) || (c.xml.nonEmpty && c.rules.isEmpty))
         failure("xml and sch should either be both defined or both omitted")
+      else if ( c.cfg.isEmpty && c.rules.isEmpty && c.xml.isEmpty )
+        failure("no parameters supplied")
       else
         success
     )
   }
 
-  def apply(root: String, cfg: Elem, force: Boolean = false) = new Smehotron(Option(abs(root)), cfg, force)
+  def apply(root: String, cfg: Elem = <smehotron/>, force: Boolean = false) = new Smehotron(Option(abs(root)), cfg, force)
 
   def main(args: Array[String]) {
     parser.parse(args, MainArgs()) match {
@@ -146,7 +148,10 @@ object Smehotron extends LazyLogging {
           case Some(r) => r.getAbsolutePath
           case None => new File(getClass.getProtectionDomain.getCodeSource.getLocation.toURI).getAbsoluteFile.getParent
         }
-        val tron = Smehotron(root, XML.loadFile(opts.cfg.get), opts.force)
+        val tron = opts.cfg match {
+          case Some(c) => Smehotron(root, XML.loadFile(c), opts.force)
+          case None => Smehotron(root, force = opts.force)
+        }
         (opts.rules, opts.xml) match {
           case (Some(rules), Some(xml)) =>
             tron.validate(rules.getAbsolutePath, xml.getAbsolutePath)

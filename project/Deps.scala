@@ -3,7 +3,7 @@ import sbt._
 object V {
   val cats = "0.8.1"
   val config = "1.3.1"
-  val logback = "1.1.7"
+  val logback = "1.1.8"
   val scala = "2.11.8"
   val scalaCheck = "1.13.4"
   val scalaLogging = "3.5.0"

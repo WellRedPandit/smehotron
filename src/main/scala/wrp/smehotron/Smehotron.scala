@@ -3,16 +3,18 @@ package wrp.smehotron
 import java.io.File
 import java.nio.file.Path
 
+import ch.qos.logback.classic.{Level, LoggerContext}
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.commons.io.FileUtils
+import org.slf4j.LoggerFactory
 import wrp.smehotron.utils.Cmd
-import wrp.smehotron.utils.PathOps._
+import wrp.smehotron.utils.PathOps.{abs, _}
 
 import scala.xml.{Elem, XML}
 
 //import scala.collection.JavaConverters._
 
-class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>, force: Boolean = false) extends LazyLogging {
+class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends LazyLogging {
   val jarDir = theRoot.get
   lazy val tronDir = jarDir / "schematron"
   lazy val saxonDir = jarDir / "saxon"
@@ -23,38 +25,43 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>, force: Bool
     (cfg \ "go" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
       val sch = log((m \ "sch-driver").head.text)
-      val icic = m \ "input-controls" \ "input-control"
-      val tapt = icic.zipWithIndex.map { icz =>
-        validate(sch, icz._1.text) match {
-          case Some(svrl) =>
-            val rpt = XML.loadFile(svrl)
-            val asserts = rpt \\ "failed-assert"
-            val reports = rpt \\ "successful-report" // TODO ???: .filter(_ \ "@role" == "error")
-            if (asserts.isEmpty && reports.isEmpty)
-              tapOk(icz._2 + 1, s"svrl $svrl for ${icz._1.text} with $sch in $mod")
-            else
-              tapNotOk(icz._2 + 1, s"svrl $svrl for ${icz._1.text} with $sch in $mod has asserts and/or reports") // TODO ???: append asserts/reports
-          case None =>
-            tapNotOk(icz._2 + 1, s"could not produce svrl for ${icz._1.text} with $sch in $mod")
+      generate(sch) match {
+        case Some(step3) => {
+          val icic = m \ "input-controls" \ "input-control"
+          val tapt = icic.zipWithIndex.map { icz =>
+            val ic = icz._1.text.trim
+            validate(step3, ic) match {
+              case Some(svrl) =>
+                val rpt = XML.loadFile(svrl)
+                val asserts = rpt \\ "failed-assert"
+                val reports = rpt \\ "successful-report" // TODO ???: .filter(_ \ "@role" == "error")
+                if (asserts.isEmpty && reports.isEmpty)
+                  tapOk(icz._2 + 1, s"svrl $svrl for ${ic} with $sch in $mod")
+                else
+                  tapNotOk(icz._2 + 1, s"svrl $svrl for ${ic} with $sch in $mod has asserts and/or reports") // TODO ???: append asserts/reports
+              case None =>
+                tapNotOk(icz._2 + 1, s"could not produce svrl for ${ic} with $sch in $mod")
+            }
+          }
+          tapMeta(s"module: $mod") :: tapHead(icic.size) :: tapt.toList
         }
+        case None =>
+          tapMeta(s"module: $mod") :: List(tapNotOk(0, s"could not compile with $sch in $mod"))
       }
-      tapMeta(s"module: $mod") :: tapHead(icic.size) :: tapt.toList
     }
 
-  def validate(rulesFile: String, docFile: String) =
+  def validate(step3: String, docFile: String) = doStep(4, docFile, step3, ".svrl")
+
+  def generate(rulesFile: String) =
     for (step1 <- doStep(1, rulesFile, s"$tronDir${File.separator}iso_dsdl_include.xsl");
          step2 <- doStep(2, step1, s"$tronDir${File.separator}iso_abstract_expand.xsl");
-         step3 <- doStep(3, step2, s"$tronDir${File.separator}iso_svrl_for_xslt2.xsl");
-         step4 <- doStep(4, docFile, step3, ".svrl")
-    ) yield step4
+         step3 <- doStep(3, step2, s"$tronDir${File.separator}iso_svrl_for_xslt2.xsl")
+    ) yield step3
 
   def doStep(num: Int, in: String, xsl: String, suffix: String = "") = {
     val out = if (suffix.size > 0) in + suffix else in.replaceAll("\\.\\d+$", "") + "." + num
     val outf = new File(out)
-    if (outf.exists() && FileUtils.isFileNewer(outf, new File(in)) && !force) {
-      logger.debug(s"$out is newer than $in, skipping regeneration...")
-      Option(out)
-    } else if (Cmd.run(log(mkCmd(in, out, xsl))).succeeded)
+    if (Cmd.run(log(mkCmd(in, out, xsl))).succeeded)
       Option(out)
     else
       None
@@ -94,11 +101,11 @@ case class MainArgs(rules: Option[File] = None,
                     xml: Option[File] = None,
                     cfg: Option[File] = None,
                     root: Option[File] = None,
-                    force: Boolean = false)
+                    logLevel: Level = Level.ERROR)
 
 object Smehotron extends LazyLogging {
   val parser = new scopt.OptionParser[MainArgs]("smehotron") {
-    head("smehotron", "1.0.2")
+    head("smehotron", "1.0.3")
 
     opt[File]('c', "cfg").minOccurs(0).maxOccurs(1)
       .valueName("<config-file>")
@@ -124,41 +131,57 @@ object Smehotron extends LazyLogging {
       .validate(x => if (x.exists() && x.isDirectory) success else failure("root either does not exist or not a directory"))
       .text("path to a root dir (optional)")
 
-    opt[Unit]('f', "force").minOccurs(0).maxOccurs(1)
-      .valueName("<force-compile>")
-      .action((x, c) => c.copy(force = true))
-      .text("force re–compilation of sch and re-generation of svrl even if they are newer than their sources")
+    opt[String]('l', "loglevel").minOccurs(0).maxOccurs(1)
+      .valueName("<log level>")
+      .validate(x =>
+        if (Set("OFF", "ERROR", "WARN", "INFO", "DEBUG", "TRACE", "ALL").contains(x.toUpperCase)) success else failure("bad log level"))
+      .action((x, c) => c.copy(logLevel = Level.toLevel(x.toUpperCase)))
+      .text("log level (case insensitive): OFF, ERROR (default), WARN, INFO, DEBUG, TRACE, ALL")
 
     checkConfig(c =>
       if ((c.xml.isEmpty && c.rules.nonEmpty) || (c.xml.nonEmpty && c.rules.isEmpty))
         failure("xml and sch should either be both defined or both omitted")
-      else if ( c.cfg.isEmpty && c.rules.isEmpty && c.xml.isEmpty )
+      else if (c.cfg.isEmpty && c.rules.isEmpty && c.xml.isEmpty)
         failure("no parameters supplied")
       else
         success
     )
   }
 
-  def apply(root: String, cfg: Elem = <smehotron/>, force: Boolean = false) = new Smehotron(Option(abs(root)), cfg, force)
+  def apply(root: String, cfg: Elem = <smehotron/>) = new Smehotron(Option(abs(root)), cfg)
+
+  private def mkConfigForRulesXmlPair(rules: File, xml: File) = {
+    val r = rules.getAbsolutePath
+    val x = xml.getAbsolutePath
+    <smehotron>
+      <go>
+        <module name="_phony_">
+          <sch-driver>{r}</sch-driver>
+          <input-controls>
+            <input-control>{x}</input-control>
+          </input-controls>
+        </module>
+      </go>
+    </smehotron>
+  }
 
   def main(args: Array[String]) {
     parser.parse(args, MainArgs()) match {
       case Some(opts) =>
+        LoggerFactory.getILoggerFactory().asInstanceOf[LoggerContext].getLogger("wrp.smehotron").setLevel(opts.logLevel)
         val root = opts.root match {
           case Some(r) => r.getAbsolutePath
           case None => new File(getClass.getProtectionDomain.getCodeSource.getLocation.toURI).getAbsoluteFile.getParent
         }
-        val tron = opts.cfg match {
-          case Some(c) => Smehotron(root, XML.loadFile(c), opts.force)
-          case None => Smehotron(root, force = opts.force)
+        val conf = opts.cfg match {
+          case Some(c) => XML.loadFile(c)
+          case None =>
+            (opts.rules, opts.xml) match {
+              case (Some(rules), Some(xml)) => mkConfigForRulesXmlPair(rules, xml)
+              case _ => throw new RuntimeException("rules and xml – both or neither")
+            }
         }
-        (opts.rules, opts.xml) match {
-          case (Some(rules), Some(xml)) =>
-            tron.validate(rules.getAbsolutePath, xml.getAbsolutePath)
-          case (None, None) =>
-            tron.processGoModules().foreach(println)
-          case _ => throw new RuntimeException("rules and xml – both or neither")
-        }
+        Smehotron(root, conf).processGoModules().foreach(println)
       case None => /*ignore*/
     }
   }

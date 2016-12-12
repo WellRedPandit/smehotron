@@ -5,10 +5,9 @@ import java.nio.file.Path
 
 import ch.qos.logback.classic.{Level, LoggerContext}
 import com.typesafe.scalalogging.LazyLogging
-import org.apache.commons.io.FileUtils
 import org.slf4j.LoggerFactory
 import wrp.smehotron.utils.Cmd
-import wrp.smehotron.utils.PathOps.{abs, _}
+import wrp.smehotron.utils.PathOps._
 
 import scala.xml.{Elem, NodeSeq, XML}
 
@@ -38,7 +37,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
                 if (asserts.isEmpty && reports.isEmpty)
                   tapOk(svrl, ic, sch, mod)
                 else
-                  tapAssertsReport(svrl, ic, sch, mod, asserts, reports)
+                  tapAssertsReports(svrl, ic, sch, mod, asserts, reports)
               case None =>
                 tapSvrlFailed(ic, sch, mod)
             }
@@ -96,7 +95,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       <svrl>{svrl}</svrl>
     </test>
 
-  private def tapAssertsReport(svrl: String,
+  private def tapAssertsReports(svrl: String,
                                inputControl: String,
                                rules: String,
                                module: String,

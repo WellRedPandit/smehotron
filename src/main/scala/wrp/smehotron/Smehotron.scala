@@ -10,7 +10,7 @@ import org.slf4j.LoggerFactory
 import wrp.smehotron.utils.Cmd
 import wrp.smehotron.utils.PathOps.{abs, _}
 
-import scala.xml.{Elem, XML}
+import scala.xml.{Elem, NodeSeq, XML}
 
 //import scala.collection.JavaConverters._
 
@@ -25,7 +25,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
     (cfg \ "go" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
       val sch = log((m \ "sch-driver").head.text)
-      generate(sch) match {
+      val res = generate(sch) match {
         case Some(step3) => {
           val icic = m \ "input-controls" \ "input-control"
           val tapt = icic.zipWithIndex.map { icz =>
@@ -36,18 +36,19 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
                 val asserts = rpt \\ "failed-assert"
                 val reports = rpt \\ "successful-report" // TODO ???: .filter(_ \ "@role" == "error")
                 if (asserts.isEmpty && reports.isEmpty)
-                  tapOk(icz._2 + 1, s"svrl $svrl for ${ic} with $sch in $mod")
+                  tapOk(svrl, ic, sch, mod)
                 else
-                  tapNotOk(icz._2 + 1, s"svrl $svrl for ${ic} with $sch in $mod has asserts and/or reports") // TODO ???: append asserts/reports
+                  tapAssertsReport(svrl, ic, sch, mod, asserts, reports)
               case None =>
-                tapNotOk(icz._2 + 1, s"could not produce svrl for ${ic} with $sch in $mod")
+                tapSvrlFailed(ic, sch, mod)
             }
           }
-          tapMeta(s"module: $mod") :: tapHead(icic.size) :: tapt.toList
+          tapt.toList
         }
         case None =>
-          tapMeta(s"module: $mod") :: List(tapNotOk(0, s"could not compile with $sch in $mod"))
+          tapCompilationFailed(sch, mod)
       }
+      <smehatron-results>{res}</smehatron-results>
     }
 
   def validate(step3: String, docFile: String) = doStep(4, docFile, step3, ".svrl")
@@ -87,13 +88,44 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
     value
   }
 
-  private def tapHead(count: Int) = s"1..$count"
+  private def tapOk(svrl: String, inputControl: String, rules: String, module: String) =
+    <test status="success">
+      <module>{module}</module>
+      <rules>{rules}</rules>
+      <input-control>{inputControl}</input-control>
+      <svrl>{svrl}</svrl>
+    </test>
 
-  private def tapOk(num: Int, msg: String) = s"ok $num - $msg"
+  private def tapAssertsReport(svrl: String,
+                               inputControl: String,
+                               rules: String,
+                               module: String,
+                               asserts: NodeSeq,
+                               reports: NodeSeq) =
+    <test status="failure">
+      <module>{module}</module>
+      <rules>{rules}</rules>
+      <input-control>{inputControl}</input-control>
+      <svrl>{svrl}</svrl>
+      <asserts>{asserts}</asserts>
+      <reports>{reports}</reports>
+    </test>
 
-  private def tapNotOk(num: Int, msg: String) = s"not ok $num - $msg"
+  private def tapSvrlFailed(inputControl: String, rules: String, module: String) =
+    <test status="failure">
+      <module>{module}</module>
+      <rules>{rules}</rules>
+      <input-control>{inputControl}</input-control>
+      <reason>could not produce svrl</reason>
+    </test>
 
-  private def tapMeta(msg: String) = s"# $msg"
+
+  private def tapCompilationFailed(rules: String, module: String) =
+    <test status="failure">
+      <module>{module}</module>
+      <rules>{rules}</rules>
+      <reason>could not compile</reason>
+    </test>
 
 }
 

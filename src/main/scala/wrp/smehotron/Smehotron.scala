@@ -20,11 +20,11 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   lazy val saxonClasspath = s"${saxonDir}${File.separator}saxon.he.9.7.0.7.jar${File.pathSeparator}${saxonDir}${File.separator}resolver.jar"
   lazy val cats = (cfg \ "catalogs" \ "catalog").map(_.text)
 
-  def processGoModules() =
-    (cfg \ "go" \ "module").flatMap { m =>
+  def processGoModules() = {
+    val res = (cfg \ "go" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
       val sch = log((m \ "sch-driver").head.text)
-      val res = generate(sch) match {
+      generate(sch) match {
         case Some(step3) => {
           val icic = m \ "input-controls" \ "input-control"
           val tapt = icic.zipWithIndex.map { icz =>
@@ -47,8 +47,9 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
         case None =>
           tapCompilationFailed(sch, mod)
       }
-      <smehatron-results>{res}</smehatron-results>
     }
+    <smehatron-results>{res}</smehatron-results>
+  }
 
   def validate(step3: String, docFile: String) = doStep(4, docFile, step3, ".svrl")
 

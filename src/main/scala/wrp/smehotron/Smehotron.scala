@@ -91,7 +91,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   private def tapOk(svrl: String, inputControl: String, rules: String, module: String) =
     <test status="success">
       <module>{module}</module>
-      <rules>{rules}</rules>
+      <sch-driver>{rules}</sch-driver>
       <input-control>{inputControl}</input-control>
       <svrl>{svrl}</svrl>
     </test>
@@ -104,7 +104,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
                                reports: NodeSeq) =
     <test status="failure">
       <module>{module}</module>
-      <rules>{rules}</rules>
+      <sch-driver>{rules}</sch-driver>
       <input-control>{inputControl}</input-control>
       <svrl>{svrl}</svrl>
       <asserts>{asserts}</asserts>
@@ -114,7 +114,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   private def tapSvrlFailed(inputControl: String, rules: String, module: String) =
     <test status="failure">
       <module>{module}</module>
-      <rules>{rules}</rules>
+      <sch-driver>{rules}</sch-driver>
       <input-control>{inputControl}</input-control>
       <reason>could not produce svrl</reason>
     </test>
@@ -123,7 +123,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   private def tapCompilationFailed(rules: String, module: String) =
     <test status="failure">
       <module>{module}</module>
-      <rules>{rules}</rules>
+      <sch-driver>{rules}</sch-driver>
       <reason>could not compile</reason>
     </test>
 
@@ -146,7 +146,7 @@ object Smehotron extends LazyLogging {
       .text("config (optional)")
 
     opt[File]('s', "sch").minOccurs(0).maxOccurs(1)
-      .valueName("<rules>")
+      .valueName("<sch-driver>")
       .action((x, c) => c.copy(rules = Option(x)))
       .validate(x => if (x.exists() && x.isFile) success else failure("schematron file either does not exist or not a file"))
       .text("schematron file (optional)")
@@ -210,7 +210,7 @@ object Smehotron extends LazyLogging {
           case None =>
             (opts.rules, opts.xml) match {
               case (Some(rules), Some(xml)) => mkConfigForRulesXmlPair(rules, xml)
-              case _ => throw new RuntimeException("rules and xml – both or neither")
+              case _ => throw new RuntimeException("sch-driver and xml – both or neither")
             }
         }
         Smehotron(root, conf).processGoModules().foreach(println)

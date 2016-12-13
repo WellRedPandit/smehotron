@@ -1,0 +1,11 @@
+<?xml version="1.0" standalone="yes" ?>
+<smehotron>
+  <go>
+    <module name="basic">
+      <sch-driver>src/test/resources/basic/basic.sch</sch-driver>
+      <input-controls>
+        <input-control>src/test/resources/basic/basic-ok.xml</input-control>
+      </input-controls>
+    </module>
+  </go>
+</smehotron>

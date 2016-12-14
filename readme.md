@@ -1,5 +1,1 @@
-to build
-
-```
-sbt dist
-```
+see the docs directory

@@ -1,0 +1,16 @@
+<?xml version="1.0" standalone="yes" ?>
+<smehotron>
+  <catalogs>
+    <catalog>/path/to/NLM-v3.0-Tag-Set/catalog-NLM-v3.0.xml</catalog>
+    <catalog>/path/to/MathML2.xml</catalog>
+  </catalogs>
+  <go>
+    <module name="somename">
+      <sch-driver>path/to/rules.sch</sch-driver>
+      <input-controls>
+        <input-control>path/to/001.xml</input-control>
+        <input-control>path/to/002.xml</input-control>
+      </input-controls>
+    </module>
+  </go>
+</smehotron>

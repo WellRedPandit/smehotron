@@ -53,9 +53,9 @@ object TronBuild extends Build {
         import scala.collection.JavaConversions._
         sbt.IO.delete(new File("dist"))
         sbt.IO.copyFile(new File("target/scala-2.11/smehotron.jar"), new File("dist/smehotron.jar"), true)
-        sbt.IO.copyFile(new File("scripts/smehotron.sh"), new File("dist/smehotron.sh"), true)
+        sbt.IO.copyFile(new File("scripts/smehotron"), new File("dist/smehotron"), true)
         sbt.IO.copyFile(new File("scripts/smehotron.bat"), new File("dist/smehotron.bat"), true)
-        scala.util.Try(Files.setPosixFilePermissions(Paths.get("dist/smehotron.sh"), Set(OWNER_EXECUTE, OWNER_READ, OWNER_WRITE)))
+        scala.util.Try(Files.setPosixFilePermissions(Paths.get("dist/smehotron"), Set(OWNER_EXECUTE, OWNER_READ, OWNER_WRITE)))
         sbt.IO.copyDirectory(new File("saxon"), new File("dist/saxon"), false, true)
         sbt.IO.copyDirectory(new File("schematron"), new File("dist/schematron"), false, true)
       },

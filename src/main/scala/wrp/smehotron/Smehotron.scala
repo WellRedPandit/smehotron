@@ -24,7 +24,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
     val res = (cfg \ "go" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
       val sch = log((m \ "sch-driver").head.text)
-      generate(sch) match {
+      compile(sch) match {
         case Some(step3) => {
           val icic = m \ "input-controls" \ "input-control"
           val tapt = icic.zipWithIndex.map { icz =>
@@ -48,12 +48,12 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
           tapCompilationFailed(sch, mod)
       }
     }
-    <smehatron-results>{res}</smehatron-results>
+    <smehotron-results>{res}</smehotron-results>
   }
 
   def validate(step3: String, docFile: String) = doStep(4, docFile, step3, ".svrl")
 
-  def generate(rulesFile: String) =
+  def compile(rulesFile: String) =
     for (step1 <- doStep(1, rulesFile, s"$tronDir${File.separator}iso_dsdl_include.xsl");
          step2 <- doStep(2, step1, s"$tronDir${File.separator}iso_abstract_expand.xsl");
          step3 <- doStep(3, step2, s"$tronDir${File.separator}iso_svrl_for_xslt2.xsl")
@@ -61,7 +61,6 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
 
   def doStep(num: Int, in: String, xsl: String, suffix: String = "") = {
     val out = if (suffix.size > 0) in + suffix else in.replaceAll("\\.\\d+$", "") + "." + num
-    val outf = new File(out)
     if (Cmd.run(log(mkCmd(in, out, xsl))).succeeded)
       Option(out)
     else

@@ -2,14 +2,19 @@ package wrp.smehotron.utils
 
 import com.typesafe.scalalogging.StrictLogging
 
-import scala.sys.process.ProcessLogger
-import scala.sys.process.stringSeqToProcess
+import scala.sys.process.{ProcessLogger, stringSeqToProcess}
 
-case class CmdResult(stdout: Vector[String] = Vector.empty, stderr: Vector[String] = Vector.empty, exitStatus: Int = 0) {
+case class CmdResult(cmd: Seq[String],
+                     stdout: Vector[String] = Vector.empty,
+                     stderr: Vector[String] = Vector.empty,
+                     exitStatus: Int = 0) {
+  require(cmd.nonEmpty,"command must not be empty")
+
   def succeeded = exitStatus == 0
 
   def failed = exitStatus != 0
-  def fail = if(failed) throw ProcessException(this) // TODO?: else succeeded
+
+  def fail = if (failed) throw ProcessException(this) // TODO?: else succeeded
 }
 
 case class ProcessException(result: CmdResult) extends Exception(result.toString)
@@ -37,11 +42,11 @@ object Cmd extends StrictLogging {
   def run(cmd: Seq[String]) = {
     assert(cmd.size > 0, "command must have a head")
     logger.debug(cmd.map("\"" + _ + "\"").mkString(" "))
-    val cltr = OutErrCollector() // s"<${cmd.head}>"
+    val cltr = OutErrCollector()
     val plogger = ProcessLogger(cltr.fout, cltr.ferr)
     val exc = cmd ! plogger
     logger.debug(s"exit code: $exc")
-    CmdResult(cltr.stdout, cltr.stderr, exc)
+    CmdResult(cmd, cltr.stdout, cltr.stderr, exc)
   }
 }
 

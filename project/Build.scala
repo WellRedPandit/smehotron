@@ -12,7 +12,7 @@ object TronBuild extends Build {
     , "-feature"
     , "-unchecked"
     , "-deprecation"
-    , "-target:jvm-1.7"
+    , "-target:jvm-1.8"
     , "-Xlog-reflective-calls"
     , "-Xlint"
     , "-Yno-adapted-args"

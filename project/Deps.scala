@@ -1,19 +1,18 @@
 import sbt._
 
 object V {
-  val cats = "0.8.1"
+  val cats = "0.9.0"
+  val commonsIo = "2.5"
   val config = "1.3.1"
-  val logback = "1.1.8"
-  val scala = "2.11.8"
+  val logback = "1.2.1"
+  val scala = "2.12.1"
   val scalaCheck = "1.13.4"
   val scalaLogging = "3.5.0"
   val scalaTest = "3.0.1"
   val scalaXml = "1.0.6"
-
-  val slf4j = "1.7.22"
   val scopt = "3.5.0"
+  val slf4j = "1.7.23"
   val tron = "1.0.1"
-  val commonsIo = "2.5"
 }
 
 object Deps {
@@ -27,7 +26,7 @@ object Deps {
   val scalaCheck = "org.scalacheck" %% "scalacheck" % V.scalaCheck
   val scalaTest = "org.scalatest" %% "scalatest" % V.scalaTest
   val scopt = "com.github.scopt" %% "scopt" % V.scopt
-  val scalaXml = "org.scala-lang.modules" % "scala-xml_2.11" % V.scalaXml
+  val scalaXml = "org.scala-lang.modules" %% "scala-xml" % V.scalaXml
   val cats = "org.typelevel" %% "cats" % V.cats
 
   def compile(deps: Seq[ModuleID]): Seq[ModuleID] = deps map (_ % "compile")

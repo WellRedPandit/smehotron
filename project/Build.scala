@@ -52,7 +52,7 @@ object TronBuild extends Build {
         import java.nio.file.attribute.PosixFilePermission._
         import scala.collection.JavaConversions._
         sbt.IO.delete(new File("dist"))
-        sbt.IO.copyFile(new File("target/scala-2.11/smehotron.jar"), new File("dist/smehotron.jar"), true)
+        sbt.IO.copyFile(new File("target/scala-2.12/smehotron.jar"), new File("dist/smehotron.jar"), true)
         sbt.IO.copyFile(new File("scripts/smehotron"), new File("dist/smehotron"), true)
         sbt.IO.copyFile(new File("scripts/smehotron.bat"), new File("dist/smehotron.bat"), true)
         scala.util.Try(Files.setPosixFilePermissions(Paths.get("dist/smehotron"), Set(OWNER_EXECUTE, OWNER_READ, OWNER_WRITE)))

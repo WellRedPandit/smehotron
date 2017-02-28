@@ -3,8 +3,10 @@ package wrp.smehotron
 import java.io.File
 import java.nio.file.Path
 
+import scala.io.Source
 import ch.qos.logback.classic.{Level, LoggerContext}
 import com.typesafe.scalalogging.LazyLogging
+import org.apache.commons.io.FileUtils
 import org.slf4j.LoggerFactory
 import wrp.smehotron.utils.Cmd
 import wrp.smehotron.utils.PathOps._
@@ -20,20 +22,26 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   lazy val saxonClasspath = s"${saxonDir}${File.separator}saxon.he.9.7.0.7.jar${File.pathSeparator}${saxonDir}${File.separator}resolver.jar"
   lazy val cats = (cfg \ "catalogs" \ "catalog").map(_.text)
 
+  def processModules() = {
+    val go = processGoModules()
+    val nogo = processNogoModules()
+    <smehotron-results>{go}{nogo}</smehotron-results>
+  }
+
   def processGoModules() = {
-    val res = (cfg \ "go" \ "module").flatMap { m =>
+    val go = (cfg \ "go" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
       val sch = log((m \ "sch-driver").head.text)
       compile(sch) match {
         case Some(step3) => {
           val icic = m \ "input-controls" \ "input-control"
-          val tapt = icic.zipWithIndex.map { icz =>
-            val ic = icz._1.text.trim
+          val tapt = icic.map { icz =>
+            val ic = icz.text.trim
             validate(step3, ic) match {
               case Some(svrl) =>
                 val rpt = XML.loadFile(svrl)
                 val asserts = rpt \\ "failed-assert"
-                val reports = rpt \\ "successful-report" // TODO ???: .filter(_ \ "@role" == "error")
+                val reports = rpt \\ "successful-report"
                 if (asserts.isEmpty && reports.isEmpty)
                   tapOk(svrl, ic, sch, mod)
                 else
@@ -48,8 +56,60 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
           tapCompilationFailed(sch, mod)
       }
     }
-    <smehotron-results>{res}</smehotron-results>
+    <go>{go}</go>
   }
+
+  def processNogoModules() = {
+    val nogo = (cfg \ "nogo" \ "module").flatMap { m =>
+      val mod = log((m \ "@name").head.text)
+      val sch = log((m \ "sch-driver").head.text)
+      compile(sch) match {
+        case Some(step3) => {
+          val icic = m \ "input-controls" \ "input-control" \ "source"
+          val golden = (m \ "input-controls" \ "input-control" \ "golden").text.trim
+          val tapt = icic.map { icz =>
+            val ic = icz.text.trim
+            validate(step3, ic) match {
+              case Some(svrl) =>
+                val suspect = Source.fromFile(svrl).getLines().mkString("\n")
+                val yardstick = Source.fromFile(golden).getLines().mkString("\n")
+                tapNogoResult(svrl, ic, golden, sch, mod, suspect == yardstick)
+              case None =>
+                tapSvrlFailed(ic, sch, mod)
+            }
+          }
+          tapt.toList
+        }
+        case None =>
+          tapCompilationFailed(sch, mod)
+      }
+    }
+    <nogo>{nogo}</nogo>
+  }
+  def generateNogoGold() =
+    (cfg \ "nogo" \ "module").flatMap { m =>
+      val mod = log((m \ "@name").head.text)
+      val sch = log((m \ "sch-driver").head.text)
+      compile(sch) match {
+        case Some(step3) => {
+          val icic = m \ "input-controls" \ "input-control" \ "source"
+          val golden = (m \ "input-controls" \ "input-control" \ "golden").text.trim
+          val tapt = icic.map { icz =>
+            val ic = icz.text.trim
+            validate(step3, ic) match {
+              case Some(svrl) =>
+                FileUtils.moveFile(FileUtils.getFile(svrl),FileUtils.getFile(golden))
+              case None =>
+                throw new RuntimeException(s"could not produce svrl: module: $mod; sch-driver: $sch; input-control: $ic")
+            }
+          }
+          tapt.toList
+        }
+        case None =>
+          throw new RuntimeException(s"could not produce svrl: module: $mod; sch-driver: $sch")
+      }
+    }
+
 
   def validate(step3: String, docFile: String) = doStep(4, docFile, step3, ".svrl")
 
@@ -95,6 +155,23 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       <svrl>{svrl}</svrl>
     </test>
 
+  private def tapNogoResult(svrl: String,
+                            inputControl: String,
+                            golden: String,
+                            rules: String,
+                            module: String,
+                            success: Boolean) = {
+    val outcome = if(success) "success" else "failure"
+    <test status={outcome}>
+      <module>{module}</module>
+      <sch-driver>{rules}</sch-driver>
+      <input-control>{inputControl}</input-control>
+      <golden>{golden}</golden>
+      <svrl>{svrl}</svrl>
+    </test>
+  }
+
+
   private def tapAssertsReports(svrl: String,
                                inputControl: String,
                                rules: String,
@@ -132,11 +209,12 @@ case class MainArgs(rules: Option[File] = None,
                     xml: Option[File] = None,
                     cfg: Option[File] = None,
                     root: Option[File] = None,
-                    logLevel: Level = Level.ERROR)
+                    logLevel: Level = Level.ERROR,
+                    generate: Boolean = false)
 
 object Smehotron extends LazyLogging {
   val parser = new scopt.OptionParser[MainArgs]("smehotron") {
-    head("smehotron", "1.0.3")
+    head("smehotron", "1.0.4")
 
     opt[File]('c', "cfg").minOccurs(0).maxOccurs(1)
       .valueName("<config-file>")
@@ -161,6 +239,13 @@ object Smehotron extends LazyLogging {
       .action((x, c) => c.copy(root = Option(x)))
       .validate(x => if (x.exists() && x.isDirectory) success else failure("root either does not exist or not a directory"))
       .text("path to a root dir (optional)")
+
+    opt[String]('g', "generate").minOccurs(0).maxOccurs(1)
+      .valueName("<generate>")
+      .validate(x =>
+        if (Set("YES", "NO").contains(x.toUpperCase)) success else failure("generate accepts yes or no"))
+      .action((x, c) => c.copy(generate = if(x.toUpperCase == "YES") true else false))
+      .text("generate godlen SVRLs")
 
     opt[String]('l', "loglevel").minOccurs(0).maxOccurs(1)
       .valueName("<log level>")
@@ -212,7 +297,10 @@ object Smehotron extends LazyLogging {
               case _ => throw new RuntimeException("sch-driver and xml – both or neither")
             }
         }
-        Smehotron(root, conf).processGoModules().foreach(println)
+        if(opts.generate)
+          Smehotron(root, conf).generateNogoGold()
+        else
+          Smehotron(root, conf).processModules().foreach(println)
       case None => /*ignore*/
     }
   }

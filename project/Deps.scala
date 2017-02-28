@@ -11,7 +11,7 @@ object V {
   val scalaTest = "3.0.1"
   val scalaXml = "1.0.6"
   val scopt = "3.5.0"
-  val slf4j = "1.7.23"
+  val slf4j = "1.7.24"
   val tron = "1.0.1"
 }
 

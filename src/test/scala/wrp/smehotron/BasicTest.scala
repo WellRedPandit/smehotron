@@ -12,6 +12,7 @@ class BasicTest extends FunSuite {
   test("basic-ok.xml should pass") {
     val cfg = XML.loadFile(s"$localPath/basic-ok.smehotron.config.xml")
     val res = Smehotron(".", cfg).processGoModules()
+    val foo = res.toString()
     val status = (res \ "test" \ "@status").text
     assertResult("success")(status)
   }

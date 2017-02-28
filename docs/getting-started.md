@@ -61,6 +61,8 @@ Usage: smehotron [options]
   -x, --xml <xml-file>     xml file (optional)
   -r, --root <path/to/dir>
                            path to a root dir (optional)
+  -g, --generate <generate>
+                           generate godlen SVRLs
   -l, --loglevel <log level>
                            log level (case insensitive): OFF, ERROR (default), WARN, INFO, DEBUG, TRACE, ALL
 ```

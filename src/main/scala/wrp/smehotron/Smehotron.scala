@@ -98,15 +98,21 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
             val ic = icz.text.trim
             validate(step3, ic) match {
               case Some(svrl) =>
-                FileUtils.moveFile(FileUtils.getFile(svrl),FileUtils.getFile(golden))
+                try {
+                  FileUtils.moveFile(FileUtils.getFile(svrl), FileUtils.getFile(golden))
+                  <outcome type="success" module={mod} sch-driver={sch} input-control={ic}>golden svrl {golden} generated</outcome>
+                } catch {
+                  case x: Throwable =>
+                    <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not generate golden svrl {golden} due to: {x.getMessage}</outcome>
+                }
               case None =>
-                throw new RuntimeException(s"could not produce svrl: module: $mod; sch-driver: $sch; input-control: $ic")
+                <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not produce svrl</outcome>
             }
           }
           tapt.toList
         }
         case None =>
-          throw new RuntimeException(s"could not produce svrl: module: $mod; sch-driver: $sch")
+          <outcome type="failure" module={mod} sch-driver={sch}>compilation faied</outcome>
       }
     }
 
@@ -298,7 +304,7 @@ object Smehotron extends LazyLogging {
             }
         }
         if(opts.generate)
-          Smehotron(root, conf).generateNogoGold()
+          Smehotron(root, conf).generateNogoGold().foreach(println)
         else
           Smehotron(root, conf).processModules().foreach(println)
       case None => /*ignore*/

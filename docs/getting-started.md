@@ -81,12 +81,12 @@ For example, running with a basic test config (from the directory where you clon
 
 ```
 > dist/smehotron -c src/test/resources/basic/basic-ok.smehotron.config.xml
-<smehatron-results><test status="success">
+<smehotron-results><test status="success">
       <module>basic</module>
       <sch-driver>src/test/resources/basic/basic.sch</sch-driver>
       <input-control>src/test/resources/basic/basic-ok.xml</input-control>
       <svrl>src/test/resources/basic/basic-ok.xml.svrl</svrl>
-    </test></smehatron-results>
+    </test></smehotron-results>
 ```
 
 The above command can be used as a smoke test after you build smehotron.

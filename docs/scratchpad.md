@@ -36,3 +36,5 @@ driver: Dropbox\sasha\OSA-Schematron-v1.1-DEV-Dropbox\_test-suite\sch-drivers\gl
 discrep: rule[@id="GLOB220"]/report[1]: ERROR [glob-test:GLOB220]: 'statement' is not allowed
 ```
 which would allow us to trace the location of the discrepancy between the golden and the current svrl.
+#On terminology#
+Should we, perhaps, use "reference" instead of "yardstick" or "golden"?

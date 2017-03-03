@@ -17,12 +17,11 @@ or
 preceded by rule[@id].
 
 Thus if in the GLOB-statement.svrl we have
-...
+```
    <svrl:successful-report test="exists(.)" location="/article[1]/statement[1]">
       <svrl:text>ERROR [glob-test:GLOB220]: 'statement' is not allowed</svrl:text>
    </svrl:successful-report>
-...
-
+```
 then in the output we could display something like:
 
 driver: Dropbox\sasha\OSA-Schematron-v1.1-DEV-Dropbox\_test-suite\sch-drivers\global-testing.sch

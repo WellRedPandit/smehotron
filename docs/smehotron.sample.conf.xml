@@ -4,6 +4,7 @@
     <catalog>/path/to/NLM-v3.0-Tag-Set/catalog-NLM-v3.0.xml</catalog>
     <catalog>/path/to/MathML2.xml</catalog>
   </catalogs>
+
   <go>
     <module name="somename">
       <sch-driver>path/to/rules.sch</sch-driver>
@@ -13,4 +14,17 @@
       </input-controls>
     </module>
   </go>
+
+  <nogo>
+    <module name="anothername">
+      <sch-driver>path/to/rules.sch</sch-driver>
+      <input-controls>
+        <input-control>
+          <source>path/to/some.xml</source>
+          <golden>path/to/some.golden.svrl</golden>
+        </input-control>
+      </input-controls>
+    </module>
+  </nogo>
+
 </smehotron>

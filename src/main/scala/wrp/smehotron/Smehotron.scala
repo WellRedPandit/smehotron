@@ -3,7 +3,6 @@ package wrp.smehotron
 import java.io.File
 import java.nio.file.Path
 
-import scala.io.Source
 import ch.qos.logback.classic.{Level, LoggerContext}
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.commons.io.FileUtils
@@ -11,6 +10,8 @@ import org.slf4j.LoggerFactory
 import wrp.smehotron.utils.Cmd
 import wrp.smehotron.utils.PathOps._
 
+import scala.io.Source
+import scala.util.{Failure, Try}
 import scala.xml.{Elem, NodeSeq, XML}
 
 //import scala.collection.JavaConverters._
@@ -25,7 +26,10 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   def processModules() = {
     val go = processGoModules()
     val nogo = processNogoModules()
-    <smehotron-results>{go}{nogo}</smehotron-results>
+    <smehotron-results>
+      {go}
+      {nogo}
+    </smehotron-results>
   }
 
   def processGoModules() = {
@@ -71,9 +75,12 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
             val ic = icz.text.trim
             validate(step3, ic) match {
               case Some(svrl) =>
-                val suspect = Source.fromFile(svrl).getLines().mkString("\n")
-                val yardstick = Source.fromFile(golden).getLines().mkString("\n")
-                tapNogoResult(svrl, ic, golden, sch, mod, suspect == yardstick)
+                val suspect = Try(Source.fromFile(svrl).getLines().mkString("\n"))
+                val yardstick = Try(Source.fromFile(golden).getLines().mkString("\n"))
+                if( suspect.isSuccess && yardstick.isSuccess )
+                  tapNogoResult(svrl, ic, golden, sch, mod, suspect.get == yardstick.get)
+                else
+                  tapNotFound(svrl, ic, golden, sch, mod, List(suspect,yardstick).collect{case Failure(x) => x.getMessage})
               case None =>
                 tapSvrlFailed(ic, sch, mod)
             }
@@ -86,8 +93,8 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
     }
     <nogo>{nogo}</nogo>
   }
-  def generateNogoGold() =
-    (cfg \ "nogo" \ "module").flatMap { m =>
+  def generateNogoGold() = {
+    val outcomes = (cfg \ "nogo" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
       val sch = log((m \ "sch-driver").head.text)
       compile(sch) match {
@@ -100,7 +107,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
               case Some(svrl) =>
                 try {
                   FileUtils.moveFile(FileUtils.getFile(svrl), FileUtils.getFile(golden))
-                  <outcome type="success" module={mod} sch-driver={sch} input-control={ic}>golden svrl {golden} generated</outcome>
+                  <outcome type="success" module={mod} sch-driver={sch} input-control={ic}>generated golden svrl: {golden}</outcome>
                 } catch {
                   case x: Throwable =>
                     <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not generate golden svrl {golden} due to: {x.getMessage}</outcome>
@@ -112,10 +119,11 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
           tapt.toList
         }
         case None =>
-          <outcome type="failure" module={mod} sch-driver={sch}>compilation faied</outcome>
+          <outcome type="failure" module={mod} sch-driver={sch}>compilation failed</outcome>
       }
     }
-
+    <outcomes>{outcomes}</outcomes>
+  }
 
   def validate(step3: String, docFile: String) = doStep(4, docFile, step3, ".svrl")
 
@@ -177,6 +185,21 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
     </test>
   }
 
+  private def tapNotFound(svrl: String,
+                            inputControl: String,
+                            golden: String,
+                            rules: String,
+                            module: String,
+                            what: Seq[String]) = {
+    <test status="failure">
+      <module>{module}</module>
+      <sch-driver>{rules}</sch-driver>
+      <input-control>{inputControl}</input-control>
+      <golden>{golden}</golden>
+      <svrl>{svrl}</svrl>
+      <reason>{what.mkString("\n")}</reason>
+    </test>
+  }
 
   private def tapAssertsReports(svrl: String,
                                inputControl: String,
@@ -246,12 +269,10 @@ object Smehotron extends LazyLogging {
       .validate(x => if (x.exists() && x.isDirectory) success else failure("root either does not exist or not a directory"))
       .text("path to a root dir (optional)")
 
-    opt[String]('g', "generate").minOccurs(0).maxOccurs(1)
+    opt[Unit]('g', "generate").minOccurs(0).maxOccurs(1)
       .valueName("<generate>")
-      .validate(x =>
-        if (Set("YES", "NO").contains(x.toUpperCase)) success else failure("generate accepts yes or no"))
-      .action((x, c) => c.copy(generate = if(x.toUpperCase == "YES") true else false))
-      .text("generate godlen SVRLs")
+      .action((_, c) => c.copy(generate = true))
+      .text("generate golden SVRLs")
 
     opt[String]('l', "loglevel").minOccurs(0).maxOccurs(1)
       .valueName("<log level>")

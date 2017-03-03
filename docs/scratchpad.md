@@ -8,7 +8,7 @@ Let's look at Dropbox\sasha\OSA-Schematron-v1.1-DEV-DROPBOX\_test-suite\input-co
 
 In it, we can suppress namespaced elements like d:req, d:func, etc.
 
-We can count report/assert statements within a <rule> element, and in the output we could display the value of
+We can count report/assert statements within a &lt;rule> element, and in the output we could display the value of
 
 /svrl:schematron-output/svrl:successful-report/svrl:text
 or

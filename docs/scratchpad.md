@@ -1,3 +1,11 @@
+#Suppress the output when generating "golden" SVRL?#
+When executed,
+```
+./smehotron -c path/to/your/smehotron-config.xml -g
+```
+displays  the results on screen. Is this needed? 
+
+#On displaying the results#
 in \GitHub\smehotron\dist:
 ```
 smehotron -c Dropbox\sasha\smehotron.config.GLOB.windows.xml 

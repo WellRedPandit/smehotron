@@ -5,7 +5,7 @@ When executed,
 ```
 displays  the results on screen. Is this needed? 
 
-#On displaying the results#
+#On displaying the comparison results#
 in \GitHub\smehotron\dist:
 ```
 smehotron -c Dropbox\sasha\smehotron.config.GLOB.windows.xml 

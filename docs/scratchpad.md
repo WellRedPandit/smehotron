@@ -1,9 +1,9 @@
 in \GitHub\smehotron\dist:
-
+```
 smehotron -c Dropbox\sasha\smehotron.config.GLOB.windows.xml 
 > 
 Dropbox\sasha\GLOB-out.xml
-
+```
 Let's look at Dropbox\sasha\OSA-Schematron-v1.1-DEV-DROPBOX\_test-suite\input-controls\NoGo\GLOB-statement.svrl:
 
 In it, we can suppress namespaced elements like d:req, d:func, etc.

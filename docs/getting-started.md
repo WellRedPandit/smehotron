@@ -55,7 +55,7 @@ Without any arguments it outputs usage info:
 ```
 > ./smehotron
 Error: no parameters supplied
-smehotron 1.0.3
+smehotron 1.0.4
 Usage: smehotron [options]
 
   -c, --cfg <config-file>  config (optional)

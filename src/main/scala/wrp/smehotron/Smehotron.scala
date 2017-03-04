@@ -9,6 +9,7 @@ import org.apache.commons.io.FileUtils
 import org.slf4j.LoggerFactory
 import wrp.smehotron.utils.Cmd
 import wrp.smehotron.utils.PathOps._
+import org.hashids._
 
 import scala.io.Source
 import scala.util.{Failure, Try}
@@ -22,6 +23,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   lazy val saxonDir = jarDir / "saxon"
   lazy val saxonClasspath = s"${saxonDir}${File.separator}saxon.he.9.7.0.7.jar${File.pathSeparator}${saxonDir}${File.separator}resolver.jar"
   lazy val cats = (cfg \ "catalogs" \ "catalog").map(_.text)
+  val gashish = new org.hashids.Hashids("smehotron");
 
   def processModules() = {
     val go = processGoModules()
@@ -69,20 +71,20 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       val sch = log((m \ "sch-driver").head.text)
       compile(sch) match {
         case Some(step3) => {
-          val icic = m \ "input-controls" \ "input-control" \ "source"
-          val golden = (m \ "input-controls" \ "input-control" \ "golden").text.trim
+          val icic = m \ "input-controls" \ "input-control"
           val tapt = icic.map { icz =>
-            val ic = icz.text.trim
-            validate(step3, ic) match {
+            val src = (icz \ "source").text.trim
+            val golden = (icz \ "golden").text.trim
+            validate(step3, src) match {
               case Some(svrl) =>
                 val suspect = Try(Source.fromFile(svrl).getLines().mkString("\n"))
                 val yardstick = Try(Source.fromFile(golden).getLines().mkString("\n"))
                 if( suspect.isSuccess && yardstick.isSuccess )
-                  tapNogoResult(svrl, ic, golden, sch, mod, suspect.get == yardstick.get)
+                  tapNogoResult(svrl, src, golden, sch, mod, suspect.get == yardstick.get)
                 else
-                  tapNotFound(svrl, ic, golden, sch, mod, List(suspect,yardstick).collect{case Failure(x) => x.getMessage})
+                  tapNotFound(svrl, src, golden, sch, mod, List(suspect,yardstick).collect{case Failure(x) => x.getMessage})
               case None =>
-                tapSvrlFailed(ic, sch, mod)
+                tapSvrlFailed(src, sch, mod)
             }
           }
           tapt.toList
@@ -99,10 +101,10 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       val sch = log((m \ "sch-driver").head.text)
       compile(sch) match {
         case Some(step3) => {
-          val icic = m \ "input-controls" \ "input-control" \ "source"
-          val golden = (m \ "input-controls" \ "input-control" \ "golden").text.trim
+          val icic = m \ "input-controls" \ "input-control"
           val tapt = icic.map { icz =>
-            val ic = icz.text.trim
+            val ic = (icz \ "source").text.trim
+            val golden = (icz \ "golden").text.trim
             validate(step3, ic) match {
               case Some(svrl) =>
                 try {
@@ -125,7 +127,8 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
     <outcomes>{outcomes}</outcomes>
   }
 
-  def validate(step3: String, docFile: String) = doStep(4, docFile, step3, ".svrl")
+  def validate(step3: String, docFile: String) =
+    doStep(4, docFile, step3, s".${gashish.encode(System.currentTimeMillis)}.RMVBL.svrl")
 
   def compile(rulesFile: String) =
     for (step1 <- doStep(1, rulesFile, s"$tronDir${File.separator}iso_dsdl_include.xsl");

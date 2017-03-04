@@ -42,7 +42,7 @@ object TronBuild extends Build {
     .settings(commonProjectSettings: _*)
     .settings(name := "smehotron",
       libraryDependencies ++=
-        compile(config ++ slf4j ++ logback ++ cats ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml) ++
+        compile(config ++ slf4j ++ logback ++ cats ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml ++ hashids) ++
         test(scalaCheck ++ scalaTest),
       assemblyJarName in assembly := "smehotron.jar",
       mainClass in assembly := Some("wrp.smehotron.Smehotron"),

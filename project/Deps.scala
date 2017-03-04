@@ -4,6 +4,7 @@ object V {
   val cats = "0.9.0"
   val commonsIo = "2.5"
   val config = "1.3.1"
+  val hashids = "1.0.1"
   val logback = "1.2.1"
   val scala = "2.12.1"
   val scalaCheck = "1.13.4"
@@ -28,6 +29,7 @@ object Deps {
   val scopt = "com.github.scopt" %% "scopt" % V.scopt
   val scalaXml = "org.scala-lang.modules" %% "scala-xml" % V.scalaXml
   val cats = "org.typelevel" %% "cats" % V.cats
+  val hashids = "org.hashids" % "hashids" % V.hashids
 
   def compile(deps: Seq[ModuleID]): Seq[ModuleID] = deps map (_ % "compile")
 

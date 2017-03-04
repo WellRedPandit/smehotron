@@ -1,3 +1,11 @@
+#Suppress the output when generating "golden" SVRL?#
+When executed,
+```
+./smehotron -c path/to/your/smehotron-config.xml -g
+```
+displays  the results on screen. Is this needed? 
+
+#On displaying the comparison results#
 in \GitHub\smehotron\dist:
 
 ```
@@ -36,3 +44,5 @@ discrep: rule[@id="GLOB220"]/report[1]: ERROR [glob-test:GLOB220]: 'statement' i
 ```
 
 which would allow us to trace the location of the discrepancy between the golden and the current svrl.
+#On terminology#
+Should we, perhaps, use "reference" instead of "yardstick" or "golden"?

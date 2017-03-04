@@ -21,7 +21,9 @@ cd smehotron
 ```
 
 Windows:
-
+* Launch GitHub for Windows
+* Select smehotron repository
+* Click the Sync button in the upper-right corner
 ```
 cd smehotron
 sbt dist

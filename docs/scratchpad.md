@@ -51,4 +51,4 @@ which would allow us to trace the location of the discrepancy between the golden
 
 # On terminology
 
-Should we, perhaps, use "reference" instead of "yardstick" or "golden"?
+Rename &lt;golden> to &lt;expected-svrl>, and &lt;svrl> to &lt;actual-svrl>. That parallels our usage in `utility-fund.xsl`.

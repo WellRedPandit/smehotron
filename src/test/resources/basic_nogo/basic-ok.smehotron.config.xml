@@ -6,7 +6,7 @@
       <input-controls>
         <input-control>
           <source>src/test/resources/basic_nogo/basic-ok.xml</source>
-          <golden>src/test/resources/basic_nogo/basic-ok-golden.svrl</golden>
+          <expected-svrl>src/test/resources/basic_nogo/basic-ok-golden.svrl</expected-svrl>
         </input-control>
       </input-controls>
     </module>

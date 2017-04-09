@@ -6,16 +6,16 @@ import java.nio.file.Path
 import ch.qos.logback.classic.{Level, LoggerContext}
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.commons.io.FileUtils
+import org.jdom2.Element
 import org.slf4j.LoggerFactory
 import wrp.smehotron.utils.Cmd
 import wrp.smehotron.utils.PathOps._
-import org.hashids._
+import org.jdom2.input.SAXBuilder
 
 import scala.io.Source
 import scala.util.{Failure, Try}
 import scala.xml.{Elem, NodeSeq, XML}
-
-//import scala.collection.JavaConverters._
+import scala.collection.JavaConverters._
 
 class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends LazyLogging {
   val jarDir = theRoot.get
@@ -74,15 +74,15 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
           val icic = m \ "input-controls" \ "input-control"
           val tapt = icic.map { icz =>
             val src = (icz \ "source").text.trim
-            val golden = (icz \ "golden").text.trim
+            val expected = (icz \ "expected-svrl").text.trim
             validate(step3, src) match {
               case Some(svrl) =>
                 val suspect = Try(Source.fromFile(svrl).getLines().mkString("\n"))
-                val yardstick = Try(Source.fromFile(golden).getLines().mkString("\n"))
+                val yardstick = Try(Source.fromFile(expected).getLines().mkString("\n"))
                 if( suspect.isSuccess && yardstick.isSuccess )
-                  tapNogoResult(svrl, src, golden, sch, mod, suspect.get == yardstick.get)
+                  tapNogoResult(svrl, src, expected, sch, mod, suspect.get == yardstick.get)
                 else
-                  tapNotFound(svrl, src, golden, sch, mod, List(suspect,yardstick).collect{case Failure(x) => x.getMessage})
+                  tapNotFound(svrl, src, expected, sch, mod, List(suspect,yardstick).collect{case Failure(x) => x.getMessage})
               case None =>
                 tapSvrlFailed(src, sch, mod)
             }
@@ -104,15 +104,15 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
           val icic = m \ "input-controls" \ "input-control"
           val tapt = icic.map { icz =>
             val ic = (icz \ "source").text.trim
-            val golden = (icz \ "golden").text.trim
+            val expected = (icz \ "expected-svrl").text.trim
             validate(step3, ic) match {
               case Some(svrl) =>
                 try {
-                  FileUtils.moveFile(FileUtils.getFile(svrl), FileUtils.getFile(golden))
-                  <outcome type="success" module={mod} sch-driver={sch} input-control={ic}>generated golden svrl: {golden}</outcome>
+                  FileUtils.moveFile(FileUtils.getFile(svrl), FileUtils.getFile(expected))
+                  <outcome type="success" module={mod} sch-driver={sch} input-control={ic}>generated svrl: {expected}</outcome>
                 } catch {
                   case x: Throwable =>
-                    <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not generate golden svrl {golden} due to: {x.getMessage}</outcome>
+                    <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not generate svrl {expected} due to: {x.getMessage}</outcome>
                 }
               case None =>
                 <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not produce svrl</outcome>
@@ -174,7 +174,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
 
   private def tapNogoResult(svrl: String,
                             inputControl: String,
-                            golden: String,
+                            expected: String,
                             rules: String,
                             module: String,
                             success: Boolean) = {
@@ -183,14 +183,14 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       <module>{module}</module>
       <sch-driver>{rules}</sch-driver>
       <input-control>{inputControl}</input-control>
-      <golden>{golden}</golden>
-      <svrl>{svrl}</svrl>
+      <expected-svrl>{expected}</expected-svrl>
+      <actual-svrl>{svrl}</actual-svrl>
     </test>
   }
 
   private def tapNotFound(svrl: String,
                             inputControl: String,
-                            golden: String,
+                            expected: String,
                             rules: String,
                             module: String,
                             what: Seq[String]) = {
@@ -198,8 +198,8 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       <module>{module}</module>
       <sch-driver>{rules}</sch-driver>
       <input-control>{inputControl}</input-control>
-      <golden>{golden}</golden>
-      <svrl>{svrl}</svrl>
+      <expected-svrl>{expected}</expected-svrl>
+      <actual-svrl>{svrl}</actual-svrl>
       <reason>{what.mkString("\n")}</reason>
     </test>
   }
@@ -275,7 +275,7 @@ object Smehotron extends LazyLogging {
     opt[Unit]('g', "generate").minOccurs(0).maxOccurs(1)
       .valueName("<generate>")
       .action((_, c) => c.copy(generate = true))
-      .text("generate golden SVRLs")
+      .text("generate expected SVRLs")
 
     opt[String]('l', "loglevel").minOccurs(0).maxOccurs(1)
       .valueName("<log level>")
@@ -311,6 +311,22 @@ object Smehotron extends LazyLogging {
     </smehotron>
   }
 
+  def resolve(f: File) = {
+    val extend = Set("catalog", "sch-driver","input-control", "source", "expected-svrl")
+    val sax = new SAXBuilder()
+    val doc = sax.build(f)
+    def _resolve(e: Element): Unit = {
+      for( e <- e.getChildren.asScala) {
+        if(extend.contains(e.getName)) {
+          if( !(e.getName == "input-control" && e.getChildren.size() > 0 && e.getChildren.get(0).getName == "source") )
+            println(e.getName + ": " + e.getText)
+        }
+        _resolve(e)
+      }
+    }
+    _resolve(doc.getRootElement)
+  }
+
   def main(args: Array[String]) {
     parser.parse(args, MainArgs()) match {
       case Some(opts) =>
@@ -320,7 +336,10 @@ object Smehotron extends LazyLogging {
           case None => new File(getClass.getProtectionDomain.getCodeSource.getLocation.toURI).getAbsoluteFile.getParent
         }
         val conf = opts.cfg match {
-          case Some(c) => XML.loadFile(c)
+          case Some(f) => {
+            val resolved = resolve(f)
+            XML.loadFile(f)
+          }
           case None =>
             (opts.rules, opts.xml) match {
               case (Some(rules), Some(xml)) => mkConfigForRulesXmlPair(rules, xml)

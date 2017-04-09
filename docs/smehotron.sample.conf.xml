@@ -21,7 +21,7 @@
       <input-controls>
         <input-control>
           <source>path/to/some.xml</source>
-          <golden>path/to/some.golden.svrl</golden>
+          <expected-svrl>path/to/some.golden.svrl</expected-svrl>
         </input-control>
       </input-controls>
     </module>

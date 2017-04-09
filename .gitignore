@@ -1,13 +1,7 @@
 *.sch.*
-*.svrl
 
 *.local
 *.local.*
-
-node_modules/
-bower_files/
-foobar/
-tmp/
 
 project/project
 project/target
@@ -42,6 +36,5 @@ lib_managed/
 src_managed/
 test-output/
 
-node-ui/.tmp/
 .DS_Store
 *_git

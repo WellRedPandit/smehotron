@@ -13,21 +13,24 @@ You need the [Java SE Development Kit 8](http://www.oracle.com/technetwork/java/
 
 ## Building
 
-Mac/Linux:
+### Mac/Linux:
 
-```bash
-cd smehotron
-./sbt dist
-```
+1. `cd smehotron`
+1. to update the source code if needed: `git pull --all`
+1. `./sbt dist`
 
-Windows:
+### Windows:
+
 * Launch GitHub for Windows
 * Select smehotron repository
-* Click the Sync button in the upper-right corner
+* Click the Sync button in the upper-right corner, update the code if needed, then
+
 ```
 cd smehotron
 sbt dist
 ```
+
+### Expected result
 
 Upon successful completion of the `sbt dist` command, a directory called `dist` that contains all required software is created. It has the following structure:
 

@@ -249,7 +249,7 @@ case class MainArgs(rules: Option[File] = None,
 
 object Smehotron extends LazyLogging {
   val parser = new scopt.OptionParser[MainArgs]("smehotron") {
-    head("smehotron", "1.0.4")
+    head("smehotron", "1.0.5")
 
     opt[File]('c', "cfg").minOccurs(0).maxOccurs(1)
       .valueName("<config-file>")

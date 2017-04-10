@@ -51,13 +51,16 @@ object TronBuild extends Build {
         import java.nio.file._
         import java.nio.file.attribute.PosixFilePermission._
         import scala.collection.JavaConversions._
-        sbt.IO.delete(new File("dist"))
-        sbt.IO.copyFile(new File("target/scala-2.12/smehotron.jar"), new File("dist/smehotron.jar"), true)
-        sbt.IO.copyFile(new File("scripts/smehotron"), new File("dist/smehotron"), true)
-        sbt.IO.copyFile(new File("scripts/smehotron.bat"), new File("dist/smehotron.bat"), true)
-        scala.util.Try(Files.setPosixFilePermissions(Paths.get("dist/smehotron"), Set(OWNER_EXECUTE, OWNER_READ, OWNER_WRITE)))
-        sbt.IO.copyDirectory(new File("saxon"), new File("dist/saxon"), false, true)
-        sbt.IO.copyDirectory(new File("schematron"), new File("dist/schematron"), false, true)
+        val releaseDir = s"smehotron-${V.tron}"
+        sbt.IO.delete(new File(releaseDir))
+        sbt.IO.delete(new File(s"$releaseDir.zip"))
+        sbt.IO.copyFile(new File("target/scala-2.12/smehotron.jar"), new File(s"$releaseDir/smehotron.jar"), true)
+        sbt.IO.copyFile(new File("scripts/smehotron"), new File(s"$releaseDir/smehotron"), true)
+        sbt.IO.copyFile(new File("scripts/smehotron.bat"), new File(s"$releaseDir/smehotron.bat"), true)
+        scala.util.Try(Files.setPosixFilePermissions(Paths.get(s"$releaseDir/smehotron"), Set(OWNER_EXECUTE, OWNER_READ, OWNER_WRITE)))
+        sbt.IO.copyDirectory(new File("saxon"), new File(s"$releaseDir/saxon"), false, true)
+        sbt.IO.copyDirectory(new File("schematron"), new File(s"$releaseDir/schematron"), false, true)
+        s"zip -r $releaseDir.zip $releaseDir" !
       },
       dist <<= dist.dependsOn(assembly),
       initialCommands in console :=

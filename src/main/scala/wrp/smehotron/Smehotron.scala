@@ -11,7 +11,9 @@ import org.slf4j.LoggerFactory
 import wrp.smehotron.utils.Cmd
 import wrp.smehotron.utils.PathOps._
 import org.jdom2.input.SAXBuilder
+import org.jdom2.output.{Format, XMLOutputter}
 
+import scala.annotation.tailrec
 import scala.io.Source
 import scala.util.{Failure, Try}
 import scala.xml.{Elem, NodeSeq, XML}
@@ -71,7 +73,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       val sch = log((m \ "sch-driver").head.text)
       compile(sch) match {
         case Some(step3) => {
-          val icic = m \ "input-controls" \ "input-control" \ "source"
+          val icic = m \ "input-controls" \ "input-control"
           val tapt = icic.map { icz =>
             val src = (icz \ "source").text.trim
             val expected = (icz \ "expected-svrl").text.trim
@@ -102,7 +104,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       val sch = log((m \ "sch-driver").head.text)
       compile(sch) match {
         case Some(step3) => {
-          val icic = m \ "input-controls" \ "input-control" \ "source"
+          val icic = m \ "input-controls" \ "input-control"
           val tapt = icic.map { icz =>
             val ic = (icz \ "source").text.trim
             val expected = (icz \ "expected-svrl").text.trim
@@ -312,17 +314,37 @@ object Smehotron extends LazyLogging {
     </smehotron>
   }
 
-  def resolve(f: File) = {
+  @tailrec
+  def findBase(e: Element): Option[String] = {
+    val base = Option(e.getAttributeValue("base"))
+    if(base.nonEmpty) base
+    else {
+      if( e.isRootElement ) None
+      else findBase(e.getParentElement)
+    }
+  }
+
+  def resolve(f: File): String = {
     val extend = Set("catalog", "sch-driver","source", "expected-svrl")
     val sax = new SAXBuilder()
     val doc = sax.build(f)
     def _resolve(e: Element): Unit = {
       for( e <- e.getChildren.asScala) {
-        if(extend.contains(e.getName)) println(e.getName + ": " + e.getText)
+        if(extend.contains(e.getName)) {
+          val base = findBase(e)
+          if( base.nonEmpty) {
+            val newPath = (base.get + File.separator + e.getText).replaceAll(raw"[/\\]+", File.separator)
+            e.setText(newPath)
+          } else {
+            e.setText(e.getText.replaceAll(raw"[/\\]+", File.separator))
+          }
+        }
         _resolve(e)
       }
     }
     _resolve(doc.getRootElement)
+    val xout = new XMLOutputter(Format.getPrettyFormat())
+    xout.outputString(doc)
   }
 
   def main(args: Array[String]) {
@@ -334,10 +356,8 @@ object Smehotron extends LazyLogging {
           case None => new File(getClass.getProtectionDomain.getCodeSource.getLocation.toURI).getAbsoluteFile.getParent
         }
         val conf = opts.cfg match {
-          case Some(f) => {
-            val resolved = resolve(f)
-            XML.loadFile(f)
-          }
+          case Some(f) =>
+            XML.loadString(resolve(f))
           case None =>
             (opts.rules, opts.xml) match {
               case (Some(rules), Some(xml)) => mkConfigForRulesXmlPair(rules, xml)

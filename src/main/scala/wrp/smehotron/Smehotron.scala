@@ -325,19 +325,22 @@ object Smehotron extends LazyLogging {
     }
   }
 
-  def resolve(f: File): String = {
+  def resolve(f: File, sep: String = File.separator): String = {
     val extend = Set("catalog", "sch-driver","source", "expected-svrl")
     val sax = new SAXBuilder()
     val doc = sax.build(f)
+    // http://stackoverflow.com/a/23870306
+    val rx = if( sep == "/") "\\\\+" else "/+"
+    val sub = if( sep == "/") "/" else "\\\\"
     def _resolve(e: Element): Unit = {
       for( e <- e.getChildren.asScala) {
         if(extend.contains(e.getName)) {
           val base = findBase(e)
           if( base.nonEmpty) {
-            val newPath = (base.get + File.separator + e.getText).replaceAll(raw"[/\\]+", File.separator)
+            val newPath = (base.get + sep + e.getText).replaceAll(rx, sub)
             e.setText(newPath)
           } else {
-            e.setText(e.getText.replaceAll(raw"[/\\]+", File.separator))
+            e.setText(e.getText.replaceAll(rx, sub))
           }
         }
         _resolve(e)

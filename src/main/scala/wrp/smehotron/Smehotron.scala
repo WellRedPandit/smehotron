@@ -40,7 +40,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       val sch = log((m \ "sch-driver").head.text)
       compile(sch) match {
         case Some(step3) => {
-          val icic = m \ "input-controls" \ "input-control"
+          val icic = m \ "input-controls" \ "input-control" \ "source"
           val tapt = icic.map { icz =>
             val ic = icz.text.trim
             validate(step3, ic) match {
@@ -71,7 +71,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       val sch = log((m \ "sch-driver").head.text)
       compile(sch) match {
         case Some(step3) => {
-          val icic = m \ "input-controls" \ "input-control"
+          val icic = m \ "input-controls" \ "input-control" \ "source"
           val tapt = icic.map { icz =>
             val src = (icz \ "source").text.trim
             val expected = (icz \ "expected-svrl").text.trim
@@ -95,13 +95,14 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
     }
     <nogo>{nogo}</nogo>
   }
+
   def generateNogoGold() = {
     val outcomes = (cfg \ "nogo" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
       val sch = log((m \ "sch-driver").head.text)
       compile(sch) match {
         case Some(step3) => {
-          val icic = m \ "input-controls" \ "input-control"
+          val icic = m \ "input-controls" \ "input-control" \ "source"
           val tapt = icic.map { icz =>
             val ic = (icz \ "source").text.trim
             val expected = (icz \ "expected-svrl").text.trim
@@ -304,7 +305,7 @@ object Smehotron extends LazyLogging {
         <module name="_phony_">
           <sch-driver>{r}</sch-driver>
           <input-controls>
-            <input-control>{x}</input-control>
+            <input-control><source>{x}</source></input-control>
           </input-controls>
         </module>
       </go>
@@ -312,15 +313,12 @@ object Smehotron extends LazyLogging {
   }
 
   def resolve(f: File) = {
-    val extend = Set("catalog", "sch-driver","input-control", "source", "expected-svrl")
+    val extend = Set("catalog", "sch-driver","source", "expected-svrl")
     val sax = new SAXBuilder()
     val doc = sax.build(f)
     def _resolve(e: Element): Unit = {
       for( e <- e.getChildren.asScala) {
-        if(extend.contains(e.getName)) {
-          if( !(e.getName == "input-control" && e.getChildren.size() > 0 && e.getChildren.get(0).getName == "source") )
-            println(e.getName + ": " + e.getText)
-        }
+        if(extend.contains(e.getName)) println(e.getName + ": " + e.getText)
         _resolve(e)
       }
     }

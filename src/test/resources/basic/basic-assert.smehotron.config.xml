@@ -4,7 +4,7 @@
     <module name="basic">
       <sch-driver>src/test/resources/basic/basic.sch</sch-driver>
       <input-controls>
-        <input-control>src/test/resources/basic/basic-assert.xml</input-control>
+        <input-control><source>src/test/resources/basic/basic-assert.xml</source></input-control>
       </input-controls>
     </module>
   </go>

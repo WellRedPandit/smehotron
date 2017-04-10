@@ -7,17 +7,17 @@ import ch.qos.logback.classic.{Level, LoggerContext}
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.commons.io.FileUtils
 import org.jdom2.Element
+import org.jdom2.input.SAXBuilder
+import org.jdom2.output.{Format, XMLOutputter}
 import org.slf4j.LoggerFactory
 import wrp.smehotron.utils.Cmd
 import wrp.smehotron.utils.PathOps._
-import org.jdom2.input.SAXBuilder
-import org.jdom2.output.{Format, XMLOutputter}
 
 import scala.annotation.tailrec
+import scala.collection.JavaConverters._
 import scala.io.Source
 import scala.util.{Failure, Try}
 import scala.xml.{Elem, NodeSeq, XML}
-import scala.collection.JavaConverters._
 
 class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends LazyLogging {
   val jarDir = theRoot.get
@@ -248,8 +248,9 @@ case class MainArgs(rules: Option[File] = None,
                     generate: Boolean = false)
 
 object Smehotron extends LazyLogging {
+
   val parser = new scopt.OptionParser[MainArgs]("smehotron") {
-    head("smehotron", "1.0.5")
+    head("smehotron", this.getClass().getPackage().getImplementationVersion())
 
     opt[File]('c', "cfg").minOccurs(0).maxOccurs(1)
       .valueName("<config-file>")

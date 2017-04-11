@@ -1,5 +1,7 @@
 package wrp.smehotron.tests
 
+import java.io.File
+
 import org.scalatest.FunSuite
 import wrp.smehotron.Smehotron
 
@@ -9,11 +11,18 @@ class BasicNogoTest extends FunSuite {
 
   val localPath = "src/test/resources/basic_nogo"
 
-  test("basic-ok.xml should pass") {
-    /*val cfg = XML.loadFile(s"$localPath/basic-ok.smehotron.config.xml")
-    val res = Smehotron(".", cfg).processGoModules()
-    val status = (res \ "test" \ "@status").text
-    assertResult("success")(status)*/
+  test("NOGO: basic-ok.xml should pass") {
+    // first, clean up...
+    new File("src/test/resources/basic_nogo/basic-ok-expected.svrl").delete()
+    val cfg = XML.loadFile(s"$localPath/basic-ok.smehotron.config.xml")
+    val resgen = Smehotron(".", cfg).generateNogoExpectedSvrls()
+    val stgen = (resgen \ "outcome" \ "@type").text
+    assertResult("success")(stgen)
+    val resprc = Smehotron(".", cfg).processNogoModules()
+    val stprc = (resprc \ "test" \ "@status").text
+    assertResult("success")(stprc)
+    // last, clean up...
+    new File("src/test/resources/basic_nogo/basic-ok-expected.svrl").delete()
   }
 
 }

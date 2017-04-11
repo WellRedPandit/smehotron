@@ -39,29 +39,32 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   def processGoModules() = {
     val go = (cfg \ "go" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
-      val sch = log((m \ "sch-driver").head.text)
-      compile(sch) match {
-        case Some(step3) => {
-          val icic = m \ "input-controls" \ "input-control" \ "source"
-          val tapt = icic.map { icz =>
-            val ic = icz.text.trim
-            validate(step3, ic) match {
-              case Some(svrl) =>
-                val rpt = XML.loadFile(svrl)
-                val asserts = rpt \\ "failed-assert"
-                val reports = rpt \\ "successful-report"
-                if (asserts.isEmpty && reports.isEmpty)
-                  tapOk(svrl, ic, sch, mod)
-                else
-                  tapAssertsReports(svrl, ic, sch, mod, asserts, reports)
-              case None =>
-                tapSvrlFailed(ic, sch, mod)
+      val drvs =log((m \ "sch-drivers" \ "sch-driver"))
+      drvs.map { drv =>
+        val sch = drv.text
+        compile(sch) match {
+          case Some(step3) => {
+            val icic = m \ "input-controls" \ "input-control" \ "source"
+            val tapt = icic.map { icz =>
+              val ic = icz.text.trim
+              validate(step3, ic) match {
+                case Some(svrl) =>
+                  val rpt = XML.loadFile(svrl)
+                  val asserts = rpt \\ "failed-assert"
+                  val reports = rpt \\ "successful-report"
+                  if (asserts.isEmpty && reports.isEmpty)
+                    tapOk(svrl, ic, sch, mod)
+                  else
+                    tapAssertsReports(svrl, ic, sch, mod, asserts, reports)
+                case None =>
+                  tapSvrlFailed(ic, sch, mod)
+              }
             }
+            tapt.toList
           }
-          tapt.toList
+          case None =>
+            tapCompilationFailed(sch, mod)
         }
-        case None =>
-          tapCompilationFailed(sch, mod)
       }
     }
     <go>{go}</go>
@@ -70,61 +73,67 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   def processNogoModules() = {
     val nogo = (cfg \ "nogo" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
-      val sch = log((m \ "sch-driver").head.text)
-      compile(sch) match {
-        case Some(step3) => {
-          val icic = m \ "input-controls" \ "input-control"
-          val tapt = icic.map { icz =>
-            val src = (icz \ "source").text.trim
-            val expected = (icz \ "expected-svrl").text.trim
-            validate(step3, src) match {
-              case Some(svrl) =>
-                val suspect = Try(Source.fromFile(svrl).getLines().mkString("\n"))
-                val yardstick = Try(Source.fromFile(expected).getLines().mkString("\n"))
-                if( suspect.isSuccess && yardstick.isSuccess )
-                  tapNogoResult(svrl, src, expected, sch, mod, suspect.get == yardstick.get)
-                else
-                  tapNotFound(svrl, src, expected, sch, mod, List(suspect,yardstick).collect{case Failure(x) => x.getMessage})
-              case None =>
-                tapSvrlFailed(src, sch, mod)
+      val drvs =log((m \ "sch-drivers" \ "sch-driver"))
+      drvs.map { drv =>
+        val sch = drv.text
+        compile(sch) match {
+          case Some(step3) => {
+            val icic = m \ "input-controls" \ "input-control"
+            val tapt = icic.map { icz =>
+              val src = (icz \ "source").text.trim
+              val expected = (icz \ "expected-svrl").text.trim
+              validate(step3, src) match {
+                case Some(svrl) =>
+                  val suspect = Try(Source.fromFile(svrl).getLines().mkString("\n"))
+                  val yardstick = Try(Source.fromFile(expected).getLines().mkString("\n"))
+                  if (suspect.isSuccess && yardstick.isSuccess)
+                    tapNogoResult(svrl, src, expected, sch, mod, suspect.get == yardstick.get)
+                  else
+                    tapNotFound(svrl, src, expected, sch, mod, List(suspect, yardstick).collect { case Failure(x) => x.getMessage })
+                case None =>
+                  tapSvrlFailed(src, sch, mod)
+              }
             }
+            tapt.toList
           }
-          tapt.toList
+          case None =>
+            tapCompilationFailed(sch, mod)
         }
-        case None =>
-          tapCompilationFailed(sch, mod)
       }
     }
     <nogo>{nogo}</nogo>
   }
 
-  def generateNogoGold() = {
+  def generateNogoExpectedSvrls() = {
     val outcomes = (cfg \ "nogo" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
-      val sch = log((m \ "sch-driver").head.text)
-      compile(sch) match {
-        case Some(step3) => {
-          val icic = m \ "input-controls" \ "input-control"
-          val tapt = icic.map { icz =>
-            val ic = (icz \ "source").text.trim
-            val expected = (icz \ "expected-svrl").text.trim
-            validate(step3, ic) match {
-              case Some(svrl) =>
-                try {
-                  FileUtils.moveFile(FileUtils.getFile(svrl), FileUtils.getFile(expected))
+      val drvs =log((m \ "sch-drivers" \ "sch-driver"))
+      drvs.map { drv =>
+        val sch = drv.text
+        compile(sch) match {
+          case Some(step3) => {
+            val icic = m \ "input-controls" \ "input-control"
+            val tapt = icic.map { icz =>
+              val ic = (icz \ "source").text.trim
+              val expected = (icz \ "expected-svrl").text.trim
+              validate(step3, ic) match {
+                case Some(svrl) =>
+                  try {
+                    FileUtils.moveFile(FileUtils.getFile(svrl), FileUtils.getFile(expected))
                   <outcome type="success" module={mod} sch-driver={sch} input-control={ic}>generated svrl: {expected}</outcome>
-                } catch {
-                  case x: Throwable =>
-                    <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not generate svrl {expected} due to: {x.getMessage}</outcome>
-                }
-              case None =>
-                <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not produce svrl</outcome>
+                  } catch {
+                    case x: Throwable =>
+                      <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not generate svrl {expected} due to: {x.getMessage}</outcome>
+                  }
+                case None =>
+                  <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not produce svrl</outcome>
+              }
             }
+            tapt.toList
           }
-          tapt.toList
+          case None =>
+            <outcome type="failure" module={mod} sch-driver={sch}>compilation failed</outcome>
         }
-        case None =>
-          <outcome type="failure" module={mod} sch-driver={sch}>compilation failed</outcome>
       }
     }
     <outcomes>{outcomes}</outcomes>
@@ -369,7 +378,7 @@ object Smehotron extends LazyLogging {
             }
         }
         if(opts.generate)
-          Smehotron(root, conf).generateNogoGold().foreach(println)
+          Smehotron(root, conf).generateNogoExpectedSvrls().foreach(println)
         else
           Smehotron(root, conf).processModules().foreach(println)
       case None => /*ignore*/

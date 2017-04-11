@@ -2,11 +2,13 @@
 <smehotron>
   <nogo>
     <module name="basic">
-      <sch-driver>src/test/resources/basic_nogo/basic.sch</sch-driver>
+      <sch-drivers>
+        <sch-driver>src/test/resources/basic_nogo/basic.sch</sch-driver>
+      </sch-drivers>
       <input-controls>
         <input-control>
           <source>src/test/resources/basic_nogo/basic-ok.xml</source>
-          <expected-svrl>src/test/resources/basic_nogo/basic-ok-golden.svrl</expected-svrl>
+          <expected-svrl>src/test/resources/basic_nogo/basic-ok-expected.svrl</expected-svrl>
         </input-control>
       </input-controls>
     </module>

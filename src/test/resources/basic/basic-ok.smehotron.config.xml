@@ -2,7 +2,9 @@
 <smehotron>
   <go>
     <module name="basic">
-      <sch-driver>src/test/resources/basic/basic.sch</sch-driver>
+      <sch-drivers>
+        <sch-driver>src/test/resources/basic/basic.sch</sch-driver>
+      </sch-drivers>
       <input-controls>
         <input-control>
           <source>src/test/resources/basic/basic-ok.xml</source>

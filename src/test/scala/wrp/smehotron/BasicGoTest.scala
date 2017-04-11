@@ -5,11 +5,11 @@ import wrp.smehotron.Smehotron
 
 import scala.xml.XML
 
-class BasicTest extends FunSuite {
+class BasicGoTest extends FunSuite {
 
   val localPath = "src/test/resources/basic"
 
-  test("basic-ok.xml should pass") {
+  test("GO: basic-ok.xml should pass") {
     val cfg = XML.loadFile(s"$localPath/basic-ok.smehotron.config.xml")
     val res = Smehotron(".", cfg).processGoModules()
     val foo = res.toString()
@@ -17,7 +17,7 @@ class BasicTest extends FunSuite {
     assertResult("success")(status)
   }
 
-  test("basic-report.xml should fail with a message") {
+  test("GO: basic-report.xml should fail with a message") {
     val cfg = XML.loadFile(s"$localPath/basic-report.smehotron.config.xml")
     val res = Smehotron(".", cfg).processGoModules()
     val status = (res \ "test" \ "@status").text
@@ -26,7 +26,7 @@ class BasicTest extends FunSuite {
     assertResult("Please inform Director of Publications about the retraction")(msg)
   }
 
-  test("basic-assert.xml should fail with a message") {
+  test("GO: basic-assert.xml should fail with a message") {
     val cfg = XML.loadFile(s"$localPath/basic-assert.smehotron.config.xml")
     val res = Smehotron(".", cfg).processGoModules()
     val status = (res \ "test" \ "@status").text

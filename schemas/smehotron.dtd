@@ -1,0 +1,16 @@
+<!ELEMENT smehotron (catalogs, (go | nogo)+) >
+<!ELEMENT catalogs (catalog)+ >
+<!ATTLIST catalogs base CDATA #IMPLIED >
+<!ELEMENT catalog (#PCDATA) >
+<!ELEMENT go (module)+ >
+<!ATTLIST go base CDATA #IMPLIED >
+<!ELEMENT nogo (module)+ >
+<!ATTLIST nogo base CDATA #IMPLIED >
+<!ELEMENT module ((sch-driver | sch-drivers), input-controls) >
+<!ATTLIST module name CDATA #REQUIRED >
+<!ELEMENT sch-driver (#PCDATA) >
+<!ELEMENT sch-drivers (sch-driver)+ >
+<!ELEMENT input-controls (input-control)+ >
+<!ELEMENT input-control (source, expected-svrl?)+ >
+<!ELEMENT source (#PCDATA) >
+<!ELEMENT expected-svrl (#PCDATA) >

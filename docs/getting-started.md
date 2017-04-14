@@ -32,10 +32,10 @@ sbt dist
 
 ### Expected result
 
-Upon successful completion of the `sbt dist` command, a directory called `dist` that contains all required software is created. It has the following structure:
+Upon successful completion of the `sbt dist` command, a directory `smehotron-1.0.8` and a zip file `smehotron-1.0.8.zip` (`1.0.8` is an example version, naturally) that contain all required software are created. They have the following structure:
 
 ```
-dist/
+smehotron-1.0.8/
 ├── saxon
 │   ├── resolver.jar
 │   └── saxon.he.9.7.0.7.jar
@@ -53,14 +53,14 @@ dist/
 
 ### General
 
-You can rename `dist` to anything you like and relocate it anywhere you like. To run, you need to call `smehotron.bat` (on Windows) or `smehotron` (on Mac or Linux).
+To run, you need to call `smehotron.bat` (on Windows) or `smehotron` (on Mac or Linux).
 
 Without any arguments it outputs usage info:
 
 ```
 > ./smehotron
 Error: no parameters supplied
-smehotron 1.0.4
+smehotron 1.0.8
 Usage: smehotron [options]
 
   -c, --cfg <config-file>  config (optional)
@@ -111,7 +111,6 @@ To run tests, run smehotron as usual without the -g switch, e.g.
 ```
 > ./dist/smehotron -c src/test/resources/basic_nogo/basic-ok.smehotron.config.xml
 <smehotron-results>
-      <go></go>
       <nogo><test status="success">
       <module>basic</module>
       <sch-driver>src/test/resources/basic_nogo/basic.sch</sch-driver>

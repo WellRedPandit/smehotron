@@ -11,15 +11,14 @@ class BasicGoTest extends FunSuite {
 
   test("GO: basic-ok.xml should pass") {
     val cfg = XML.loadFile(s"$localPath/basic-ok.smehotron.config.xml")
-    val res = Smehotron(".", cfg).processGoModules()
-    val foo = res.toString()
+    val res = <go>{Smehotron(".", cfg).processGoModules()}</go>
     val status = (res \ "test" \ "@status").text
     assertResult("success")(status)
   }
 
   test("GO: basic-report.xml should fail with a message") {
     val cfg = XML.loadFile(s"$localPath/basic-report.smehotron.config.xml")
-    val res = Smehotron(".", cfg).processGoModules()
+    val res = <go>{Smehotron(".", cfg).processGoModules()}</go>
     val status = (res \ "test" \ "@status").text
     assertResult("failure")(status)
     val msg = (res \ "test" \ "reports" \ "successful-report" \ "text").text
@@ -28,7 +27,7 @@ class BasicGoTest extends FunSuite {
 
   test("GO: basic-assert.xml should fail with a message") {
     val cfg = XML.loadFile(s"$localPath/basic-assert.smehotron.config.xml")
-    val res = Smehotron(".", cfg).processGoModules()
+    val res = <go>{Smehotron(".", cfg).processGoModules()}</go>
     val status = (res \ "test" \ "@status").text
     assertResult("failure")(status)
     val msg = (res \ "test" \ "asserts" \ "failed-assert" \ "text").text

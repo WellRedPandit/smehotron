@@ -25,21 +25,22 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   lazy val saxonDir = jarDir / "saxon"
   lazy val saxonClasspath = s"${saxonDir}${File.separator}saxon.he.9.7.0.7.jar${File.pathSeparator}${saxonDir}${File.separator}resolver.jar"
   lazy val cats = (cfg \ "catalogs" \ "catalog").map(_.text)
-  val gashish = new org.hashids.Hashids("smehotron");
+  val gashish = new org.hashids.Hashids("smehotron")
 
   def processModules() = {
-    val go = processGoModules()
-    val nogo = processNogoModules()
+    val goms = processGoModules()
+    val nogoms = processNogoModules()
+    val go = if( goms.nonEmpty ) <go>{goms}</go> else NodeSeq.Empty
+    val nogo = if( nogoms.nonEmpty ) <nogo>{nogoms}</nogo> else NodeSeq.Empty
     <smehotron-results>
-      {go}
-      {nogo}
+      {go ++ nogo}
     </smehotron-results>
   }
 
-  def processGoModules() = {
-    val go = (cfg \ "go" \ "module").flatMap { m =>
+  def processGoModules() =
+    (cfg \ "go" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
-      val drvs =log((m \ "sch-drivers" \ "sch-driver"))
+      val drvs = log((m \ "sch-drivers" \ "sch-driver") ++ (m \ "sch-driver"))
       drvs.map { drv =>
         val sch = drv.text
         compile(sch) match {
@@ -67,13 +68,11 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
         }
       }
     }
-    <go>{go}</go>
-  }
 
-  def processNogoModules() = {
-    val nogo = (cfg \ "nogo" \ "module").flatMap { m =>
+  def processNogoModules() =
+    (cfg \ "nogo" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
-      val drvs =log((m \ "sch-drivers" \ "sch-driver"))
+      val drvs =log((m \ "sch-drivers" \ "sch-driver") ++ (m \ "sch-driver"))
       drvs.map { drv =>
         val sch = drv.text
         compile(sch) match {
@@ -101,13 +100,11 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
         }
       }
     }
-    <nogo>{nogo}</nogo>
-  }
 
   def generateNogoExpectedSvrls() = {
     val outcomes = (cfg \ "nogo" \ "module").flatMap { m =>
       val mod = log((m \ "@name").head.text)
-      val drvs =log((m \ "sch-drivers" \ "sch-driver"))
+      val drvs =log((m \ "sch-drivers" \ "sch-driver") ++ (m \ "sch-driver"))
       drvs.map { drv =>
         val sch = drv.text
         compile(sch) match {

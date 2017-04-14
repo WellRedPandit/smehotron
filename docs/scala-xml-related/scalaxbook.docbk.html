@@ -1,0 +1,1142 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1"><title>scala.xml</title><link rel="stylesheet" href="styles.css" type="text/css"><meta name="generator" content="DocBook XSL Stylesheets V1.73.2"></head><body bgcolor="white" text="black" link="#0000FF" vlink="#840084" alink="#0000FF"><div class="book" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="id2891950"></a>scala.xml</h1></div><div><h2 class="subtitle">(draft book, updated for Scala 2.6.1)</h2></div></div><hr></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="preface"><a href="#id2892128">preface</a></span></dt><dt><span class="part"><a href="#id2891979">I. Semistructured Syntax and Data</a></span></dt><dd><dl><dt><span class="chapter"><a href="#id2891987">1. Introduction</a></span></dt><dd><dl><dt><span class="section"><a href="#id2892157">XML, Types and Objects</a></span></dt><dt><span class="section"><a href="#id2892218">Developer Perspectives</a></span></dt><dt><span class="section"><a href="#id2892407">Acknowledgements</a></span></dt></dl></dd><dt><span class="chapter"><a href="#id2892433">2. The scala.xml API</a></span></dt><dd><dl><dt><span class="section"><a href="#id2892440">Nodes and Attributes</a></span></dt><dd><dl><dt><span class="section"><a href="#id2892453">Elements and Text</a></span></dt><dt><span class="section"><a href="#id2892456">Embedded expressions</a></span></dt></dl></dd><dt><span class="section"><a href="#id2892870">Other nodes</a></span></dt><dt><span class="section"><a href="#id2892950">Matching XML</a></span></dt><dt><span class="section"><a href="#id2892989">Updates and Queries</a></span></dt><dt><span class="section"><a href="#id2893075">Names and Namespaces</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893278">Sharing namespace nodes</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#id2893078">3. XPath projection</a></span></dt><dt><span class="chapter"><a href="#id2893345">4. XSLT style transformations</a></span></dt><dt><span class="chapter"><a href="#id2893361">5. XQuery style querying</a></span></dt><dt><span class="chapter"><a href="#id2893380">6. Loading and Saving XML</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893425">The native Scala parser</a></span></dt><dt><span class="section"><a href="#id2893444">Pull parsing (experimental)</a></span></dt></dl></dd></dl></dd><dt><span class="part"><a href="#id2893475">II. Library</a></span></dt><dd><dl><dt><span class="chapter"><a href="#id2893482">7. Overview</a></span></dt><dt><span class="chapter"><a href="#id2893493">8. scala.xml runtime classes</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893506">scala.xml.Node</a></span></dt><dt><span class="section"><a href="#id2893530">scala.xml.NodeSeq</a></span></dt><dt><span class="section"><a href="#id2893549">scala.xml.Elem</a></span></dt><dt><span class="section"><a href="#id2893583">SpecialNode</a></span></dt><dt><span class="section"><a href="#id2893592">Atom</a></span></dt><dt><span class="section"><a href="#id2893604">EntityRef</a></span></dt><dt><span class="section"><a href="#id2893617">scala.xml.MetaData</a></span></dt><dt><span class="section"><a href="#id2893633">scala.xml.Null</a></span></dt><dt><span class="section"><a href="#id2893647">scala.xml.PrefixedAttribute</a></span></dt><dt><span class="section"><a href="#id2893678">scala.xml.UnprefixedAttribute</a></span></dt><dt><span class="section"><a href="#id2893696">scala.xml.NamespaceBinding</a></span></dt><dt><span class="section"><a href="#id2893708">scala.xml.TopScope</a></span></dt></dl></dd><dt><span class="chapter"><a href="#id2893496">9. Scala's XML syntax, formally</a></span></dt><dt><span class="chapter"><a href="#id2893839">10. Interpretation of XML expressions and patterns</a></span></dt></dl></dd><dt><span class="part"><a href="#id2893932">III. Tools</a></span></dt><dd><dl><dt><span class="chapter"><a href="#id2893939">11. xinc</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893944">EHR's SAXIncluder</a></span></dt></dl></dd><dt><span class="chapter"><a href="#id2893974">12. schema2src</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893979">Introduction to Data Binding</a></span></dt></dl></dd><dt><span class="chapter"><a href="#id2894161">13. xslt2src</a></span></dt><dt><span class="chapter"><a href="#id2894171">14. xquery2src</a></span></dt></dl></dd><dt><span class="part"><a href="#id2894181">IV. Appendix</a></span></dt><dd><dl><dt><span class="appendix"><a href="#id2894186">A. Scala/XML expression grammar</a></span></dt><dd><dl><dt><span class="section"><a href="#id2894192">EBNF productions</a></span></dt><dt><span class="section"><a href="#id2894347">Summary of changes</a></span></dt><dt><span class="section"><a href="#id2894404">Omissions from XML syntax</a></span></dt></dl></dd><dt><span class="appendix"><a href="#id2894445">B. Implementation Chart: Information Set</a></span></dt><dt><span class="bibliography"><a href="#id2894455">Bibliography</a></span></dt></dl></dd></dl></div><div class="list-of-tables"><p><b>List of Tables</b></p><dl><dt>12.1. <a href="#id2894006"></a></dt><dt>12.2. <a href="#id2894086"></a></dt></dl></div><div class="preface" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2892128"></a>preface</h2></div></div></div><div class="abstract"><p class="title"><b>Abstract</b></p><p>
+        We shed light on Scala's XML data model and the syntax of literal XML 
+        markup in Scala code.
+      </p></div></div><div class="part" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="id2891979"></a>Part I. Semistructured Syntax and Data</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#id2891987">1. Introduction</a></span></dt><dd><dl><dt><span class="section"><a href="#id2892157">XML, Types and Objects</a></span></dt><dt><span class="section"><a href="#id2892218">Developer Perspectives</a></span></dt><dt><span class="section"><a href="#id2892407">Acknowledgements</a></span></dt></dl></dd><dt><span class="chapter"><a href="#id2892433">2. The scala.xml API</a></span></dt><dd><dl><dt><span class="section"><a href="#id2892440">Nodes and Attributes</a></span></dt><dd><dl><dt><span class="section"><a href="#id2892453">Elements and Text</a></span></dt><dt><span class="section"><a href="#id2892456">Embedded expressions</a></span></dt></dl></dd><dt><span class="section"><a href="#id2892870">Other nodes</a></span></dt><dt><span class="section"><a href="#id2892950">Matching XML</a></span></dt><dt><span class="section"><a href="#id2892989">Updates and Queries</a></span></dt><dt><span class="section"><a href="#id2893075">Names and Namespaces</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893278">Sharing namespace nodes</a></span></dt></dl></dd></dl></dd><dt><span class="chapter"><a href="#id2893078">3. XPath projection</a></span></dt><dt><span class="chapter"><a href="#id2893345">4. XSLT style transformations</a></span></dt><dt><span class="chapter"><a href="#id2893361">5. XQuery style querying</a></span></dt><dt><span class="chapter"><a href="#id2893380">6. Loading and Saving XML</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893425">The native Scala parser</a></span></dt><dt><span class="section"><a href="#id2893444">Pull parsing (experimental)</a></span></dt></dl></dd></dl></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2891987"></a>Chapter 1. Introduction</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#id2892157">XML, Types and Objects</a></span></dt><dt><span class="section"><a href="#id2892218">Developer Perspectives</a></span></dt><dt><span class="section"><a href="#id2892407">Acknowledgements</a></span></dt></dl></div><p>
+      <a class="ulink" href="http://scala-lang.org" target="_top">Scala</a> <a class="xref" href="#scala" title="Scala language specification">[scala]</a>
+      is a programming language that is compiled to Java Virtual
+      Machine(tm) bytecode which supports a variety of programming styles and
+      can call Java libraries. It provides extensive library support for XML processing
+      with functional and object-oriented techniques. 
+    </p><p>
+      This book aims to inform the reader of Scala's XML
+      facilities. Some basic knowledge of Scala
+      is assumed, as provided by the <a class="ulink" href="http://scala-lang.org/intro" target="_top">Scala Overview</a>, a
+      cursory reading of <a class="xref" href="#scala-programming" title="Programming in Scala">[scala-programming]</a>, or any of the fashionable Scala books that are coming out these days (use Google to find
+      them).  Before
+      we embark on this journey, let me try to place scala.xml within the big picture:
+      </p><div class="itemizedlist"><ul type="disc"><li><p>Some consider XML as just syntax: In this view, the core XML specification<a class="xref" href="#w3c-xml" title="Recommendation: Extensible Markup Language (XML) 1.0">[<abbr class="abbrev">xml</abbr>]</a> merely talks about
+          sequences of characters with some markers (tags) in
+          angle brackets appearing here and there. XML is kind of "meta" because the spec authors
+          do <span class="emphasis"><em>not</em></span> say, <span class="emphasis"><em>which</em></span> tags.
+          When tags are "instantiated" to concrete structuring elements like <code class="literal">&lt;html&gt;</code>,
+          then the XML spec speaks of an XML application (like XHTML, DocBook or Atom).
+          </p></li><li><p>XML is also something like a data model: The nesting of tags in an XML
+          document  provides a neat tree
+          structure, which can be used to represent data.  Thus, most of this book is concerned 
+          with trees and sequences of trees. Thinking in trees is useful, for instance when XML 
+          transformation can be described applying recursive tree traversals.  However, it 
+          is sometimes too imprecise: sometimes we might encounter a string like "23", and 
+          decide whether we actually want to consider it as an integer, a string, or a
+          day of the month. 
+	  <sup>[<a name="id2892079" href="#ftn.id2892079" class="footnote">1</a>]</sup>
+          </p></li></ul></div><p>
+    </p><p>The scala.xml library is designed to help with both perspectives, and for the latter, to 
+    keep options open of unmarshalling parts of the XML to object and value representations ("data binding").
+    In this document I try to promote an understanding of the library classes, 
+    programming constructs and design patterns provided to this end.
+    This should help the reader do things like parsing, maybe validating, 
+    applying recursive transformations, querying and data binding.
+    </p><p>
+      There is a wealth of XML specific programming languages which
+      however do not integrate too well with the object-oriented
+      paradigm <sup>[<a name="id2892117" href="#ftn.id2892117" class="footnote">2</a>]</sup>. <a class="ulink" href="http://scala-lang.org" target="_top">Scala</a> is a language that is particularly open to elegant solutions
+      to old problems, because it allows new programming abstractions to be defined easily, providing some 
+      opportunities to bridge syntactical gaps and achieving somewhat tighter integration.
+    </p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2892157"></a>XML, Types and Objects</h2></div></div></div><p>
+        Types in programming can help structure your code, remind you of data invariants and push the compiler to detect
+        errors and apply optimizations. A type system should be considered a simple and effective form of 
+        program verification.
+      </p><p>
+	Data Types in XML specifications are concerned with assigning meaning to sequences of
+	characters -- not with programming. The types thus introduced express
+        some form of structural invariants of XML documents and fragments. This, and not more, 
+        is what standards like "Document Type Definition" (DTD)<a class="xref" href="#w3c-xml" title="Recommendation: Extensible Markup Language (XML) 1.0">[<abbr class="abbrev">xml</abbr>]</a>, the more recent XML
+	Schema Definitions (XSD) <a class="xref" href="#w3c-xsd1" title="Recommendation: XML Schema Part 1: Structures">[<abbr class="abbrev">xsd1</abbr>]</a><a class="xref" href="#w3c-xsd2" title="Recommendation: XML Schema Part 2: Datatypes">[<abbr class="abbrev">xsd2</abbr>]</a> and Relax NG (RNG) <a class="xref" href="#oasis-rng" title="Committee Specification: RELAX NG Specification">[<abbr class="abbrev">rng</abbr>]</a> schemata achieve. Less well-known alternatives
+	are schematron and Document Structure Description (DSD) <a class="xref" href="#brics-dsd" title="Document Structure Description 2.0">[<abbr class="abbrev">dsd</abbr>]</a>.  
+        An XML
+	document conforming to such a schema is called
+	<span class="emphasis"><em>valid</em></span> or schema-valid. For the programmer, the job does not end at 
+        data definition, it begins there. And then there are a whole number of XML programs that don't need this
+        datatype business at all.
+      </p><p>
+        I believe, it is wrong to impose one perspective and completely neglect the other.
+        Probably, most users of scala.xml are interested in generating (X)HTML: These users
+        need support for almost all details of the XML and XHTML spec, plus some knowledge
+        about browser incompatibilities. The Scala language thus supports cut-and-paste 
+        compatibility for XML literals.
+      </p><p>
+        On the other hand, there are benefits of using type information.
+        Today there is some static type checking for XQuery and XSLT, but they are somewhat all-or-nothing, 
+        forcing the developer to decide whether he wants to live in a typed or an untyped XML world. 
+        The scala.xml library keeps all options open: one can manipulate XML without worrying about a schema,
+        but there are ways to convert to or represent some attribute or element text as a Scala/Java integer.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2892218"></a>Developer Perspectives</h2></div></div></div><p>
+        XML programming is a placeholder for many different approaches
+        developers have for XML processing. We will call such a perspective 
+        "generic" if it does not depend on any particular XML application (nothing to do with Java generics). 
+        A generic approach can deal with XHTML just as it 
+        can deal with a markup language for cooking recipes. There are several points of view that can be taken:
+        </p><div class="orderedlist"><ol type="1"><li><p>
+              XML is regarded as text. We ignore the tree structure completely.
+              Some text/regular expression search is used to retrieve or
+              manipulate information. This can get you quite far for small tasks. Go away, use perl :-)
+            </p></li><li><p>
+              XML is parsed into a (mutable) object graph that represents 
+              the tree structure in a generic way. The 
+              Document Object Model (DOM) <a class="xref" href="#dom-level3" title="Recommendation: Document Object Model (DOM) Level 3 Core Specification">[<abbr class="abbrev">dom-L3</abbr>]</a> and related programming interfaces
+              <a class="xref" href="#dom4j" title="dom4j">[<abbr class="abbrev">dom4j</abbr>]</a>
+              <a class="xref" href="#jdom" title="JDOM">[<abbr class="abbrev">jdom</abbr>]</a>
+              <a class="xref" href="#xom" title="XML Object Model">[<abbr class="abbrev">xom</abbr>]</a>
+              provide more or less standard APIs to 
+              manipulate such trees in general purpose language. Not surprisingly, scala.xml comes with
+              its own API. It is possible to convert to and from others, but this is not yet part of the library.
+            </p></li><li><p>
+              While parsing XML, a sequence of
+              <span class="emphasis"><em>events</em></span> is generated. These events either
+              trigger callbacks
+              (<span class="emphasis"><em>push</em></span>, application is the callee,
+              like in the Simple API for XML (SAX) <a class="xref" href="#sax" title="Simple API for XML">[<abbr class="abbrev">sax</abbr>]</a>) or 
+              the application fetches its events itself (<span class="emphasis"><em>pull</em></span>,
+              implemented in Streaming API for XML (StAX) <a class="xref" href="#stax" title="Streaming API for XML">[stax]</a>). There is an experimental pull api for Scala that allows to experiment with this view (see <a class="ulink" href="http://www.scala-lang.org/docu/files/api/scala/xml/pull%24content.html" target="_top">scala.xml.pull API documentation</a>.
+            </p></li><li><p>
+              XML is the communication format to interact with a database -- not
+              so much like MySQL running on the same machine, but more like 
+              "Acme Corp has good data and allowed us to send them queries".
+              This would use a query language like XQuery <a class="xref" href="#w3c-xquery" title="Recommendation: XQuery 1.0: An XML Query Language">[<abbr class="abbrev">xquery</abbr>]</a>. An 
+              experimental XQuery-to-Scala-source translator is available to
+              support this view <a class="xref" href="#xquery2src" title="xquery2src (written in Scala)">[<abbr class="abbrev">xquery2src</abbr>]</a>.
+            </p></li><li><p>
+              XML is transformed by applying style templates (like XSLT <a class="xref" href="#w3c-xslt" title="XSL Transformations (XSLT)">[<abbr class="abbrev">xslt</abbr>]</a>). 
+              This falls under the more general term of 
+              "recursive transformations". There are some library classes that achieve
+              the same (see package <a class="ulink" href="http://www.scala-lang.org/docu/files/api/scala/xml/transform%24content.html" target="_top">scala.xml.transform</a>). There is also an XSLT-to-Scala-source translator,
+              which is a bit outdated and does not work with the current version of Scala, but which might be revived one day if anybody asks me. For new developments,
+              it is more straightforward to use the more convenient Scala API rather than the cumbersome 
+              XSLT syntax, or (if it really must be XSLT), some Java library.
+            </p></li><li><p>
+              XML is considered as bare trees, and we want to deal with XML "natively". Then the scala.xml API
+              provides methods to handle these structures, with support for XPath like selection and 
+              pattern matching.
+            </p></li></ol></div><p>
+      </p><p>
+        Using scala.xml feels somewhere between using some DOM API and having an XML specific language.
+        Besides the literal syntax, there is actually no language support.
+        In Scala, most "features" are realized not as language extensions but
+        as libraries. Even the literal XML syntax is desugared into code that constructs objects --
+        so it is possible to do express everything that can be expressed in XML literals (and even more)
+        without actually using XML syntax, programmatically.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2892407"></a>Acknowledgements</h2></div></div></div><p>Thanks go to  Martin Odersky for giving me the freedom in
+      designing this library. Also, without the past and present 
+      LAMP staff, Scala would not be what it is today. Matthias Zenger, 
+      Michel Schinz, Philippe Altherr, Vincent Cremet, Erik Stenman, 
+      Gilles Dubochet, Stéphane Micheloud, Lex Spoon, Sean McDirmid, 
+      Nikolay Mihaylov, Iulian Dragos. Some of these guys were pretty
+      ardent XML detractors, which is sometimes good as it reminds
+      one that no XML API is a silver-bullet.</p><p>
+      Jamie Webb and Jon Pretty of Sygneca gave a lot of feedback and
+      a couple of features were suggested by them. Students that took
+      undergraduate projects helped to weed out bugs and improve
+      performance and usability -- thank you to Simon Barbey, Fatemeh Borran, 
+      Susann Bucher, Badr Hejira, Florian Hof, Clément Hongler and Lukas Rytz.</p><p>Update: For the latest iteration of this draft's release, Jonas Bonér, David Pollak, David Hall, Michael Fortson deserve thanks for reporting bugs in the code and the document.</p></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a name="ftn.id2892079" href="#id2892079" class="para">1</a>] </sup>
+              The tree view is <span class="emphasis"><em>somewhat</em></span> encouraged by the XML InfoSet specification <a class="xref" href="#w3c-info" title="Recommendation: XML Information Set (Second Edition)">[<abbr class="abbrev">info</abbr>]</a>, and by common sense.
+	    </p></div><div class="footnote"><p><sup>[<a name="ftn.id2892117" href="#id2892117" class="para">2</a>] </sup>Mary Fernandez aptly described the
+      problem as "throwing your data over the wall" ) <a class="xref" href="#mf-wall" title="XQuery: A Query Language for XML (or...Memoir of a W3C Standards Hacker). invited talk ECOOP'03 Darmstadt">[mf-wall]</a></p></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2892433"></a>Chapter 2. The scala.xml API</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#id2892440">Nodes and Attributes</a></span></dt><dd><dl><dt><span class="section"><a href="#id2892453">Elements and Text</a></span></dt><dt><span class="section"><a href="#id2892456">Embedded expressions</a></span></dt></dl></dd><dt><span class="section"><a href="#id2892870">Other nodes</a></span></dt><dt><span class="section"><a href="#id2892950">Matching XML</a></span></dt><dt><span class="section"><a href="#id2892989">Updates and Queries</a></span></dt><dt><span class="section"><a href="#id2893075">Names and Namespaces</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893278">Sharing namespace nodes</a></span></dt></dl></dd></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2892440"></a>Nodes and Attributes</h2></div></div></div><p>The Scala programming language offers a wide range of constructions
+      and library routines that make dynamic XML processing simple and effective.
+      This section contains an overview of the most common ways to construct 
+      XML.
+    </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2892453"></a>Elements and Text</h3></div></div></div><p>Probably the easiest way to put XML data in your program is
+    to copy and paste it into your program.  The following code will
+    demonstrates this.  To make the matter more interesting, it is
+    spiced with an HTML description.</p><pre class="programlisting">
+/* examples/phonebook/phonebook1.scala */
+package phonebook  
+
+object phonebook1 {
+
+  val labPhoneBook = 
+    &lt;phonebook&gt;
+      &lt;descr&gt;
+        This is the &lt;b&gt;phonebook&lt;/b&gt; of the 
+        &lt;a href="http://acme.org"&gt;ACME&lt;/a&gt; corporation.
+      &lt;/descr&gt;
+      &lt;entry&gt;
+        &lt;name&gt;Burak Emir&lt;/name&gt; 
+        &lt;phone where="work"&gt;+41 21 693 68 67&lt;/phone&gt;
+      &lt;/entry&gt;
+    &lt;/phonebook&gt;;
+
+  def main(args: Array[String]) =
+    Console.println( labPhoneBook )
+
+}
+</pre><p>The Scala parser recognizes the full XML grammar. Further down, we shall see that is actually
+    recognizes a superset, allowing it to parse mixed and nested Scala and XML expression. As a principle,
+    everything allowed in XML is allowed in Scala, with the only exceptions being motivated by the fact that
+    some aspects of the XML spec just don't make sense for the source code of a program. In return, the extensions
+    to the syntax have been made in order to make programming easier.
+</p><pre class="programlisting">
+
+$ scalac -d /tmp examples/xml/phonebook/phonebook1.scala
+$ scala -classpath /tmp phonebook.phonebook1
+&lt;phonebook&gt;
+      &lt;descr&gt;
+        This is the &lt;b&gt;phonebook&lt;/b&gt; of the
+        &lt;a href="http://acme.org"&gt;ACME&lt;/a&gt; corporation.
+      &lt;/descr&gt;
+      &lt;entry&gt;
+        &lt;name&gt;Burak Emir&lt;/name&gt;
+        &lt;phone where="work"&gt;+41 21 693 68 67&lt;/phone&gt;
+      &lt;/entry&gt;
+    &lt;/phonebook&gt;
+    
+</pre><p>
+  XML nodes in Scala are always instances of some subclass of <a class="ulink" href="http://scala-lang.org/docu/files/api/scala/xml/Node.html" target="_top"><code class="constant">scala.xml.Node</code></a>.
+  The library uses an immutable representation (no parts of an XML node can be changed), but the
+  programmer may provide own mutable subclasses of <a class="ulink" href="http://scala-lang.org/docu/files/api/scala/xml/Node.html" target="_top"><code class="constant">scala.xml.Node</code></a>
+  if required.
+</p><p>By default, elements are represented using <a class="ulink" href="http://scala-lang.org/docu/files/api/scala/xml/Elem.html" target="_top"><code class="constant">scala.xml.Elem</code></a>
+and <a class="ulink" href="http://scala-lang.org/docu/files/api/scala/xml/Text.html" target="_top"><code class="constant">scala.xml.Text</code></a>. These
+are case classes, so they can be constructed wihout having to
+write <code class="constant">new</code> and can be used as patterns in a
+<code class="constant">match</code> expression. </p><p>The <code class="constant">Elem</code> class looks roughly like this:
+      </p><pre class="programlisting">
+case class Elem(val prefix: String,          // namespace prefix
+                val label: String,           // (local) tag name
+                val attributes: MetaData,
+                val scope: NamespaceBinding, // namespace bindings
+                val child: Node*) extends Node { ... }
+</pre><p>
+        From the constructor, we can see what constitutes an XML element (we shall treat
+        namespaces later). The last
+        formal parameter definition <code class="constant">child: Node*</code>
+        indicates that an arbitrary number of nodes
+        (including zero) may be passed to the <code class="constant">Elem</code> constructor.
+        In fact, the above phonebook code can equivalently written like this:
+        </p><pre class="programlisting">/* examples/xml/phonebook/verboseBook.scala */
+package phonebook 
+
+object verboseBook {
+
+  import scala.xml.{ UnprefixedAttribute, Elem, Node, Null, Text, TopScope } 
+
+  val pbookVerbose = 
+    Elem(null, "phonebook", Null, TopScope,
+       Elem(null, "descr", Null, TopScope,
+            Text("This is a "), 
+            Elem(null, "b", Null, TopScope, Text("sample")),
+            Text("description")
+          ),
+       Elem(null, "entry", Null, TopScope,
+            Elem(null, "name", Null, TopScope, Text("Burak Emir")),
+            Elem(null, "phone", new UnprefixedAttribute("where","work", Null), TopScope, 
+                 Text("+41 21 693 68 67"))
+          )
+       )
+
+  def main(args: Array[String]) = 
+    Console.println( pbookVerbose )
+}
+</pre><p>
+      </p><p>This code does <span class="emphasis"><em>almost</em></span> the same as the
+      code above. However, the output of the programs are different:
+      </p><pre class="programlisting">
+$ scalac -d /tmp examples/xml/phonebook/verboseBook.scala
+$ scala -classpath /tmp phonebook.verboseBook
+&lt;phonebook&gt;&lt;descr&gt;This is a &lt;b&gt;sample&lt;/b&gt;description&lt;/descr&gt;&lt;entry&gt;&lt;name&gt;Burak Emir&lt;/name&gt;&lt;phone where="work"&gt;+41 21 693 68 67&lt;/phone&gt;&lt;/entry&gt;&lt;/phonebook&gt;
+</pre><p>
+       </p><p>Why does the former output looked somewhat better,
+      although still not perfect?.  The answer lies in the whitespace
+      contained in the former program source. Scala's XML parser
+      adopts the simple rule that within XML expressions, whitespace
+      is preserved everywhere.  In <code class="constant">verboseBook</code>,
+      we did not care to construct superfluous nodes containing only
+      whitespace, consequently there was no whitespace when we printed
+      it. In most cases, this does not matter (flamewars on xml-dev notwithstanding). 
+      A pretty printer is available to obtain more human-readable output -- try to change the main to:
+      </p><pre class="programlisting">
+  def main(args: Array[String]) = 
+    Console.println( new PrettyPrinter(80 /*width*/,3 /*indent*/).format(pbookVerbose) )
+      </pre><p>Three things are worth remembering:</p><div class="itemizedlist"><ul type="disc"><li><p>Mixed content has to be expressed by juxtaposing <code class="constant">Text</code> and <code class="constant">Elem</code>.</p></li><li><p>Attributes are an immutable linked list of <code class="constant">UnprefixedAttribute</code> objects, terminated with the <code class="constant">Null</code> object.</p></li><li><p>The <code class="constant">Elem</code> is special in that it can deal with an arbitrary 
+            number of arguments.</p></li></ul></div><p>
+      </p><p>
+        The mysterious occurrences of <code class="constant">null</code> (lowercase) and
+        <code class="constant">TopScope</code> are for namespace handling. They will be explained later, together with
+        <code class="constant">PrefixedAttribute</code>, in the section on namespaces.
+      </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title"><a name="note-seqesc"></a>Passing sequences to <code class="constant">Elem</code></h3><p>Sometimes, we want to call a constructor with a sequence
+        parameter, but the sequence of arguments is computed
+        dynamically. The <code class="constant">Elem</code> constructor can
+        deal with a sequence as long as you told the compiler that it
+        is one. You do this by annotating the sequence with
+        <code class="constant">_*</code>, like this
+        </p><pre class="programlisting">
+val myElem = Elem(null, "baz", Null, TopScope, computeList(42,"froz"):_* );
+</pre><p>Assuming that the result <code class="constant">computeList(42,"froz")</code>
+will be <code class="constant">List(Elem(null, "foo", Null, TopScope), Elem(null, "bar", Null, TopScope))</code>, then the
+above code has the same effect as
+</p><pre class="programlisting">
+val myElem = Elem(null, "baz", Null, TopScope, 
+                  Elem(null, "foo", Null, TopScope), 
+                  Elem(null, "bar", Null, TopScope) )
+</pre></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2892456"></a>Embedded expressions</h3></div></div></div><p>
+          These syntactic considerations are not very exciting yet (because we have not looked into the things
+          that one can do with those objects). For the developer, the fun starts when he can parameterize some
+          XML fragment or include computed parts in it. This is achieved by embedded expressions, which allow
+          to freely mix Scala code. The following program produces the same output as <code class="constant">phonebook1</code>
+</p><pre class="programlisting">
+/* examples/phonebook/embeddedBook.scala */
+package phonebook  
+
+object embeddedBook {
+
+  val company  = &lt;a href="http://acme.org"&gt;ACME&lt;/a&gt;
+  val first    = "Burak"
+  val last     = "Emir"
+  val location = "work"
+
+  val embBook = 
+    &lt;phonebook&gt;
+      &lt;descr&gt;
+        This is the &lt;b&gt;phonebook&lt;/b&gt; of the 
+        {company} corporation.
+      &lt;/descr&gt;
+      &lt;entry&gt;
+        &lt;name&gt;{ first+" "+last }&lt;/name&gt; 
+        &lt;phone where={ location }&gt;+41 21 693 68 {val x = 60 + 7; x}&lt;/phone&gt;
+      &lt;/entry&gt;
+    &lt;/phonebook&gt;;
+
+  def main(args: Array[String]) =
+    Console.println( embBook )
+
+}
+</pre><p>
+
+        </p><p>
+          Scala expressions are embedded within an XML fragment using
+          single braces <code class="constant">{</code> <code class="constant">}</code>
+          <sup>[<a name="id2892782" href="#ftn.id2892782" class="footnote">3</a>]</sup>. In order to get a
+          single brace character, you have to double it
+          <code class="constant">{{</code> <code class="constant">}}</code>.
+        </p><p>
+          Between the braces is an embedded <span class="emphasis"><em>block</em></span>, which
+          means not only expressions, but also statements, function and class definitions
+          and pretty much everything else is allowed. The last expression in a block
+          determines its "value" -- what will appear in the XML after evaluating
+          preceding code.
+        </p><p>
+          The compiler accepts various types of values within embedded nodes -- 
+          everything that is either a scala.xml.Node or something that has toString method is welcome.
+          For embedded attributes, a string or a <span class="emphasis"><em>sequence</em></span> of nodes will do - the constructor
+          of attributes is typically
+            <code class="literal">UnprefixedAttribute(key, string, next)</code> is mostly equivalent to 
+            <code class="literal">UnprefixedAttribute(key, Text(string), next)</code>.
+        </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Nullable attributes</h3><p>Often, whether a particular attribute is present depends on some condition, leading
+          to code like this
+</p><pre class="programlisting">
+  if(cond)
+    &lt;foo bar="pizza"&gt;{ /*lots of code*/ }&lt;/foo&gt;
+  else
+    &lt;foo&gt;{ /*lots of code*/ }&lt;/foo&gt;
+</pre><p>
+In order to simplify life in such a scenario, Scala allows to make attribute addition conditional: an
+attribute value of null means the attribute is omitted.
+</p><pre class="programlisting">
+    &lt;foo bar={if (cond) "pizza" else null}&gt;{ /*lots of code*/ }&lt;/foo&gt;
+</pre><p>
+Type-safety is a nice property, and having a compiler checking options for you is often much better than using null.
+This is why, you can also use Option types for nullable attributea, provided you pass an instance of Seq[Node].
+</p><pre class="programlisting">
+    val z = if (cond) { Some(Text("pizza")) } else { None }
+    &lt;foo bar={z}&gt;{ /*lots of code*/ }&lt;/foo&gt;
+</pre><p>
+</p></div></div></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2892870"></a>Other nodes</h2></div></div></div><p>
+        Although the above is sufficient for most purposes, there are a couple of other nodes 
+        that can be used.
+        </p><div class="itemizedlist"><ul type="disc"><li><p>EntityRef, ProcItem and Comment - for various XML elements</p></li><li><p>Group - for grouping nodes.</p></li><li><p>Unparsed - for including verbatim text, e.g. when generating non-XHTML hypertext.</p></li><li><p>Atom - for nodes containing data of any type, e.g. int, Date.</p></li></ul></div><p>
+
+        </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Why do attributes contain sequences of nodes?</h3><p>
+          At first sight, it appears that attributes should only be strings and nothing else.
+          However, there are two reasons to allow the same kind of nodes (other than element nodes) 
+          that can appear within XML: data values and entity references.
+          </p><pre class="programlisting">
+&lt;foo name= "s&amp;uuml;ss" life={Atom(42)}&gt;
+
+Elem(null, 
+     foo,  
+     new UnprefixedAttribute("name",List(Text("s"),EntityRef("uuml"),Text("ss")), 
+       new UnprefixedAttribute("life", Atom(42), Null), TopScope)
+          </pre><p>
+          Fortunately, a single node always behaves as if it was a sequence of nodes, so there
+          is no need to wrap elements in a singleton lists.
+          </p></div><p>
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2892950"></a>Matching XML</h2></div></div></div><p>Scala provides pattern matching to search and
+        decompose sequences. Pattern matching can also be used to decompose XML.</p><p>For instance to find out whether a variable contains an "entry" element 
+        which has as last child a "foo" with no children, this pattern will do:
+</p><pre class="programlisting">
+x match {
+          case Elem(_,"entry", _, _, _*, Elem(_, "foo", _)) =&gt; true
+          case _ =&gt; false
+}
+</pre><p>This also works using XML syntax:
+</p><pre class="programlisting">
+x match {
+          case &lt;entry&gt;{ _* }&lt;foo/&gt;&lt;/entry&gt; =&gt; true
+          case _ =&gt; false
+}</pre><p>
+  However, there is no support for testing presence or values of attributes. This can be achieved
+using guards, for instance like in the following example
+</p><pre class="programlisting">
+x match {
+          case link @ &lt;a&gt;{ _* }&lt;/a&gt; if link.attribute("href").isEmpty =&gt; "href missing"
+}</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2892989"></a>Updates and Queries</h2></div></div></div><p>
+        The Scala XML API takes a functional approach to representing
+        data, eschewing imperative updates where possible. Since nodes
+        as used by the library are immutable, updating an XML tree can
+        a bit verbose, as the XML tree has to be copied. Here is an
+        example how this could be done.
+
+        </p><pre class="programlisting">/* examples/xml/phonebook/phonebook2.scala */
+package phonebook;
+
+object phonebook2 {
+
+  import scala.xml.Node
+
+  /** adds an entry to a phonebook */
+  def add( p: Node, newEntry: Node ): Node = p match {
+
+      case &lt;phonebook&gt;{ ch @ _* }&lt;/phonebook&gt; =&gt; 
+
+        &lt;phonebook&gt;{ ch }{ newEntry }&lt;/phonebook&gt;
+  }
+
+  val pb2 = 
+    add( phonebook1.labPhoneBook, 
+         &lt;entry&gt;
+           &lt;name&gt;Kim&lt;/name&gt; 
+           &lt;phone where="work"&gt;+41 21 111 11 11&lt;/phone&gt;
+         &lt;/entry&gt; );
+
+  def main( args: Array[String] ) = 
+    Console.println( pb2 )
+}
+</pre><p>
+
+        This code will throw a <code class="literal">MatchError</code> in <code class="literal">add</code> exception if 
+        the node does not have <code class="literal">phonebook</code> tag. It is also possible to express it using only
+        method calls:
+        </p><pre class="programlisting">
+          def add( p: Node, e: Node ) = Elem(null, p.label, Null, TopScope, (p.child ++ e):_*)
+        </pre><p>
+        Here we assume that our element representing a phonebook will never have a namespace
+        prefix (<code class="literal">null</code>), never have attributes 
+        (<code class="literal">Null</code>) and never define namespace bindings (<code class="literal">TopScope</code>). Without
+        these assumptions, we would have copied <code class="literal">p.prefix</code>, <code class="literal">p.attributes</code>
+        and <code class="literal">p.scope</code> over to the new element as well. The _* ("sequence escape") has been explained before: see <a class="xref" href="#note-seqesc" title="Passing sequences to Elem">Passing sequences to <code class="constant">Elem</code></a>.
+      </p><p>
+        
+      </p><p>
+        Changing the phone number of an entry is similar. First we lookup an
+        entry by traversing the tree and
+        and copying it. Then we provide an updated copy of the element we wish to change.  </p><pre class="programlisting">package phonebook;
+
+object phonebook3 {
+
+  import scala.xml.{Elem, Node, Text} ;
+  import scala.xml.PrettyPrinter ;
+  import Node.NoAttributes ;
+
+  /* this method "changes" (returns an updated copy) of the phonebook when the
+   *   entry for Name exists. If it has an attribute "where" whose value is equal to the
+   *   parameter Where, it is changed, otherwise, it is added.
+   */
+  def change ( phonebook:Node, Name:String, Where:String, newPhone:String ) = {
+
+    /** this nested function walks through tree, and returns an updated copy of it  */
+    def copyOrChange ( ch: Iterator[Node] ) = {
+
+      import xml.Utility.{trim,trimProper} //removes whitespace nodes, which are annoying in matches
+
+      for( val c &lt;- ch ) yield 
+        trimProper(c) match {
+
+          // if the node is the particular entry we are looking for, return an updated copy
+
+          case x @ &lt;entry&gt;&lt;name&gt;{ Text(Name) }&lt;/name&gt;{ ch1 @ _* }&lt;/entry&gt; =&gt; 
+
+            var updated = false;
+            val ch2 = for(val c &lt;- ch1) yield c match { // does it have the phone number?
+
+              case y @ &lt;phone&gt;{ _* }&lt;/phone&gt; if y \ "@where" == Where =&gt; 
+                updated = true
+                &lt;phone where={ Where }&gt;{ newPhone }&lt;/phone&gt;
+              
+              case y =&gt; y
+              
+            }
+            if( !updated ) { // no, so we add as first entry
+            
+              &lt;entry&gt;
+                &lt;name&gt;{ Name }&lt;/name&gt;
+                &lt;phone where={ Where }&gt;{ newPhone }&lt;/phone&gt;
+                { ch1 }
+              &lt;/entry&gt;
+              
+            } else {         // yes, and we changed it as we should
+              
+              &lt;entry&gt;
+                { ch2 }
+              &lt;/entry&gt;
+        
+            } 
+          // end case x @ &lt;entry&gt;...
+          
+          // other entries are copied without changing them
+
+          case x =&gt;           
+            x
+          
+        }
+    } ; // for ... yield ... returns an Iterator[Node]
+    
+    // decompose phonebook, apply updates
+    phonebook match {
+      case &lt;phonebook&gt;{ ch @ _* }&lt;/phonebook&gt; =&gt;
+        &lt;phonebook&gt;{ copyOrChange( ch.elements ) }&lt;/phonebook&gt;
+    }
+    
+  }
+
+  val pb2 = 
+    change( phonebook1.labPhoneBook, "John", "work", "+41 55 555 55 55" );
+
+  val pp = new PrettyPrinter( 80, 5 );
+
+  def main( args:Array[String] ) = {
+    Console.println("---before---");
+    Console.println( pp.format( phonebook1.labPhoneBook ));
+    Console.println("---after---");
+    Console.println( pp.format( pb2 ));
+  }
+}
+</pre><p>
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893075"></a>Names and Namespaces</h2></div></div></div><p>
+      Namespaces <a class="xref" href="#w3c-names-1.0" title="Recommendation: Namespaces in XML">[<abbr class="abbrev">names1.0</abbr>]</a><a class="xref" href="#w3c-names-1.1" title="Recommendation: Namespaces in XML 1.1">[<abbr class="abbrev">names1.1</abbr>]</a> have been introduced into extensible
+      markup long after the XML specicifaction was out.  The intention
+      is to provide a means of 'packaging' related names by
+      associating them with a URL.  The association happens indirectly
+      by (1) binding URIs to prefixes and (2) prefixing names using
+      the syntax 'prefix:localname', i.e. using the colon as a
+      separator. Consequently, the colon is not a part of names
+      anymore.
+    </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">why namespace prefixes?</h3><p>
+        Namespace prefixes have to be taken into account (Binding,Scope) 
+        because they are used whenever QNames live in content 
+        (for example, in XML Schema Definitions). 
+      </p></div><p>
+      To avoid clutteredness, the standard allows a 'default
+      namespace' to be declared, which implicitly associates
+      unprefixed names with a certain URI. Finally it is possible to
+      undeclare namespaces by binding them to the empty prefix. (v1.0
+      only allowed to undeclare the default namespaces, but in v1.1
+      this has been generalized to any prefix).
+    </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">The empty string is allowed in a binding</h3><p>
+        The meaning of an empty string
+        is to <span class="emphasis"><em>undeclare</em></span> the namespace, prefix mapping.
+        In the past, this has caused considerable headache: The 
+        Namespaces in XML recommendation allowed empty string only for the 
+        default namespace binding, i.e. <code class="literal">xmlns=""</code> was 
+        allowed, but <code class="literal">xmlns:foo=""</code> was not. 
+        However, this unnecessary
+        distinction between default and other 
+        namespace bindings (those with a prefix) was removed
+        in Namespaces in XML 1.1. Now "undeclarations" are allowed
+        for both kinds.
+      </p></div><p>
+      How does this look in Scala? Namespace bindings are treated in a class aptly named
+      <a class="ulink" href="http://scala-lang.org/docu/files/api/scala/xml/NamespaceBinding.html" target="_top"><code class="literal">NamespaceBinding</code></a>, which is a linked list of prefix-URI pairs.
+      A default namespace is synonymous with a namespace for the <code class="literal">null</code> prefix (not
+      the empty string), and undeclaring a namespacebinding is done by assigning the 
+      empty string as URI.
+      
+      The <a class="ulink" href="http://scala-lang.org/docu/files/api/scala/xml/TopScope.html" target="_top"><code class="literal">TopScope</code></a> is the most common top-level scope, the empty  prefix-URI mapping that does not contain any binding.
+    </p><p>
+ Here is an example what the compiler does with <code class="literal">scala.xml.NamespaceBinding</code>.
+Assuming we had a internal variable <code class="literal">$scope</code> containing the active bindings
+at each element. Then for the following fragment
+</p><pre class="programlisting">
+val foobar = &lt;foo:bar xmlns:foo="http://foo.com" foo:key="value" xmlns="urn:default" attr="42"&gt;&lt;a/&gt;&lt;/foo:bar&gt;
+</pre><p>
+ the compiler has to take the following steps to updates the scope, translating everything roughly into:
+</p><pre class="programlisting">
+val foobar = { // add bindings to scope
+  scope = new NamespaceBinding(null,  "urn:default", 
+             NamespaceBinding("foo", "http://foo.com",  scope))
+
+  // make attributes
+  val md = new UnprefixedAttribute("attr","42", 
+              new PrefixedAttribute("foo","key","value", Null))
+
+  // make element
+  Elem("foo","bar", md, scope, Elem(null, "a", Null, scope))
+}
+  </pre><p>
+    </p><p>
+    The element labeled <code class="literal">bar</code> uses a prefix which
+    tells us it is in the namespace
+    <code class="literal">http://foo.com</code>. The element
+    <code class="literal">a</code> is nested under <code class="literal">bar</code>, this
+    is affected by the same namespace bindings. It
+    is in the namespace <code class="literal">urn:default</code>.
+  </p><p>
+Namespace binding is properly scoped over the child nodes: Unless a
+descendant undeclares a prefix, the prefix is bound to URI according
+to the bindings defined for the parent. As can be seen, namespace
+bindings are treated differently from regular attributes -- this seems
+a good compromise since they are shared, have different properties and
+there is an important class of users that is simply not concerned with
+namespaces. The library is design to handle namespace bindings by
+itself, and where namespace manipulations are needed, they are
+effected on the <code class="literal">scope</code> members and
+<code class="literal">NamespaceBinding</code> classes.
+    </p><p>
+      Attributes without a prefix are <span class="emphasis"><em>not</em></span>
+      implicitly put in the same namespace as the element in which
+      they occur. This is the reason why there is
+      <code class="literal">UnprefixedAttribute</code> and a
+      <code class="literal">PrefixedAttribute</code>
+      class. <code class="literal">UnprefixedAttribute</code>s have no namespace
+      at all.
+    </p><div class="section" lang="en"><div class="titlepage"><div><div><h3 class="title"><a name="id2893278"></a>Sharing namespace nodes</h3></div></div></div><p>
+        Implementations of XML infrastructure routines typically share namespace nodes in the data model.
+        This accounts for the lexical scoping which is prescribed by the spec.
+      </p><p>
+        Some requirements are expected of such XML infrastructure
+        routines. It is for instance absolutely necessary to preserve
+        namespace bindings as they are given in source documents
+        (because some documents, like XSD schemata, refer to prefixes
+        not only in XML names but also in content.  Then it is often
+        desirable that identical namespace bindings are not repeated
+        in each node, i.e.  the number of namespace binding
+        <code class="literal">xmlns:prefix="..."</code> should be minimized.
+        This in turn becomes more tricky when sharing namespaces -- we
+        might mix fragments from different trees, in which case
+        namespace nodes might convey identical information and yet
+        have different object identity.
+      </p><div class="note" style="margin-left: 0.5in; margin-right: 0.5in;"><h3 class="title">Namespace sharing</h3><p>
+          The current implementation will not properly stratify namespace bindings when elements from different
+          scopes are combined. This is not a problem when querying or processing XML data, but it might lead
+          to wrong namespace bindings when serializing XML. A modified version of the serializing algorithm 
+          can solve the problem by introducing namespace declarations and undeclarations in the right place.
+          Since it seems a rare problem and developers can stratify namespaces themselves
+          in a given XML application, your humble author and scala.xml maintainer did not consider this issue
+          a priority.
+        </p></div></div></div><div class="footnotes"><br><hr width="100" align="left"><div class="footnote"><p><sup>[<a name="ftn.id2892782" href="#id2892782" class="para">3</a>] </sup>The same convention is used in XQuery,
+          Xtatic and maybe Java.</p></div></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2893078"></a>Chapter 3. XPath projection</h2></div></div></div><p>
+      The XML Path Language (XPath) <a class="xref" href="#w3c-xpath" title="Recommendation: XML Path Language (XPath) 1.0">[<abbr class="abbrev">xml</abbr>]</a> is a language expressing simple queries on 
+      XML documents. This example illustrates how XPath projection can be used in Scala
+      </p><pre class="programlisting">package bib;
+
+object bib {
+
+  import scala.xml.{Node,NodeSeq};
+  import scala.xml.PrettyPrinter;
+
+  val biblio = 
+    &lt;bib&gt;
+      &lt;book&gt;
+         &lt;author&gt;Peter Buneman&lt;/author&gt;
+         &lt;author&gt;Dan Suciu&lt;/author&gt;
+         &lt;title&gt;Data on ze web&lt;/title&gt;
+      &lt;/book&gt;
+      &lt;book&gt;
+         &lt;author&gt;John Mitchell&lt;/author&gt;
+         &lt;title&gt;Foundations of Programming Languages&lt;/title&gt;
+      &lt;/book&gt;
+    &lt;/bib&gt; ;
+
+  val pp = new PrettyPrinter(80, 5);
+
+  def main(args:Array[String]):Unit = {
+  Console.println( pp.formatNodes( biblio \ "book" \ "title" ));
+
+  // prints 
+  // &lt;title&gt;Data on ze web&lt;/title&gt;&lt;title&gt;Foundations ...&lt;/title&gt;
+
+  Console.println(   pp.formatNodes( biblio \\ "title" ));   // prints the same
+
+  Console.println(   pp.formatNodes( biblio \\ "_" ));   // prints node and all descendant 
+
+  Console.println(   pp.formatNodes( biblio.descendant_or_self )); // prints the same
+
+
+  }
+}
+</pre><p>
+    </p></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2893345"></a>Chapter 4. XSLT style transformations</h2></div></div></div><p>
+      Here is a sample program to convert Docbook to some other format:
+      </p><pre class="programlisting">object transform {
+  import scala.xml._ ;
+  import scala.xml.dtd._ ;
+  import org.xml.sax.InputSource ;
+
+  /* a former version of Scala used regular expression patterns, like
+   * in the following code. In the future, we plan to reactivate some
+   * well-behaved regular expressions again
+  // gimmick: text replacement "scalac" =&gt; &amp;lt;code&amp;gt;scalac&amp;lt;/code&amp;gt;
+  def cook(s: String): Seq[Node] = cook1(s) ;
+  def cook1(s: Seq[Char]):List[Node] = s match {
+
+    case Seq( a @ _*, 's','c','a','l','a','c', b @ _* ) =&gt; 
+
+      Text(cook2( a )) :: &lt;code&gt;scalac&lt;/code&gt; :: cook1( b )
+    case _ =&gt; List( Text( cook2( s )))
+  }
+  def cook2(s: Seq[Char]): String = {
+    val r = new StringBuffer();
+    s.foreach { c:char =&gt; val _ = r.append(c); };
+    r.toString()
+  }
+   */
+
+  def transform1(ns: Iterable[Node]): Seq[Node] = {
+    val zs = new NodeBuffer();
+    for(val z &lt;- ns) { zs &amp;+ transform( z ) }
+    zs
+  }
+
+  /** this functions holds "templates" that transform nodes of an input tree 
+   *  into an iterable representation of a sequence of nodes of the output 
+   *  tree.
+   *
+   *  It is ok to return a single node, since each node is at the same
+   *  time a singleton sequence. Likewise, the pattern variable x will be
+   *  of type Seq[Node], although here it is always binding a single node.
+   */
+  def transform(n: Node):Iterable[Node] = n match {
+    case x @ &lt;article&gt;{ ns @ _ * }&lt;/article&gt; =&gt; 
+      &lt;source active="ant" title={ (x \ "title" \ "_").toString() }&gt;
+      &lt;header&gt;
+        &lt;author&gt;Burak Emir&lt;/author&gt;
+        &lt;keywords&gt;Scala4Ant&lt;/keywords&gt;
+        &lt;style type="text/css"&gt;&lt;/style&gt;
+        &lt;/header&gt;
+        &lt;content&gt;
+          &lt;title&gt;&lt;scala/&gt; Ant Task&lt;/title&gt;
+          { transform1( x \ "_" ) }
+        &lt;/content&gt;
+      &lt;/source&gt;
+    case x @ &lt;sect1&gt;{ _* }&lt;/sect1&gt; =&gt; 
+      &lt;section&gt;{ transform1( x \ "_" ) }&lt;/section&gt;
+    case x @ &lt;title&gt;{ _* }&lt;/title&gt; =&gt; 
+      &lt;h&gt;{ x \ "_" }&lt;/h&gt;
+    case x @ &lt;para&gt;{ _* }&lt;/para&gt; =&gt; 
+      &lt;p&gt;{ transform1( x \ "_" ) }&lt;/p&gt;
+    case x @ &lt;itemizedlist&gt;{ _* }&lt;/itemizedlist&gt; =&gt; 
+      &lt;ul&gt;{ transform1( x \ "_" ) }&lt;/ul&gt;
+    case x @ &lt;listitem&gt;{ _* }&lt;/listitem&gt; =&gt; 
+      &lt;li&gt;{ transform1( x \ "_" ) }&lt;/li&gt;
+    case x @ &lt;constant&gt;{ _* }&lt;/constant&gt; =&gt; 
+      // an xml:group is a sequence that appears to the scala type system
+      //  as a single node. Here it is used to append a text node with a space
+      &lt;xml:group&gt;&lt;code&gt;{ x \ "_" }&lt;/code&gt; &lt;/xml:group&gt;
+    case x @ &lt;programlisting&gt;{ _* }&lt;/programlisting&gt; =&gt; 
+      &lt;pre&gt;{ x \ "_" }&lt;/pre&gt; 
+    case Elem(namespace, label, attrs, scp, ns @ _*) =&gt; 
+      Elem(namespace, label, attrs, scp, transform1( ns ):_* )
+    case z =&gt; 
+      z 
+  };
+
+  def main(args:Array[String]) = {
+    if( args.length == 1 ) { // must have one arg
+      object ConsoleWriter extends java.io.Writer {
+        def close() = {}
+        def flush() = Console.flush
+        def write(cbuf:Array[char], off:int , len:int ): unit = {
+          var i = 0
+          while(i &lt; len) 
+          Console.print(cbuf(off + i))
+        }
+      }
+
+      val src = XML.load(new InputSource(  args( 0 ))); //use Java parser
+
+      // transform returns an iterable, but we now it is a singleton
+      //  sequence, so we get its first element
+      val n = transform( src ).elements.next
+      
+      val doctpe = DocType("html",PublicID("-//W3C//DTD XHTML 1.1//EN","../default.dtd"), Nil)
+
+        /** write document to console, with encoding latin1, xml declaration
+         * and doctype 
+         */
+      XML.write(ConsoleWriter, n, "iso-8859-1", true, doctpe)
+
+    }
+    else error("need one arg");
+  }
+}
+</pre><p>
+    </p></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2893361"></a>Chapter 5. XQuery style querying</h2></div></div></div><p>
+      This example illustrates XQuery style querying
+      </p><pre class="programlisting">package bib;
+
+object bibq {
+
+  val theBib = bib.biblio ;
+
+  for( val b &lt;- theBib \ "book" )
+    for( val a &lt;- b \ "author"  ) {
+      Console.println( a )
+    }
+
+}
+</pre><p>
+    </p></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2893380"></a>Chapter 6. Loading and Saving XML</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#id2893425">The native Scala parser</a></span></dt><dt><span class="section"><a href="#id2893444">Pull parsing (experimental)</a></span></dt></dl></div><p>
+      If you just want to load XML, without using databinding, try this:
+</p><pre class="programlisting">
+object Foo with Application {
+  val x = scala.xml.XML.loadFile("myfile.xml");
+  Console.println(x);
+}
+</pre><p>
+The value x will be of type <code class="constant">scala.xml.Elem</code>, which in turn
+is an implementation of the <code class="constant">scala.xml.Node</code> interface.
+The parser used for parsing the XML is currently the XML parser that comes with the underlying JDK.
+    </p><p>
+There is also a save method defined there:
+</p><pre class="programlisting">
+object Foo with Application {
+  val y: Elem = ...
+  scala.xml.XML.save("myfile.xml", y);
+}
+</pre><p>
+There is also a <code class="literal">write</code> method that allows to output XML to anything implementing the <code class="literal">java.io.Writer</code> class.
+</p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893425"></a>The native Scala parser</h2></div></div></div><p>
+    Scala has a XML parser of its own, which can be invoked like this
+  </p><pre class="programlisting">
+import scala.xml.parsing.ConstructingParser
+
+val p = ConstructingParser.fromFile(file, true /*preserve whitespace*/)
+val d: xml.Document = p.document
+  </pre><p>
+  The advantages of this parser is that the developer has more fine-grained control over what to parse.
+  It is for instance possible to parse a sequence of elements from a stream (the XML spec allows only one),
+  or to obtain the entity declarations from the internal subset of the DTD.
+  </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893444"></a>Pull parsing (experimental)</h2></div></div></div><p>
+  The native XML parser can also be used for pull parsing. An
+  experimental API is accessible via <a class="ulink" href="http://scala-lang.org/docu/files/api/scala/xml/pull/XMLEventReader.html" target="_top"><code class="literal">scala.xml.pull.XMLEventReader</code></a>. You
+  need to provide a <code class="literal">scala.io.Source</code>, just like for
+  the constructing parser.
+  </p></div></div></div><div class="part" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="id2893475"></a>Part II. Library</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#id2893482">7. Overview</a></span></dt><dt><span class="chapter"><a href="#id2893493">8. scala.xml runtime classes</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893506">scala.xml.Node</a></span></dt><dt><span class="section"><a href="#id2893530">scala.xml.NodeSeq</a></span></dt><dt><span class="section"><a href="#id2893549">scala.xml.Elem</a></span></dt><dt><span class="section"><a href="#id2893583">SpecialNode</a></span></dt><dt><span class="section"><a href="#id2893592">Atom</a></span></dt><dt><span class="section"><a href="#id2893604">EntityRef</a></span></dt><dt><span class="section"><a href="#id2893617">scala.xml.MetaData</a></span></dt><dt><span class="section"><a href="#id2893633">scala.xml.Null</a></span></dt><dt><span class="section"><a href="#id2893647">scala.xml.PrefixedAttribute</a></span></dt><dt><span class="section"><a href="#id2893678">scala.xml.UnprefixedAttribute</a></span></dt><dt><span class="section"><a href="#id2893696">scala.xml.NamespaceBinding</a></span></dt><dt><span class="section"><a href="#id2893708">scala.xml.TopScope</a></span></dt></dl></dd><dt><span class="chapter"><a href="#id2893496">9. Scala's XML syntax, formally</a></span></dt><dt><span class="chapter"><a href="#id2893839">10. Interpretation of XML expressions and patterns</a></span></dt></dl></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2893482"></a>Chapter 7. Overview</h2></div></div></div><p>This part provides a more detailed account of classes in the XML library.</p></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2893493"></a>Chapter 8. scala.xml runtime classes</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#id2893506">scala.xml.Node</a></span></dt><dt><span class="section"><a href="#id2893530">scala.xml.NodeSeq</a></span></dt><dt><span class="section"><a href="#id2893549">scala.xml.Elem</a></span></dt><dt><span class="section"><a href="#id2893583">SpecialNode</a></span></dt><dt><span class="section"><a href="#id2893592">Atom</a></span></dt><dt><span class="section"><a href="#id2893604">EntityRef</a></span></dt><dt><span class="section"><a href="#id2893617">scala.xml.MetaData</a></span></dt><dt><span class="section"><a href="#id2893633">scala.xml.Null</a></span></dt><dt><span class="section"><a href="#id2893647">scala.xml.PrefixedAttribute</a></span></dt><dt><span class="section"><a href="#id2893678">scala.xml.UnprefixedAttribute</a></span></dt><dt><span class="section"><a href="#id2893696">scala.xml.NamespaceBinding</a></span></dt><dt><span class="section"><a href="#id2893708">scala.xml.TopScope</a></span></dt></dl></div><p>This section describes the classes in scala.xml.</p><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893506"></a>scala.xml.Node</h2></div></div></div><p>
+        The abstract superclass of all XML nodes as represented in the Scala library.
+        Nodes have an optional prefix (null = no prefix), a namespace binding 
+        scope, a list of metadata (attributes), and a sequence of children.
+        A node can be considered as a singleton sequence containing the node,
+        because it inherits from <code class="literal">NodeSeq</code>.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893530"></a>scala.xml.NodeSeq</h2></div></div></div><p>
+        Sequences of nodes are pretty common in XML processing.
+        The main use of this class is to add XPath methods \ and \\ to
+        any sequence of nodes, regardless of its concrete representation.
+        It is a wrapper class, which gets automatically created by means
+        of Scala's <span class="emphasis"><em>view</em></span> mechanism.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893549"></a>scala.xml.Elem</h2></div></div></div><p>
+        A class implementing scala.xml.Node with a case class. XML literals
+        embedded in Scala code will get turned into <code class="literal">Elem</code> 
+        instances. Also, most default parsing factories will produce 
+        <code class="literal">Elem</code> instances. By contrast, most library 
+        routines (like e.g. the <code class="literal">PrettyPrinter</code>) expect 
+        instances of <code class="literal">Node</code>, so it is possible to
+        call them with custom XML representations.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893583"></a>SpecialNode</h2></div></div></div><p>
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893592"></a>Atom</h2></div></div></div><p>
+        To store data values like ints and dates.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893604"></a>EntityRef</h2></div></div></div><p>
+        To represent entity references. It is possible to output entity declarations using
+        the classes in scala.xml.dtd.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893617"></a>scala.xml.MetaData</h2></div></div></div><p>
+        The abstract superclass of attribute nodes. Attributes are realized
+        as an immutable linked list. Since the attribute order does not 
+        matter in XML, default parser factories may actually change 
+        (typically reverse) the order when they parse XML.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893633"></a>scala.xml.Null</h2></div></div></div><p>
+        This object is used to `ground' linked attribute lists. It is
+        also the representation of empty attribute lists.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893647"></a>scala.xml.PrefixedAttribute</h2></div></div></div><p>
+        A prefixed attribute has a prefix, a name, a value and a
+        pointer to the tail of the attribute list. It answers to
+        <code class="literal">getValue(uri,scope,key)</code> calls with its value if the
+        its own prefix matches the uri in the given scope (typically the 
+        scope of the parent element). It will <span class="emphasis"><em>not</em></span>
+        answer <code class="literal">getValue(key)</code> calls, because the
+        Namespaces spec considers it distinct from an unprefixed attribute.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893678"></a>scala.xml.UnprefixedAttribute</h2></div></div></div><p>
+        An unprefixed attribute has a name, a value and a
+        pointer to the tail of the attribute list. It answers 
+        <code class="literal">getValue(key)</code> calls, but not the 
+        namespace aware ones describe above.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893696"></a>scala.xml.NamespaceBinding</h2></div></div></div><p>
+        This class is for representing namespace bindings using a linked
+        list of namespace binding nodes.
+      </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893708"></a>scala.xml.TopScope</h2></div></div></div><p>
+        This class is used to `ground' a linked
+        list of namespace binding nodes. It also stands for a top-level
+        scope in which no namespaces are bound.
+      </p></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2893496"></a>Chapter 9. Scala's XML syntax, formally</h2></div></div></div><p>The following changes were made to the Scala syntax in
+    order to accomodate literal XML and XML expressions</p><div class="itemizedlist"><ul type="disc"><li><p>Lexical syntax (Chapter 1)</p><p>Programming languages are usually defined in terms of 
+	  lexical syntax, handled by a scanner, and context-free syntax,
+	  handled by a parser. Scala is no exception to this rule,
+	  adopting a lexical syntax similar to Java's but with more freedom
+	  for definition of operators etc.</p><p>The lexical syntax from XML documents cannot be
+          reconciled with the lexical syntax Scala code. Therefore, in
+          addition to the Java-like lexical syntax, a Scala parser needs to 
+	  treat every input character differently and in conformance with the 
+	  XML specification when entering a literal XML element. This happens
+          when the following character sequence is encountered:
+          </p><pre class="programlisting">( S | '(' | '{' ) '&lt;' (Letter | '_' )</pre><p> </p><p>Thus, whenever a &lt; is immediately preceded by
+          whitespace, '(' or '{', and immediately followed by an XML
+          name start character, the scanner is forced to interpret 
+	  the following characters as XML input. In the following, this will be
+          referred to as the scanner being 'in XML mode'.  The scanner
+          changes from XML mode to Scala mode when one of the following 
+	  conditions hold:
+            </p><div class="itemizedlist"><ul type="circle"><li><p>The XML expression or an XML pattern started by the initial '&lt;' has been successfully parsed.</p></li><li><p>The parser encounters an embedded Scala expression or pattern, indicated by a '{'. This changes the scanner back to normal mode, until the closing '}' is found, which puts the scanner into XML mode again.</p><p>Since the nested Scala expression can contain nested XML 
+		expressions/patterns, the parser thus has to maintain a stack 
+		that reflects the nesting of XML and Scala expressions 
+		adequately.</p></li></ul></div><p>
+            </p><p>Note that Scala comments are interpreted as text
+          (parseable character data) in XML mode.</p></li><li><p>Expression (Ch.4) and pattern (Ch.7) syntax </p><p>
+            The following two productions are added to the Scala grammar (see below for XML expression and pattern grammar)
+            </p><pre class="programlisting">
+              xmlExpr ::= Element (Element*)
+              xmlPat  ::= ElementPattern
+            </pre><p>
+            As said before, they indicate that the scanner is in xml mode.</p></li></ul></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2893839"></a>Chapter 10. Interpretation of XML expressions and patterns</h2></div></div></div><p>The meaning of XML expressions and patterns is given using equivalent Scala expressions and patterns.
+      </p><div class="itemizedlist"><ul type="disc"><li><p>
+            An element <code class="literal">&lt;pre:name att1=val1 pre2:att2=val2 ... attN=valN&gt; content &lt;name&gt;</code> is interpreted as
+            <code class="literal">scala.xml.Elem("pre", "name", UnprefixedAttribute(att1, val1, PrefixedAttribute(pre2, att2, val2, ... UnprefixedAttribute(attN, valN, Null))), content)</code>
+          </p></li><li><p>
+            A sequence of elements e1...eN is interpreted as (a concrete representation of) Seq(e1...eN)
+          </p></li><li><p>
+            Embedded scala expressions are interpreted by themselves.
+          </p></li><li><p>
+            An element pattern '<code class="literal">&lt;name&gt; contentPattern &lt;name&gt;</code>' is interpreted as 
+            '<code class="literal">scala.xml.Elem("name", contentPattern )</code>'
+          </p></li><li><p>
+            Embedded scala patterns are interpreted by themselves.
+          </p></li></ul></div><p>
+    </p><p>
+      Note that this implies that an xml expression consisting of one
+      element will be of type '<code class="literal">scala.xml.Elem</code>'
+      whereas an xml
+      expression consisting of two or more elements will be of type
+      '<code class="literal">Seq[scala.xml.Elem]</code>'.
+    </p></div></div><div class="part" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="id2893932"></a>Part III. Tools</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="chapter"><a href="#id2893939">11. xinc</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893944">EHR's SAXIncluder</a></span></dt></dl></dd><dt><span class="chapter"><a href="#id2893974">12. schema2src</a></span></dt><dd><dl><dt><span class="section"><a href="#id2893979">Introduction to Data Binding</a></span></dt></dl></dd><dt><span class="chapter"><a href="#id2894161">13. xslt2src</a></span></dt><dt><span class="chapter"><a href="#id2894171">14. xquery2src</a></span></dt></dl></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2893939"></a>Chapter 11. xinc</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#id2893944">EHR's SAXIncluder</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893944"></a>EHR's SAXIncluder</h2></div></div></div><p>
+          This tool is an adaption of Eliotte Rusty Harold's SAXXIncluder to Scala.
+          It builds on top of the relevant JAVA API classes and was crucial for
+          including the code samples in this document.
+        </p><p>
+          At this point some information (the Scaladoc description) is
+          available at url <a class="ulink" href="http://lamp-lang.org/~emir/projects/xinc/index.html" target="_top">xinc
+          homepage </a>
+        </p></div></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2893974"></a>Chapter 12. schema2src</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#id2893979">Introduction to Data Binding</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2893979"></a>Introduction to Data Binding</h2></div></div></div><p>
+          Despite great APIs, data represented in XML tends to be
+          converted to and from object representations. This task is
+          called data binding.  It can in prinicple be coded manually
+          if the data representations are intricate. But often,
+          conversion has to bridge fairly straightforward XML types
+          and fairly basic "pure data" classes. The latter scenario is
+          a case for automation.
+        </p><p>
+          For the sake of an example consider the following way to represent bugreports</p><table>
+<tr>
+<td>
+<pre class="programlisting">
+
+&lt;bugReport id="42"&gt;
+  &lt;dateSubmitted&gt;2003-06-25&lt;/dateSubmitted&gt;
+  &lt;status&gt;     fixed   &lt;/status&gt;
+  &lt;submitter&gt;  Matthias&lt;/submitter&gt;
+  &lt;assignedTo&gt; Michel  &lt;/assignedTo&gt;
+  &lt;code&gt;        ...    &lt;/code&gt;
+  &lt;whatHappened&gt;...&lt;/whatHappened&gt;
+  &lt;whatExpected&gt;...&lt;/whatExpected&gt;
+&lt;/bugreport&gt;
+
+</pre>
+</td>
+<td>
+<pre class="programlisting">
+
+&lt;!ELEMENT bugReport (dateSubmitted,
+                     status,
+                     submitter,
+                     assignedTo,
+                     code,
+                     whatHappened,
+                     whatExpected)&gt;
+&lt;!ELEMENT dateSubmitted #PCDATA&gt;
+&lt;!ELEMENT status        #PCDATA&gt;
+&lt;!ELEMENT submitter     #PCDATA&gt;
+&lt;!ELEMENT assignedTo    #PCDATA&gt;
+&lt;!ELEMENT code          #PCDATA&gt;
+&lt;!ELEMENT whatHappened  #PCDATA&gt;
+&lt;!ELEMENT whatExpected  #PCDATA&gt;
+
+</pre>
+bugReport.dtd
+</td>
+</tr>
+</table><p>
+There are many scenarios, where we would like to programmatically 
+manipulate bug reports in ways that cannot be handled by XML tools.
+We might want to store and retrieve them in a relational database, access 
+and compile the source in the <code class="literal">code</code> element, or notify 
+the <code class="literal">submitter</code> of changes by email.
+</p><p>
+Using the data binding tool <code class="literal">schema2src</code> it is possible
+to generate the following classes from the DTD above. We can invoke
+the schema2src with its DTD module in the following way
+</p><div class="informalexample"><span class="command"><strong>scala -cp ... schema2src.Main dtd -d /tmp bugReport.dtd BugReportDefs</strong></span></div><p>
+This will result in a sourcefile being generated. The sourcefile contains
+mainly one object, one cases class and one method definition for each element 
+declaration found in the DTD.
+</p><table><tr>
+<td>
+<pre class="programlisting">
+object BugReportDefs {
+  import scala.xml.{MetaData, Node};
+
+  object bugReport { def validate(atts: MetaData, child: Node*)    ... }
+  case class bugReport    (atts: MetaData, child: Node*)         { ... }
+  def bugReport(s:String) = new bugReport(s);
+
+  object dateSubmitted { def validate(atts: MetaData, child: Node*) ...}
+  case class dateSubmitted(atts: MetaData, child: Node*)          { ... }
+  def dateSubmitted(s:String) = new dateSubmitted(s);
+
+  ...
+}
+</pre>
+</td>
+</tr></table><p>
+</p><p>
+  Importing the types from BugReportDefs has several benefits for the
+programmer working with bug reports. She can 
+</p><div class="itemizedlist"><ul type="disc"><li><p>construct elements
+</p><pre class="programlisting">
+val n = scala.xml.Null; // empty attribute list
+bugReport(UnprefixedAttribute("id","42",n),
+  dateSubmitted("2003-06-25"),
+  status ("fixed"),
+  submitter ("Matthias"),
+  assignedTo ("Michel"),
+  code ("..."),
+  whatHappened ("..."),
+  whatExpected ("...")
+)
+</pre><p>
+</p></li><li><p>load elements</p></li></ul></div><p>
+</p><p>
+
+        </p></div><p>todo...</p><p>
+          At this point some information (including the Scaladoc description) is
+          available at url <a class="ulink" href="http://lamp-lang.org/~emir/projects/schema2src/index.html" target="_top">schema2src
+          homepage </a>
+        </p></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2894161"></a>Chapter 13. xslt2src</h2></div></div></div><p>todo...</p></div><div class="chapter" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2894171"></a>Chapter 14. xquery2src</h2></div></div></div><p>todo...</p></div></div><div class="part" lang="en"><div class="titlepage"><div><div><h1 class="title"><a name="id2894181"></a>Part IV. Appendix</h1></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="appendix"><a href="#id2894186">A. Scala/XML expression grammar</a></span></dt><dd><dl><dt><span class="section"><a href="#id2894192">EBNF productions</a></span></dt><dt><span class="section"><a href="#id2894347">Summary of changes</a></span></dt><dt><span class="section"><a href="#id2894404">Omissions from XML syntax</a></span></dt></dl></dd><dt><span class="appendix"><a href="#id2894445">B. Implementation Chart: Information Set</a></span></dt><dt><span class="bibliography"><a href="#id2894455">Bibliography</a></span></dt></dl></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2894186"></a>Appendix A. Scala/XML expression grammar</h2></div></div></div><div class="toc"><p><b>Table of Contents</b></p><dl><dt><span class="section"><a href="#id2894192">EBNF productions</a></span></dt><dt><span class="section"><a href="#id2894347">Summary of changes</a></span></dt><dt><span class="section"><a href="#id2894404">Omissions from XML syntax</a></span></dt></dl></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2894192"></a>EBNF productions</h2></div></div></div><p>The following grammar show equal (=) and different (X) productions of
+    XML literals embedded in Scala. (DRAFT-TODO) Check parser (?) and 
+    add link to namespace recommendation.</p><pre class="programlisting">
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-element" target="_top">(=)</a>element       ::=    EmptyElemTag
+                    |    STag Content ETag                                    WFC: Element Type Match
+
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-EmptyElemTag" target="_top">(=)</a>EmptyElemTag  ::=    '&lt;' Name (S Attribute)* S? '/&gt;'                         WFC: Unique Att Spec
+
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-STag" target="_top">(=)</a>STag          ::=    '&lt;' Name (S Attribute)* S? '&gt;'                          WFC: Unique Att Spec
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-ETag" target="_top">(=)</a>ETag          ::=    '&lt;/' Name S? '&gt;'                                        
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-content" target="_top">(=)</a>content       ::=    (CharData)? ((element | Reference | Comment | PI | ScalaExp ) (CharData)?)*
+
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-Attribute" target="_top">(=)</a>Attribute     ::=    Name Eq AttValue	                                 WFC: No &lt; in Attribute Values
+
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-AttValue" target="_top">(X)</a>AttValue	  ::=    '"' ([^&lt;&amp;"] | CharRef)* '"'
+                    |    "'" ([^&lt;&amp;'] | CharRef)* "'"
+                    |    ScalaExp
+
+    ScalaExp      ::=    '{' expr '}'
+
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-CharData" target="_top">(X)</a>CharData      ::=   [^&lt;&amp;]* - ([^&lt;&amp;]* '{'[^&lt;&amp;{] [^&lt;&amp;]*) 
+                               - ([^&lt;&amp;]* '{']]&gt; [^&lt;&amp;]*)
+
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-Reference" target="_top">(=)</a>Reference     ::=   CharRef | EntityRef
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-CharRef" target="_top">(=)</a>CharRef       ::=   '&amp;#' [0-9]+ ';'
+                       |   '&amp;#x' [0-9a-fA-F]+ ';'                                  WFC: Legal Character
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-EntityRef" target="_top">(=)</a>EntityRef     ::=   '&amp;' Name ';'
+
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-Char" target="_top">(=)</a>Char          ::=    #x9 | #xA | #xD | [#x20-#xD7FF] | [#xE000-#xFFFD] | [#x10000-#x10FFFF]
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-S" target="_top">(=)</a>S             ::=   (#x20 | #x9 | #xD | #xA)+ 
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-Comment" target="_top">(=)</a>Comment       ::=   '&lt;!--' ((Char - '-') | ('-' (Char - '-')))* '--&gt;'
+
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-PI" target="_top">(=)</a>PI	          ::=   '&lt;?' PITarget (S (Char* - (Char* '?&gt;' Char*)))? '?&gt;'  
+
+
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-NameChar" target="_top">(=)</a>NameChar      ::=   Letter | Digit | '.' | '-' | '_' | ':' | CombiningChar | Extender
+    <a class="ulink" href="http://www.w3c.org/TR/REC-xml/#NT-NameChar" target="_top">(?)</a>Name          ::=   (Letter | '_' | ':') (NameChar)*
+
+
+    ElemPattern   ::=    EmptyElemTagP
+                    |    STagP ContentP ETagP                                       WFC: Element Type Match
+
+    EmptyElemTagP ::=    '&lt;' Name S? '/&gt;'
+    STag          ::=    '&lt;' Name S? '&gt;'                          
+    ETag          ::=    '&lt;/' Name S? '&gt;'                                        
+    content       ::=    (CharData)? ((ElemPattern | ScalaPatterns ) (CharData)?)*
+    ScalaPatterns ::=    '{' patterns '}'
+</pre></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2894347"></a>Summary of changes</h2></div></div></div><p>This lists reflects the differences to the XML productions with justifications
+      </p><div class="itemizedlist"><ul type="disc"><li><p>(missing prolog). XML expressions do not need a prolog. This implies that there are no doctype or entity declarations.</p></li><li><p>(changed Char) No single left brace '{'. These have to be written using '{{'</p></li><li><p>(changed EntityRef) No well-formedness constraint for checking entity references. Since entities cannot be declared, any entities that appear 
+            in an XML expression are parsed, but never expanded.</p></li><li><p>(changed AttValue) Attributes can have Scala expressions as values.</p></li></ul></div><p>
+    </p></div><div class="section" lang="en"><div class="titlepage"><div><div><h2 class="title" style="clear: both"><a name="id2894404"></a>Omissions from XML syntax</h2></div></div></div><p>For simplicity, Scala omits some parts of XML. There are two 
+      kinds of omission: items omitted from the syntax cannot be used in any 
+      Scala program, whereas items omitted in the
+      representation lack some treatment described in the XML spec.
+    </p><p>Thus Scala syntax does not include: 
+        </p><div class="itemizedlist"><ul type="disc"><li><p>prolog: XML fragments in Scala programs do not need a prolog</p></li><li><p>(changed AttValue) Attributes cannot refer to parsed entities.</p></li></ul></div><p>
+      </p></div></div><div class="appendix" lang="en"><div class="titlepage"><div><div><h2 class="title"><a name="id2894445"></a>Appendix B. Implementation Chart: Information Set</h2></div></div></div><p>
+
+      </p></div><div class="bibliography"><div class="titlepage"><div><div><h2 class="title"><a name="id2894455"></a>Bibliography</h2></div></div></div><div class="biblioentry"><a name="brics-dsd"></a><p>[<abbr class="abbrev">dsd</abbr>] <span class="orgname">BRICS. </span><span class="title"><i>
+        <a class="ulink" href="http://www.brics.dk/DSD/dsd2.html" target="_top">
+          Document Structure Description 2.0
+        </a>
+      </i>. </span></p></div><div class="biblioentry"><a name="iso-schematron"></a><p>[<abbr class="abbrev">schematron</abbr>] <span class="orgname">ISO/IEC. </span><span class="title"><i>
+        <a class="ulink" href="http://www.schematron.com/spec.html" target="_top">
+          Draft International Standard 19757-3 Document Schema Definition Languages Part 3: Rule-based validation
+        </a>
+      </i>. </span></p></div><div class="biblioentry"><a name="oasis-rng"></a><p>[<abbr class="abbrev">rng</abbr>] <span class="orgname">OASIS. </span><span class="date">2001. </span><span class="title"><i>
+        <a class="ulink" href="http://www.oasis-open.org/committees/relax-ng/spec-20010811.html" target="_top">Committee Specification: RELAX NG Specification</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="w3c-xml"></a><p>[<abbr class="abbrev">xml</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3c.org/TR/REC-xml" target="_top">Recommendation: Extensible Markup Language (XML) 1.0</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="w3c-xpath"></a><p>[<abbr class="abbrev">xml</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3.org/TR/xpath" target="_top">Recommendation: XML Path Language (XPath) 1.0</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="w3c-xsd0"></a><p>[<abbr class="abbrev">xsd0</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3.org/TR/xmlschema-0/" target="_top">Recommendation: XML Schema Part 0: Primer Second Edition</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="w3c-xsd1"></a><p>[<abbr class="abbrev">xsd1</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3.org/TR/xmlschema-0/" target="_top">Recommendation: XML Schema Part 1: Structures</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="w3c-xsd2"></a><p>[<abbr class="abbrev">xsd2</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3.org/TR/xmlschema-0/" target="_top">Recommendation: XML Schema Part 2: Datatypes</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="w3c-names-1.0"></a><p>[<abbr class="abbrev">names1.0</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3.org/TR/REC-xml-names" target="_top">Recommendation: Namespaces in XML</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="w3c-names-1.1"></a><p>[<abbr class="abbrev">names1.1</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3.org/TR/xml-names11" target="_top">Recommendation: Namespaces in XML 1.1</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="w3c-info"></a><p>[<abbr class="abbrev">info</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3c.org/TR/xml-infoset" target="_top">Recommendation: XML Information Set (Second Edition)</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="w3c-xquery"></a><p>[<abbr class="abbrev">xquery</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3c.org/TR/xquery" target="_top">Recommendation: XQuery 1.0: An XML Query Language</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="w3c-xslt"></a><p>[<abbr class="abbrev">xslt</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3c.org/TR/xslt" target="_top">XSL Transformations (XSLT)</a>
+      </i>. </span></p></div><div class="biblioentry"><a name="scala"></a><p>[scala] <span class="author"><span class="firstname">Martin</span> <span class="surname">Odersky</span>. </span><span class="author"><span class="othername">et al.</span>. </span><span class="title"><i>Scala language specification</i>. </span></p></div><div class="biblioentry"><a name="dom-level3"></a><p>[<abbr class="abbrev">dom-L3</abbr>] <span class="orgname">W3C. </span><span class="title"><i>
+      <a class="ulink" href="http://www.w3.org/TR/DOM-Level-3-Core" target="_top">
+        Recommendation: Document Object Model (DOM) Level 3 Core Specification
+      </a>
+      </i>. </span></p></div><div class="biblioentry"><a name="dom4j"></a><p>[<abbr class="abbrev">dom4j</abbr>] <span class="title"><i><a class="ulink" href="http://www.dom4j.org" target="_top">dom4j</a></i>. </span></p></div><div class="biblioentry"><a name="jdom"></a><p>[<abbr class="abbrev">jdom</abbr>] <span class="title"><i><a class="ulink" href="http://www.jdom.org" target="_top">JDOM</a></i>. </span></p></div><div class="biblioentry"><a name="xom"></a><p>[<abbr class="abbrev">xom</abbr>] <span class="title"><i><a class="ulink" href="http://www.xom.nu" target="_top">XML Object Model</a></i>. </span></p></div><div class="biblioentry"><a name="sax"></a><p>[<abbr class="abbrev">sax</abbr>] <span class="title"><i><a class="ulink" href="http://www.saxproject.org" target="_top">Simple API for XML</a></i>. </span></p></div><div class="biblioentry"><a name="stax"></a><p>[stax] <span class="orgname">JCP. </span>StAX<span class="title"><i>
+      <a class="ulink" href="http://jcp.org/en/jsr/detail?id=173" target="_top">Streaming API for XML</a></i>. </span></p></div><div class="biblioentry"><a name="fxt"></a><p>[<abbr class="abbrev">fxt</abbr>] <span class="title"><i><a class="ulink" href="http://www2.in.tum.de/~berlea/Fxt/" target="_top">
+      </a>fxt - The Functional XML Transformation Tool (written in SML / NJ)</i>. </span></p></div><div class="biblioentry"><a name="xquery2src"></a><p>[<abbr class="abbrev">xquery2src</abbr>] <span class="title"><i><a class="ulink" href="http://code.google.com/xquery2src/" target="_top">http://code.google.com/xquery2src/</a>xquery2src (written in Scala)</i>. </span></p></div><div class="biblioentry"><a name="fxt-transf"></a><p>[fxt-transf] <span class="author"><span class="firstname">Alexander</span> <span class="surname">Berlea</span>. </span><span class="author"><span class="firstname">Helmut</span> <span class="surname">Seidl</span>. </span><span class="title"><i>Transforming XML documents using fxt. 
+      Computing and Information Technology, Special Issue on DomainSpecific Languages, vol. 10, no. 1, pp. 19--35, 2002.</i>. </span></p></div><div class="biblioentry"><a name="fxt-binary"></a><p>[fxt-binary] <span class="author"><span class="firstname">Alexander</span> <span class="surname">Berlea</span>. </span><span class="author"><span class="firstname">Helmut</span> <span class="surname">Seidl</span>. </span><span class="title"><i>Binary Queries for Document Trees. Nordic Journal of Computing Volume 11, Number 1, Spring 2004 <a class="ulink" href="http://www2.in.tum.de/~berlea/publications/njc/binaries.pdf" target="_top">[pdf]</a> </i>. </span></p></div><div class="biblioentry"><a name="mf-wall"></a><p>[mf-wall] <span class="author"><span class="firstname">Mary</span> <span class="surname">Fernandez</span>. </span><span class="title"><i>XQuery: A Query Language for XML (or...Memoir of a W3C Standards Hacker). invited talk ECOOP'03 Darmstadt</i>. </span></p></div><div class="biblioentry"><a name="scala-programming"></a><p>[scala-programming] <span class="author"><span class="firstname">Martin</span> <span class="surname">Odersky</span>. </span><span class="title"><i><a class="ulink" href="http://scala-lang.org/docu/files/ProgrammingInScala.pdf" target="_top">Programming in Scala</a></i>. </span></p></div></div></div></div></body></html>

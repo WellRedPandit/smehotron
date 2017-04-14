@@ -18,7 +18,7 @@ class BasicNogoTest extends FunSuite {
     val resgen = Smehotron(".", cfg).generateNogoExpectedSvrls()
     val stgen = (resgen \ "outcome" \ "@type").text
     assertResult("success")(stgen)
-    val resprc = Smehotron(".", cfg).processNogoModules()
+    val resprc = <nogo>{Smehotron(".", cfg).processNogoModules()}</nogo>
     val stprc = (resprc \ "test" \ "@status").text
     assertResult("success")(stprc)
     // last, clean up...

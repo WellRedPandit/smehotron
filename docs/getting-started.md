@@ -98,13 +98,13 @@ The above command can be used as a smoke test after you build smehotron.
 
 ### Nogo tests
 
-Again, first, you need to create a config file (see the `<nogo>...</nogo>` section in `docs/smehotron.sample.conf.xml` for an example). The difference between go and nogo tests is that the nogo test needs a yardstick (golden svrl report) to compare all subsequent runs of the test with. Consequently, a golden svrl must be generated for every input control source. To achieve that,  run smehotron with the -g switch:
+Again, first, you need to create a config file (see the `<nogo>...</nogo>` section in `docs/smehotron.sample.conf.xml` for an example). The difference between go and nogo tests is that the nogo test needs a yardstick (expected svrl report) to compare all subsequent runs of the test with. Consequently, an expected svrl must be generated for every input control source. To achieve that,  run smehotron with the -g switch ("g" stands for "golden"):
 
 ```
 > ./smehotron -c path/to/your/smehotron-config.xml -g
 ```
 
-If a golden svrl report already exists, smehotron will produce an error.
+If an expected svrl report already exists, smehotron will produce an error.
 
 To run tests, run smehotron as usual without the -g switch, e.g.
 
@@ -115,10 +115,10 @@ To run tests, run smehotron as usual without the -g switch, e.g.
       <module>basic</module>
       <sch-driver>src/test/resources/basic_nogo/basic.sch</sch-driver>
       <input-control>src/test/resources/basic_nogo/basic-ok.xml</input-control>
-      <golden>src/test/resources/basic_nogo/basic-ok-golden.svrl</golden>
-      <svrl>src/test/resources/basic_nogo/basic-ok.xml.svrl</svrl>
+      <expected-svrl>src/test/resources/basic_nogo/basic-ok-expected.svrl</expected-svrl>
+      <actual-svrl>src/test/resources/basic_nogo/basic-ok-actual.xml.svrl</actual-svrl>
     </test></nogo>
     </smehotron-results>
 ```
 
-A nogo test is successful (`status="success"`) if a freshly generated svrl is exactly the same as the golden one.
+A nogo test is successful (`status="success"`) if a freshly generated actual svrl is exactly the same as the expected one.

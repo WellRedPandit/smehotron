@@ -69,7 +69,7 @@ Usage: smehotron [options]
   -r, --root <path/to/dir>
                            path to a root dir (optional)
   -g, --generate <generate>
-                           generate godlen SVRLs
+                           generate expected SVRLs
   -l, --loglevel <log level>
                            log level (case insensitive): OFF, ERROR (default), WARN, INFO, DEBUG, TRACE, ALL
 ```
@@ -98,7 +98,7 @@ The above command can be used as a smoke test after you build smehotron.
 
 ### Nogo tests
 
-Again, first, you need to create a config file (see the `<nogo>...</nogo>` section in `docs/smehotron.sample.conf.xml` for an example). The difference between go and nogo tests is that the nogo test needs a yardstick (expected svrl report) to compare all subsequent runs of the test with. Consequently, an expected svrl must be generated for every input control source. To achieve that,  run smehotron with the -g switch ("g" stands for "golden"):
+Again, first, you need to create a config file (see the `<nogo>...</nogo>` section in `docs/smehotron.sample.conf.xml` for an example). The difference between go and nogo tests is that the nogo test needs a yardstick (expected svrl report) to compare all subsequent runs of the test with. Consequently, an expected svrl must be generated for every input control source. To achieve that,  run smehotron with the -g switch:
 
 ```
 > ./smehotron -c path/to/your/smehotron-config.xml -g

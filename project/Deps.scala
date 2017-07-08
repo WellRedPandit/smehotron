@@ -9,12 +9,12 @@ object V {
   val logback = "1.2.3"
   val scala = "2.12.2"
   val scalaCheck = "1.13.5"
-  val scalaLogging = "3.5.0"
+  val scalaLogging = "3.7.1"
   val scalaTest = "3.0.3"
   val scalaXml = "1.0.6"
   val scopt = "3.6.0"
   val slf4j = "1.7.25"
-  val tron = "1.0.8"
+  val tron = "1.0.9"
 }
 
 object Deps {

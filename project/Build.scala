@@ -45,7 +45,7 @@ object TronBuild extends Build {
         compile(config ++ slf4j ++ logback ++ cats ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml ++ jdom ++ hashids) ++
         test(scalaCheck ++ scalaTest),
       assemblyJarName in assembly := "smehotron.jar",
-      mainClass in assembly := Some("wrp.smehotron.Smehotron"),
+      mainClass in assembly := Some("wrp.smehotron.Main"),
       initialCommands in(Test, console) := """import wrp.smehotron._""",
       dist := {
         import java.nio.file._

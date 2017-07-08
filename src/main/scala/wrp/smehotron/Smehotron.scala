@@ -28,15 +28,9 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
   def processModules() = {
     val goms = processGoModules()
     val nogoms = processNogoModules()
-    val go = if (goms.nonEmpty) <go>
-      {goms}
-    </go> else NodeSeq.Empty
-    val nogo = if (nogoms.nonEmpty) <nogo>
-      {nogoms}
-    </nogo> else NodeSeq.Empty
-    <smehotron-results>
-      {go ++ nogo}
-    </smehotron-results>
+    val go = if (goms.nonEmpty) tapGo(goms) else NodeSeq.Empty
+    val nogo = if (nogoms.nonEmpty) tapNogo(nogoms) else NodeSeq.Empty
+    tapResults({go ++ nogo})
   }
 
   def processGoModules() =
@@ -119,31 +113,23 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
                 case Some(svrl) =>
                   try {
                     FileUtils.moveFile(FileUtils.getFile(svrl), FileUtils.getFile(expected))
-                    <outcome type="success" module={mod} sch-driver={sch} input-control={ic}>generated svrl:
-                      {expected}
-                    </outcome>
+                    tapOutcomeSuccess(mod, sch, ic, expected)
                   } catch {
                     case x: Throwable =>
-                      <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not generate svrl
-                        {expected}
-                        due to:
-                        {x.getMessage}
-                      </outcome>
+                      tapOutcomeMoveFailure(mod, sch, ic, expected, x.getMessage)
                   }
                 case None =>
-                  <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not produce svrl</outcome>
+                  tapOutcomeSvlGenFailure(mod,sch,ic)
               }
             }
             tapt.toList
           }
           case None =>
-            <outcome type="failure" module={mod} sch-driver={sch}>compilation failed</outcome>
+            tapOutcomeCompileFailure(mod,sch)
         }
       }
     }
-    <outcomes>
-      {outcomes}
-    </outcomes>
+    tapOutcomes(outcomes)
   }
 
   def validate(step3: String, docFile: String) =

@@ -1,6 +1,6 @@
 package wrp.smehotron
 
-import scala.xml.NodeSeq
+import scala.xml.{Node, NodeSeq}
 
 object Tap {
 
@@ -85,6 +85,36 @@ object Tap {
       <sch-driver>{rules}</sch-driver>
       <reason>could not compile</reason>
     </test>
+  //@formatter:on
+
+  //@formatter:off
+  def tapGo(m: Seq[Seq[Node]]) = <go>{m}</go>
+  def tapNogo(m: Seq[Seq[Node]]) = <nogo>{m}</nogo>
+  def tapResults(m: NodeSeq) = <smehotron-results>{m}</smehotron-results>
+  //@formatter:on
+
+  //@formatter:off
+  def tapOutcomeSuccess(mod: String, sch: String, ic: String, exp: String) =
+    <outcome type="success" module={mod} sch-driver={sch} input-control={ic}>generated svrl: {exp}</outcome>
+  //@formatter:on
+
+  //@formatter:off
+  def tapOutcomeMoveFailure(mod: String, sch: String, ic: String, exp: String, msg: String) =
+    <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not move svrl {exp} due to: {msg}</outcome>
+  //@formatter:on
+
+  //@formatter:off
+  def tapOutcomeSvlGenFailure(mod: String, sch: String, ic: String) =
+    <outcome type="failure" module={mod} sch-driver={sch} input-control={ic}>could not generate svrl</outcome>
+  //@formatter:on
+
+  //@formatter:off
+  def tapOutcomeCompileFailure(mod: String, sch: String) =
+    <outcome type="failure" module={mod} sch-driver={sch}>compilation failed</outcome>
+  //@formatter:on
+
+  //@formatter:off
+  def tapOutcomes(m: Seq[Seq[Node]]) = <outcomes>{m}</outcomes>
   //@formatter:on
 
 }

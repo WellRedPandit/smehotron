@@ -14,7 +14,8 @@ object TronBuild extends Build {
     , "-deprecation"
     , "-target:jvm-1.8"
     , "-Xlog-reflective-calls"
-    , "-Xlint"
+    //, "-Xlint"
+    , "-Ywarn-unused:-imports"
     , "-Yno-adapted-args"
     , "-Ywarn-value-discard"
     //"-Xfatal-warnings" // be good!
@@ -65,9 +66,9 @@ object TronBuild extends Build {
       dist <<= dist.dependsOn(assembly),
       initialCommands in console :=
         """
-          |import wrp.smehotron._
-          |import scala.concurrent.ExecutionContext.Implicits.global
-          |import scala.util._
-          | """.stripMargin
+        |import wrp.smehotron._
+        |import scala.concurrent.ExecutionContext.Implicits.global
+        |import scala.util._
+        """.stripMargin
     )
 }

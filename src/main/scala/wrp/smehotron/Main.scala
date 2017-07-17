@@ -19,7 +19,8 @@ case class MainArgs(rules: Option[File] = None,
                     cfg: Option[File] = None,
                     root: Option[File] = None,
                     logLevel: Level = Level.ERROR,
-                    generate: Boolean = false)
+                    generate: Boolean = false,
+                    keep: Boolean = false)
 
 object Main extends LazyLogging {
 
@@ -54,6 +55,11 @@ object Main extends LazyLogging {
       .valueName("<generate>")
       .action((_, c) => c.copy(generate = true))
       .text("generate expected SVRLs")
+
+    opt[Unit]('k', "keep").minOccurs(0).maxOccurs(1)
+      .valueName("<keep>")
+      .action((_, c) => c.copy(keep  = true))
+      .text("keep intermediate files")
 
     opt[String]('l', "loglevel").minOccurs(0).maxOccurs(1)
       .valueName("<log level>")
@@ -149,9 +155,9 @@ object Main extends LazyLogging {
             }
         }
         if (opts.generate)
-          Smehotron(root, conf).generateNogoExpectedSvrls().foreach(println)
+          Smehotron(root, conf, opts.keep).generateNogoExpectedSvrls().foreach(println)
         else
-          Smehotron(root, conf).processModules().foreach(println)
+          Smehotron(root, conf, opts.keep).processModules().foreach(println)
       case None => /*ignore*/
     }
   }

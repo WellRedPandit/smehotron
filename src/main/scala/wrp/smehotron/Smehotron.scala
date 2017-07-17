@@ -14,10 +14,10 @@ import scala.util.{Failure, Try}
 import scala.xml.{Elem, NodeSeq, XML}
 
 object Smehotron {
-  def apply(root: String, cfg: Elem = <smehotron/>) = new Smehotron(Option(abs(root)), cfg)
+  def apply(root: String, cfg: Elem = <smehotron/>, keep: Boolean = false) = new Smehotron(Option(abs(root)), cfg, keep)
 }
 
-class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends LazyLogging {
+class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>, keep: Boolean = false) extends LazyLogging {
   val jarDir = theRoot.get
   lazy val tronDir = jarDir / "schematron"
   lazy val saxonDir = jarDir / "saxon"
@@ -30,7 +30,9 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
     val nogoms = processNogoModules()
     val go = if (goms.nonEmpty) tapGo(goms) else NodeSeq.Empty
     val nogo = if (nogoms.nonEmpty) tapNogo(nogoms) else NodeSeq.Empty
-    tapResults({go ++ nogo})
+    tapResults({
+      go ++ nogo
+    })
   }
 
   def processGoModules() =
@@ -39,12 +41,13 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       val drvs = log((m \ "sch-drivers" \ "sch-driver") ++ (m \ "sch-driver"))
       drvs.map { drv =>
         val sch = drv.text
-        compile(sch) match {
-          case Some(step3) => {
+        val chain = Chain(keep)
+        val res = compile(chain, sch) match {
+          case Some(compiled) => {
             val icic = m \ "input-controls" \ "input-control" \ "source"
             val tapt = icic.map { icz =>
               val ic = icz.text.trim
-              validate(step3, ic) match {
+              validate(chain, compiled, ic) match {
                 case Some(svrl) =>
                   val rpt = XML.loadFile(svrl)
                   val asserts = rpt \\ "failed-assert"
@@ -62,6 +65,8 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
           case None =>
             tapCompilationFailed(sch, mod)
         }
+        chain.clean()
+        res
       }
     }
 
@@ -71,13 +76,14 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       val drvs = log((m \ "sch-drivers" \ "sch-driver") ++ (m \ "sch-driver"))
       drvs.map { drv =>
         val sch = drv.text
-        compile(sch) match {
-          case Some(step3) => {
+        val chain = Chain(keep)
+        val res = compile(chain, sch) match {
+          case Some(compiled) => {
             val icic = m \ "input-controls" \ "input-control"
             val tapt = icic.map { icz =>
               val src = (icz \ "source").text.trim
               val expected = (icz \ "expected-svrl").text.trim
-              validate(step3, src) match {
+              validate(chain, compiled, src) match {
                 case Some(svrl) =>
                   val suspect = Try(Source.fromFile(svrl).getLines().mkString("\n"))
                   val yardstick = Try(Source.fromFile(expected).getLines().mkString("\n"))
@@ -94,6 +100,8 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
           case None =>
             tapCompilationFailed(sch, mod)
         }
+        chain.clean()
+        res
       }
     }
 
@@ -103,13 +111,14 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
       val drvs = log((m \ "sch-drivers" \ "sch-driver") ++ (m \ "sch-driver"))
       drvs.map { drv =>
         val sch = drv.text
-        compile(sch) match {
-          case Some(step3) => {
+        val chain = Chain(keep)
+        val res = compile(chain, sch) match {
+          case Some(compiled) => {
             val icic = m \ "input-controls" \ "input-control"
             val tapt = icic.map { icz =>
               val ic = (icz \ "source").text.trim
               val expected = (icz \ "expected-svrl").text.trim
-              validate(step3, ic) match {
+              validate(chain, compiled, ic) match {
                 case Some(svrl) =>
                   try {
                     FileUtils.moveFile(FileUtils.getFile(svrl), FileUtils.getFile(expected))
@@ -119,30 +128,48 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>) extends Laz
                       tapOutcomeMoveFailure(mod, sch, ic, expected, x.getMessage)
                   }
                 case None =>
-                  tapOutcomeSvlGenFailure(mod,sch,ic)
+                  tapOutcomeSvlGenFailure(mod, sch, ic)
               }
             }
             tapt.toList
           }
           case None =>
-            tapOutcomeCompileFailure(mod,sch)
+            tapOutcomeCompileFailure(mod, sch)
         }
+        chain.clean()
+        res
       }
     }
     tapOutcomes(outcomes)
   }
 
-  def validate(step3: String, docFile: String) =
-    doStep(4, docFile, step3, s".${gashish.encode(System.currentTimeMillis)}.RMVBL.svrl")
+  def validate(chain: Chain, compiled: String, docFile: String) = {
+    val step = doStep(chain, docFile, compiled)
+    if (step.nonEmpty) chain.addResult(step.get)
+    step
+  }
 
-  def compile(rulesFile: String) =
-    for (step1 <- doStep(1, rulesFile, s"$tronDir${File.separator}iso_dsdl_include.xsl");
-         step2 <- doStep(2, step1, s"$tronDir${File.separator}iso_abstract_expand.xsl");
-         step3 <- doStep(3, step2, s"$tronDir${File.separator}iso_svrl_for_xslt2.xsl")
-    ) yield step3
+  def compile(chain: Chain, rulesFile: String) = {
+    val step = for (step1 <- doStep(chain, rulesFile, s"$tronDir${File.separator}iso_dsdl_include.xsl");
+         step2 <- doStep(chain, step1, s"$tronDir${File.separator}iso_abstract_expand.xsl");
+         step3 <- doStep(chain, step2, s"$tronDir${File.separator}iso_svrl_for_xslt2.xsl")
+    ) yield Tuple3(step1, step2, step3)
+    if( step.nonEmpty) {
+      chain.addResult(step.get._1)
+      chain.addResult(step.get._2)
+      chain.addResult(step.get._3)
+      Some(step.get._3)
+    } else {
+      None
+    }
+  }
 
-  def doStep(num: Int, in: String, xsl: String, suffix: String = "") = {
-    val out = if (suffix.size > 0) in + suffix else in.replaceAll("\\.\\d+$", "") + "." + num
+  def doStep(chain: Chain, in: String, xsl: String) = {
+    val suffix = chain.incStepAndGet()
+    val out = "RMVBL".r.findFirstIn(in) match {
+      case Some(_) => in.replaceAll("\\.RMVBL.*$", ".RMVBL." + suffix)
+      case None => in + ".RMVBL." + suffix
+    }
     if (Cmd.run(log(mkCmd(in, out, xsl))).succeeded)
       Option(out)
     else

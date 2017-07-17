@@ -4,7 +4,7 @@
 #which find
 
 if [[ "$1" == "-x" ]] ; then
-find -name '*.sch.[1-3]' -o -name '*.RMVBL.svrl' | xargs rm -v
+find -name '*RMVBL*' | xargs rm -v
 else
-find -name '*.sch.[1-3]' -o -name '*.RMVBL.svrl'
+find -name '*RMVBL*'
 fi

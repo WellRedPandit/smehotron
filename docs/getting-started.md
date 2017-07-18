@@ -60,7 +60,7 @@ Without any arguments it outputs usage info:
 ```
 > ./smehotron
 Error: no parameters supplied
-smehotron 1.0.8
+smehotron 1.10.0
 Usage: smehotron [options]
 
   -c, --cfg <config-file>  config (optional)
@@ -68,8 +68,8 @@ Usage: smehotron [options]
   -x, --xml <xml-file>     xml file (optional)
   -r, --root <path/to/dir>
                            path to a root dir (optional)
-  -g, --generate <generate>
-                           generate expected SVRLs
+  -g, --generate           generate expected SVRLs
+  -k, --keep               keep intermediate files
   -l, --loglevel <log level>
                            log level (case insensitive): OFF, ERROR (default), WARN, INFO, DEBUG, TRACE, ALL
 ```

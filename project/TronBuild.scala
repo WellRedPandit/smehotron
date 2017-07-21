@@ -85,9 +85,16 @@ object TronBuild extends Build {
       libraryDependencies ++=
         compile(config ++ slf4j ++ logback ++ cats ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml ++ jdom ++ hashids) ++
         test(scalaCheck ++ scalaTest),
-      assemblyJarName in assembly := "smehotron.jar",
-      mainClass in assembly := Some("wrp.smehotron.Main"),
       initialCommands in(Test, console) := """import wrp.smehotron._""",
+      initialCommands in console :=
+        """
+          |import wrp.smehotron._
+          |import scala.concurrent.ExecutionContext.Implicits.global
+          |import scala.util._
+        """.stripMargin)
+      // assembly, dist
+    .settings(assemblyJarName in assembly := "smehotron.jar",
+      mainClass in assembly := Some("wrp.smehotron.Main"),
       dist := {
         import java.nio.file._
         import java.nio.file.attribute.PosixFilePermission._
@@ -103,12 +110,6 @@ object TronBuild extends Build {
         sbt.IO.copyDirectory(new File("schematron"), new File(s"$releaseDir/schematron"), false, true)
         s"zip -r $releaseDir.zip $releaseDir" !
       },
-      dist <<= dist.dependsOn(assembly),
-      initialCommands in console :=
-        """
-        |import wrp.smehotron._
-        |import scala.concurrent.ExecutionContext.Implicits.global
-        |import scala.util._
-        """.stripMargin
+      dist <<= dist.dependsOn(assembly)
     )
 }

@@ -3,6 +3,7 @@ import sbt._
 import sbtassembly.AssemblyPlugin.autoImport._
 
 object V {
+  val betterFiles = "3.1.0"
   val cats = "0.9.0"
   val commonsIo = "2.5"
   val config = "1.3.1"
@@ -33,6 +34,7 @@ object Deps {
   val scalaXml = "org.scala-lang.modules" %% "scala-xml" % V.scalaXml
   val cats = "org.typelevel" %% "cats" % V.cats
   val jdom = "org.jdom" % "jdom2" % V.jdom
+  val betterFiles ="com.github.pathikrit" %% "better-files" % V.betterFiles
   val hashids = "org.hashids" % "hashids" % V.hashids
 
   def compile(deps: Seq[ModuleID]): Seq[ModuleID] = deps map (_ % "compile")

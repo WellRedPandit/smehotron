@@ -14,9 +14,7 @@ import scala.collection.JavaConverters._
 import scala.xml.XML
 
 
-case class MainArgs(rules: Option[File] = None,
-                    xml: Option[File] = None,
-                    cfg: Option[File] = None,
+case class MainArgs(cfg: Option[File] = None,
                     root: Option[File] = None,
                     logLevel: Level = Level.ERROR,
                     generate: Boolean = false,
@@ -27,23 +25,11 @@ object Main extends LazyLogging {
   val parser = new scopt.OptionParser[MainArgs]("smehotron") {
     head("smehotron", this.getClass().getPackage().getImplementationVersion())
 
-    opt[File]('c', "cfg").minOccurs(0).maxOccurs(1)
+    opt[File]('c', "cfg").minOccurs(1).maxOccurs(1)
       .valueName("<config-file>")
       .action((x, c) => c.copy(cfg = Option(x)))
       .validate(x => if (x.exists() && x.isFile) success else failure("config either does not exist or not a file"))
       .text("config (optional)")
-
-    opt[File]('s', "sch").minOccurs(0).maxOccurs(1)
-      .valueName("<sch-driver>")
-      .action((x, c) => c.copy(rules = Option(x)))
-      .validate(x => if (x.exists() && x.isFile) success else failure("schematron file either does not exist or not a file"))
-      .text("schematron file (optional)")
-
-    opt[File]('x', "xml").minOccurs(0).maxOccurs(1)
-      .valueName("<xml-file>")
-      .action((x, c) => c.copy(xml = Option(x)))
-      .validate(x => if (x.exists() && x.isFile) success else failure("xml file either does not exist or not a file"))
-      .text("xml file (optional)")
 
     opt[File]('r', "root").minOccurs(0).maxOccurs(1)
       .valueName("<path/to/dir>")
@@ -67,15 +53,6 @@ object Main extends LazyLogging {
         if (Set("OFF", "ERROR", "WARN", "INFO", "DEBUG", "TRACE", "ALL").contains(x.toUpperCase)) success else failure("bad log level"))
       .action((x, c) => c.copy(logLevel = Level.toLevel(x.toUpperCase)))
       .text("log level (case insensitive): OFF, ERROR (default), WARN, INFO, DEBUG, TRACE, ALL")
-
-    checkConfig(c =>
-      if ((c.xml.isEmpty && c.rules.nonEmpty) || (c.xml.nonEmpty && c.rules.isEmpty))
-        failure("xml and sch should either be both defined or both omitted")
-      else if (c.cfg.isEmpty && c.rules.isEmpty && c.xml.isEmpty)
-        failure("no parameters supplied")
-      else
-        success
-    )
   }
 
   private def mkConfigForRulesXmlPair(rules: File, xml: File) = {
@@ -109,17 +86,17 @@ object Main extends LazyLogging {
     }
   }
 
-  def resolve(f: File, sep: String = File.separator): String = {
-    val extend = Set("catalog", "sch-driver", "source", "expected-svrl")
+  def resolveBase(f: File, sep: String = File.separator): String = {
+    val resolvables = Set("catalog", "sch-driver", "source", "expected-svrl")
     val sax = new SAXBuilder()
     val doc = sax.build(f)
     // http://stackoverflow.com/a/23870306
     val rx = if (sep == "/") "\\\\+" else "/+"
     val sub = if (sep == "/") "/" else "\\\\"
 
-    def _resolve(e: Element): Unit = {
+    def _resolveBase(e: Element): Unit = {
       for (e <- e.getChildren.asScala) {
-        if (extend.contains(e.getName)) {
+        if (resolvables.contains(e.getName)) {
           val base = findBase(e)
           if (base.nonEmpty) {
             val newPath = (base.get + sep + e.getText).replaceAll(rx, sub)
@@ -128,11 +105,11 @@ object Main extends LazyLogging {
             e.setText(e.getText.replaceAll(rx, sub))
           }
         }
-        _resolve(e)
+        _resolveBase(e)
       }
     }
 
-    _resolve(doc.getRootElement)
+    _resolveBase(doc.getRootElement)
     val xout = new XMLOutputter(Format.getPrettyFormat())
     xout.outputString(doc)
   }
@@ -145,15 +122,7 @@ object Main extends LazyLogging {
           case Some(r) => r.getAbsolutePath
           case None => new File(getClass.getProtectionDomain.getCodeSource.getLocation.toURI).getAbsoluteFile.getParent
         }
-        val conf = opts.cfg match {
-          case Some(f) =>
-            XML.loadString(resolve(f))
-          case None =>
-            (opts.rules, opts.xml) match {
-              case (Some(rules), Some(xml)) => mkConfigForRulesXmlPair(rules, xml)
-              case _ => throw new RuntimeException("sch-driver and xml – both or neither")
-            }
-        }
+        val conf = XML.loadString(resolveBase(opts.cfg.get))
         if (opts.generate)
           Smehotron(root, conf, opts.keep).generateNogoExpectedSvrls().foreach(println)
         else

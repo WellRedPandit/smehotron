@@ -97,6 +97,7 @@ object TronBuild extends Build {
       // assembly, dist
     .settings(assemblyJarName in assembly := "smehotron.jar",
       mainClass in assembly := Some("wrp.smehotron.Main"),
+      sbt.Keys.test in assembly := {},
       dist := {
         import java.nio.file._
         import java.nio.file.attribute.PosixFilePermission._

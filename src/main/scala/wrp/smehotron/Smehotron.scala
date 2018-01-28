@@ -5,13 +5,15 @@ import java.nio.file.Path
 
 import com.typesafe.scalalogging.LazyLogging
 import org.apache.commons.io.FileUtils
-import wrp.smehotron.Tap._
-import wrp.smehotron.utils.Cmd
-import wrp.smehotron.utils.PathOps._
 
 import scala.io.Source
 import scala.util.{Failure, Try}
 import scala.xml.{Elem, NodeSeq, XML}
+
+import wrp.smehotron.Tap._
+import wrp.smehotron.utils.Cmd
+import wrp.smehotron.utils.PathOps._
+import wrp.smehotron.utils.Control.RTE
 
 object Smehotron {
   def apply(root: String, cfg: Elem = <smehotron/>, keep: Boolean = false) = new Smehotron(Option(abs(root)), cfg, keep)
@@ -21,7 +23,21 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>, keep: Boole
   val jarDir = theRoot.get
   lazy val tronDir = jarDir / "schematron"
   lazy val saxonDir = jarDir / "saxon"
-  lazy val saxonClasspath = s"${saxonDir}${File.separator}saxon.he.9.7.0.7.jar${File.pathSeparator}${saxonDir}${File.separator}resolver.jar"
+
+  def saxonClasspath = {
+    val d = saxonDir.toFile
+    val sax = if (d.exists && d.isDirectory) {
+      d.listFiles.filter(f => f.isFile && """(?i)^saxon.*\.jar$""".r.findFirstIn(f.getName).nonEmpty).toList
+    } else {
+      List[File]()
+    }
+    if(sax.size == 1) {
+      val c = sax(0)
+      s"${saxonDir}${File.separator}${c.getName}${File.pathSeparator}${saxonDir}${File.separator}resolver.jar"
+    } else
+      throw RTE("no saxon found")
+  }
+
   lazy val cats = (cfg \ "catalogs" \ "catalog").map(_.text)
   val gashish = new org.hashids.Hashids("smehotron")
 

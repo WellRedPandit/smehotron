@@ -17,7 +17,7 @@ object V {
   val scalaXml = "1.0.6"
   val scopt = "3.7.0"
   val slf4j = "1.7.25"
-  val tron = "1.10.0"
+  val tron = "1.11.0"
 }
 
 object Deps {

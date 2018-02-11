@@ -13,7 +13,7 @@ object V {
   val scala = "2.12.4"
   val scalaCheck = "1.13.5"
   val scalaLogging = "3.7.2"
-  val scalaTest = "3.0.4"
+  val scalaTest = "3.0.5"
   val scalaXml = "1.0.6"
   val scopt = "3.7.0"
   val slf4j = "1.7.25"

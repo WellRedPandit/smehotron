@@ -54,16 +54,18 @@ lazy val tron = Project(id = "smehotron", base = file("."))
     dist := {
       import java.nio.file._
       import java.nio.file.attribute.PosixFilePermission._
-      import scala.collection.JavaConversions._
+      import scala.collection.JavaConverters._
+      import sys.process._
+
       val releaseDir = s"smehotron-${V.tron}"
       sbt.IO.delete(new File(releaseDir))
       sbt.IO.delete(new File(s"$releaseDir.zip"))
       sbt.IO.copyFile(new File("target/scala-2.12/smehotron.jar"), new File(s"$releaseDir/smehotron.jar"), true)
       sbt.IO.copyFile(new File("scripts/smehotron"), new File(s"$releaseDir/smehotron"), true)
       sbt.IO.copyFile(new File("scripts/smehotron.bat"), new File(s"$releaseDir/smehotron.bat"), true)
-      scala.util.Try(Files.setPosixFilePermissions(Paths.get(s"$releaseDir/smehotron"), Set(OWNER_EXECUTE, OWNER_READ, OWNER_WRITE)))
+      scala.util.Try(Files.setPosixFilePermissions(Paths.get(s"$releaseDir/smehotron"), Set(OWNER_EXECUTE, OWNER_READ, OWNER_WRITE).asJava))
       sbt.IO.copyDirectory(new File("saxon"), new File(s"$releaseDir/saxon"), false, true)
       sbt.IO.copyDirectory(new File("schematron"), new File(s"$releaseDir/schematron"), false, true)
       s"zip -r $releaseDir.zip $releaseDir" !
     },
-    dist <<= dist.dependsOn(assembly))
+    dist := dist.dependsOn(assembly).value)

@@ -8,7 +8,7 @@ object V {
   val hashids = "1.0.3"
   val jdom = "2.0.6"
   val logback = "1.2.3"
-  val scala = "2.12.4"
+  val scala = "2.12.5"
   val scalaCheck = "1.13.5"
   val scalaLogging = "3.8.0"
   val scalaTest = "3.0.5"

@@ -15,7 +15,8 @@ object V {
   val scalaXml = "1.1.1"
   val scopt = "3.7.1"
   val slf4j = "1.7.25"
-  val tron = "1.11.0"
+
+  val tron = "1.12.0"
 }
 
 object Dependencies {

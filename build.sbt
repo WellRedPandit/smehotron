@@ -13,7 +13,6 @@ lazy val sharedScalacSettings = Seq(
   , "-Xlog-reflective-calls"
   //, "-Xlint"
   , "-Ywarn-unused:-imports"
-  , "-Yno-adapted-args"
   , "-Ywarn-value-discard"
   //"-Xfatal-warnings" // be good!
 )
@@ -38,7 +37,7 @@ lazy val tron = Project(id = "smehotron", base = file("."))
   .settings(commonProjectSettings: _*)
   .settings(name := "smehotron",
     libraryDependencies ++=
-      depsCompile(typesafeConfig ++ slf4j ++ logback ++ cats ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml ++ jdom ++ hashids) ++
+      depsCompile(typesafeConfig ++ slf4j ++ logback ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml ++ jdom ++ hashids) ++
       depsTest(scalaCheck ++ scalaTest),
     initialCommands in(Test, console) := """import wrp.smehotron._""",
     initialCommands in console :=
@@ -60,7 +59,7 @@ lazy val tron = Project(id = "smehotron", base = file("."))
       val releaseDir = s"smehotron-${V.tron}"
       sbt.IO.delete(new File(releaseDir))
       sbt.IO.delete(new File(s"$releaseDir.zip"))
-      sbt.IO.copyFile(new File("target/scala-2.12/smehotron.jar"), new File(s"$releaseDir/smehotron.jar"), true)
+      sbt.IO.copyFile(new File("target/scala-2.13/smehotron.jar"), new File(s"$releaseDir/smehotron.jar"), true)
       sbt.IO.copyFile(new File("scripts/smehotron"), new File(s"$releaseDir/smehotron"), true)
       sbt.IO.copyFile(new File("scripts/smehotron.bat"), new File(s"$releaseDir/smehotron.bat"), true)
       scala.util.Try(Files.setPosixFilePermissions(Paths.get(s"$releaseDir/smehotron"), Set(OWNER_EXECUTE, OWNER_READ, OWNER_WRITE).asJava))

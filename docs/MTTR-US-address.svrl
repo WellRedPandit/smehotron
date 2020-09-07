@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<svrl:schematron-output xmlns:svrl="http://purl.oclc.org/dsdl/svrl"
+                        xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                        xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+                        xmlns:saxon="http://saxon.sf.net/"
+                        xmlns:schold="http://www.ascc.net/xml/schematron"
+                        xmlns:iso="http://purl.oclc.org/dsdl/schematron"
+                        xmlns:xhtml="http://www.w3.org/1999/xhtml"
+                        xmlns:ali="http://www.niso.org/schemas/ali/1.0/"
+                        xmlns:cqf="http://www.schematron-quickfix.com/validator/process"
+                        xmlns:f="http://www.osa.org/Schematron/util-fund"
+                        xmlns:m="http://www.osa.org/Schematron/util"
+                        xmlns:mml="http://www.w3.org/1998/Math/MathML"
+                        xmlns:xlink="http://www.w3.org/1999/xlink"
+                        title=""
+                        schemaVersion=""><!--   
+		   
+		   
+		 -->
+   <svrl:ns-prefix-in-attribute-values uri="http://www.niso.org/schemas/ali/1.0/" prefix="ali"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.schematron-quickfix.com/validator/process" prefix="cqf"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.osa.org/Schematron/util-fund" prefix="f"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.osa.org/Schematron/util" prefix="m"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/1998/Math/MathML" prefix="mml"/>
+   <svrl:ns-prefix-in-attribute-values uri="http://www.w3.org/1999/xlink" prefix="xlink"/>
+   <svrl:active-pattern document="file:/C:/Users/aschwarzman/MEGA/sasha-pasha/smehotron/MEGA-OSA-Schematron-v1.1-DEV/_test-suite/input-controls/NoGo/ERROR/MTTR-US-address.xml"
+                        id="INIT"
+                        name="INIT"/>
+   <svrl:active-pattern document="file:/C:/Users/aschwarzman/MEGA/sasha-pasha/smehotron/MEGA-OSA-Schematron-v1.1-DEV/_test-suite/input-controls/NoGo/ERROR/MTTR-US-address.xml"
+                        id="MTTR"
+                        name="Metadata validations for Traditional journals only">
+      <svrl:text>Tests constraints on article metadata</svrl:text>
+   </svrl:active-pattern>
+   <svrl:fired-rule context="    article-meta/contrib-group/aff[country = 'USA']    [not(matches(normalize-space(.),    '[Nn]ow|[Cc]urrently|[Dd]eceased|[Dd]ied|[Pp]resent|[Rr]etired'))]"
+                    id="MTTR120"/>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We tokenize affiliations by commas, and pick the penultimate
+			token.</d:func>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We remove anything but ZIP code.</d:func>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We remove the ZIP code and spaces.</d:func>
+   <d:req xmlns="http://purl.oclc.org/dsdl/schematron"
+          xmlns:d="http://www.osa.org/Schematron/docs">For the US affiliations, a subdivision, i.e., state, district, or outlying
+			territory, must be present and match the ones on the US Subdivisions Authority
+			list.</d:req>
+   <svrl:failed-assert test="$subdiv-not-found"
+                       location="/article[1]/front[1]/article-meta[1]/contrib-group[1]/aff[1]">
+      <svrl:text>ERROR [test-meta-trad:MTTR120]: &lt;aff id="aff1"&gt;: a US subdivision "District of Columbia" is not found in the authority list: authority 'LOOKUP-subdivisions-US.xml'</svrl:text>
+   </svrl:failed-assert>
+   <d:req xmlns="http://purl.oclc.org/dsdl/schematron"
+          xmlns:d="http://www.osa.org/Schematron/docs">In the US addresses that begin with variations of 'U.S.', United States
+			must be abbreviated as 'U.S.'</d:req>
+   <svrl:fired-rule context="    article-meta/contrib-group/aff[country = 'USA']    [not(matches(normalize-space(.),    '[Nn]ow|[Cc]urrently|[Dd]eceased|[Dd]ied|[Pp]resent|[Rr]etired'))]"
+                    id="MTTR120"/>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We tokenize affiliations by commas, and pick the penultimate
+			token.</d:func>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We remove anything but ZIP code.</d:func>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We remove the ZIP code and spaces.</d:func>
+   <d:req xmlns="http://purl.oclc.org/dsdl/schematron"
+          xmlns:d="http://www.osa.org/Schematron/docs">For the US affiliations, a subdivision, i.e., state, district, or outlying
+			territory, must be present and match the ones on the US Subdivisions Authority
+			list.</d:req>
+   <svrl:failed-assert test="$subdiv-not-found"
+                       location="/article[1]/front[1]/article-meta[1]/contrib-group[1]/aff[2]">
+      <svrl:text>ERROR [test-meta-trad:MTTR120]: &lt;aff id="aff2"&gt;: a US subdivision "OH" is not found in the authority list: authority 'LOOKUP-subdivisions-US.xml'</svrl:text>
+   </svrl:failed-assert>
+   <d:req xmlns="http://purl.oclc.org/dsdl/schematron"
+          xmlns:d="http://www.osa.org/Schematron/docs">In the US addresses that begin with variations of 'U.S.', United States
+			must be abbreviated as 'U.S.'</d:req>
+   <svrl:fired-rule context="    article-meta/contrib-group/aff[country = 'USA']    [not(matches(normalize-space(.),    '[Nn]ow|[Cc]urrently|[Dd]eceased|[Dd]ied|[Pp]resent|[Rr]etired'))]"
+                    id="MTTR120"/>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We tokenize affiliations by commas, and pick the penultimate
+			token.</d:func>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We remove anything but ZIP code.</d:func>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We remove the ZIP code and spaces.</d:func>
+   <d:req xmlns="http://purl.oclc.org/dsdl/schematron"
+          xmlns:d="http://www.osa.org/Schematron/docs">For the US affiliations, a subdivision, i.e., state, district, or outlying
+			territory, must be present and match the ones on the US Subdivisions Authority
+			list.</d:req>
+   <svrl:failed-assert test="$subdiv-not-found"
+                       location="/article[1]/front[1]/article-meta[1]/contrib-group[1]/aff[3]">
+      <svrl:text>ERROR [test-meta-trad:MTTR120]: &lt;aff id="aff3"&gt;: a US subdivision "" is not found in the authority list: authority 'LOOKUP-subdivisions-US.xml'</svrl:text>
+   </svrl:failed-assert>
+   <d:req xmlns="http://purl.oclc.org/dsdl/schematron"
+          xmlns:d="http://www.osa.org/Schematron/docs">In the US addresses that begin with variations of 'U.S.', United States
+			must be abbreviated as 'U.S.'</d:req>
+   <svrl:fired-rule context="    article-meta/contrib-group/aff[country = 'USA']    [not(matches(normalize-space(.),    '[Nn]ow|[Cc]urrently|[Dd]eceased|[Dd]ied|[Pp]resent|[Rr]etired'))]"
+                    id="MTTR120"/>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We tokenize affiliations by commas, and pick the penultimate
+			token.</d:func>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We remove anything but ZIP code.</d:func>
+   <d:func xmlns="http://purl.oclc.org/dsdl/schematron"
+           xmlns:d="http://www.osa.org/Schematron/docs">We remove the ZIP code and spaces.</d:func>
+   <d:req xmlns="http://purl.oclc.org/dsdl/schematron"
+          xmlns:d="http://www.osa.org/Schematron/docs">For the US affiliations, a subdivision, i.e., state, district, or outlying
+			territory, must be present and match the ones on the US Subdivisions Authority
+			list.</d:req>
+   <d:req xmlns="http://purl.oclc.org/dsdl/schematron"
+          xmlns:d="http://www.osa.org/Schematron/docs">In the US addresses that begin with variations of 'U.S.', United States
+			must be abbreviated as 'U.S.'</d:req>
+   <svrl:successful-report test="matches($country-is-preceded-by, '^US|^U. S.|^U.S.A.|^U S') and not(matches($country-is-preceded-by, $exceptions))"
+                           location="/article[1]/front[1]/article-meta[1]/contrib-group[1]/aff[4]">
+      <svrl:text>ERROR [test-meta-trad:MTTR120]: &lt;aff id="aff4"&gt;:
+			the only permitted abbreviation of United States is "U.S." (Address may
+			contain "USDA|US Conec|US-")</svrl:text>
+   </svrl:successful-report>
+</svrl:schematron-output>

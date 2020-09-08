@@ -1,11 +1,11 @@
 package wrp.smehotron.tests
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 import wrp.smehotron.Smehotron
 
 import scala.xml.XML
 
-class BasicGoTest extends FunSuite {
+class BasicGoTest extends AnyFunSuite {
 
   val localPath = "src/test/resources/basic"
 

@@ -15,6 +15,9 @@ object V {
   val scopt = "3.7.1"
   val slf4j = "1.7.30"
 
+  val scalaXmlDiff = "2.0.4"
+  val scalaXmlCompare = "2.0.0"
+
   val tron = "1.13.0"
 }
 
@@ -31,12 +34,15 @@ object Dependencies {
   val scopt = "com.github.scopt" %% "scopt" % V.scopt
   val scalaXml = "org.scala-lang.modules" %% "scala-xml" % V.scalaXml
   val jdom = "org.jdom" % "jdom2" % V.jdom
-  val betterFiles ="com.github.pathikrit" %% "better-files" % V.betterFiles
+  val betterFiles = "com.github.pathikrit" %% "better-files" % V.betterFiles
   val hashids = "org.hashids" % "hashids" % V.hashids
+
+  val scalaXmlDiff = "com.github.andyglow" %% "scala-xml-diff" % V.scalaXmlDiff
+  val scalaXmlCompare = "software.purpledragon.xml" %% "xml-compare" % V.scalaXmlCompare
 
   def depsCompile(deps: Seq[ModuleID]): Seq[ModuleID] = deps map (_ % "compile")
 
   def depsTest(deps: Seq[ModuleID]): Seq[ModuleID] = deps map (_ % "test")
 
-  implicit def mod2seq (m: ModuleID) = Seq(m)
+  implicit def mod2seq(m: ModuleID) = Seq(m)
 }

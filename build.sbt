@@ -21,13 +21,13 @@ val prompt = (state: State) => "%s> ".format(Project.extract(state).currentProje
 
 val commonProjectSettings =
   Defaults.coreDefaultSettings ++
-  Seq(
-    organization := "wrp",
-    version := V.tron,
-    scalaVersion := V.scala,
-    scalacOptions := sharedScalacSettings,
-    shellPrompt := prompt
-  )
+    Seq(
+      organization := "wrp",
+      version := V.tron,
+      scalaVersion := V.scala,
+      scalacOptions := sharedScalacSettings,
+      shellPrompt := prompt
+    )
 
 
 lazy val dist = TaskKey[Unit]("dist")
@@ -37,8 +37,8 @@ lazy val tron = Project(id = "smehotron", base = file("."))
   .settings(commonProjectSettings: _*)
   .settings(name := "smehotron",
     libraryDependencies ++=
-      depsCompile(typesafeConfig ++ slf4j ++ logback ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml ++ jdom ++ hashids) ++
-      depsTest(scalaCheck ++ scalaTest),
+      depsCompile(typesafeConfig ++ slf4j ++ logback ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml ++ jdom ++ hashids ++ scalaXmlDiff ++ scalaXmlCompare) ++
+        depsTest(scalaCheck ++ scalaTest),
     initialCommands in(Test, console) := """import wrp.smehotron._""",
     initialCommands in console :=
       """
@@ -46,7 +46,7 @@ lazy val tron = Project(id = "smehotron", base = file("."))
         |import scala.concurrent.ExecutionContext.Implicits.global
         |import scala.util._
       """.stripMargin)
-    // assembly, dist
+  // assembly, dist
   .settings(assemblyJarName in assembly := "smehotron.jar",
     mainClass in assembly := Some("wrp.smehotron.Main"),
     sbt.Keys.test in assembly := {},

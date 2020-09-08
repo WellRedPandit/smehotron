@@ -44,7 +44,7 @@ object Main extends LazyLogging {
 
     opt[Unit]('k', "keep").minOccurs(0).maxOccurs(1)
       .valueName("<keep>")
-      .action((_, c) => c.copy(keep  = true))
+      .action((_, c) => c.copy(keep = true))
       .text("keep intermediate files")
 
     opt[String]('l', "loglevel").minOccurs(0).maxOccurs(1)
@@ -114,7 +114,9 @@ object Main extends LazyLogging {
     xout.outputString(doc)
   }
 
-  def main(args: Array[String]) {
+  def main(args: Array[String]): Unit = {
+    wrp.smehotron.utils.WrpXmlDiff.compare()
+    wrp.smehotron.utils.WrpXmlDiff.diff()
     parser.parse(args, MainArgs()) match {
       case Some(opts) =>
         LoggerFactory.getILoggerFactory().asInstanceOf[LoggerContext].getLogger("wrp.smehotron").setLevel(opts.logLevel)

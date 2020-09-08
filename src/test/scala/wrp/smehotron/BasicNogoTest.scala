@@ -2,12 +2,12 @@ package wrp.smehotron.tests
 
 import java.io.File
 
-import org.scalatest.FunSuite
+import org.scalatest.funsuite.AnyFunSuite
 import wrp.smehotron.Smehotron
 
 import scala.xml.XML
 
-class BasicNogoTest extends FunSuite {
+class BasicNogoTest extends AnyFunSuite {
 
   val localPath = "src/test/resources/basic_nogo"
 
@@ -18,7 +18,9 @@ class BasicNogoTest extends FunSuite {
     val resgen = Smehotron(".", cfg).generateNogoExpectedSvrls()
     val stgen = (resgen \ "outcome" \ "@type").text
     assertResult("success")(stgen)
-    val resprc = <nogo>{Smehotron(".", cfg).processNogoModules()}</nogo>
+    val resprc = <nogo>
+      {Smehotron(".", cfg).processNogoModules()}
+    </nogo>
     val stprc = (resprc \ "test" \ "@status").text
     assertResult("success")(stprc)
     // last, clean up...

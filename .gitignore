@@ -38,3 +38,4 @@ test-output/
 
 .DS_Store
 *_git
+.bsp/

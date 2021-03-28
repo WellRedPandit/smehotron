@@ -2,23 +2,23 @@ import sbt._
 
 object V {
   val betterFiles = "3.1.0"
-  val commonsIo = "2.7"
-  val typesafeConfig = "1.4.0"
+  val commonsIo = "2.8.0"
+  val typesafeConfig = "1.4.1"
   val hashids = "1.0.3"
   val jdom = "2.0.6"
   val logback = "1.2.3"
-  val scala = "2.13.3"
-  val scalaCheck = "1.14.3"
-  val scalaLogging = "3.9.2"
-  val scalaTest = "3.2.2"
+  val scala = "2.13.5"
+  val scalaCheck = "1.15.3"
+  val scalaLogging = "3.9.3"
+  val scalaTest = "3.2.6"
   val scalaXml = "1.3.0"
-  val scopt = "3.7.1"
+  val scopt = "4.0.1"
   val slf4j = "1.7.30"
 
   val scalaXmlDiff = "2.0.4"
   val scalaXmlCompare = "2.0.0"
 
-  val tron = "1.13.0"
+  val tron = "1.13.1"
 }
 
 object Dependencies {

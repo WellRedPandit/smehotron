@@ -1,91 +1,383 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!DOCTYPE book-part-wrapper PUBLIC "-//OSA//DTD OSA BITS Conference DTD v1.0 20170715//EN" "OSA-BITS-conference.dtd">
-<book-part-wrapper content-type="conf-paper-wrap" dtd-version="2.0" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
-<collection-meta collection-type="conf">
-<conference content-type="conf-name"><conf-name>Spatial Light Modulators</conf-name><conf-acronym>SLMO</conf-acronym></conference>
-<conference content-type="conf-other-meta"><conf-date content-type="start">
-<day>17</day>
-<month>03</month>
-<year>1997</year></conf-date><conf-date content-type="end">
-<day>19</day>
-<month>03</month>
-<year>1997</year></conf-date><conf-loc>Nevada, 
-<country country="US">United States</country></conf-loc></conference></collection-meta>
-<collection-meta collection-type="conf-session">
-<title-group>
-<title>SLM Materials and Sructures</title>
-<alt-title alt-title-type="conf-session-acronym"/></title-group></collection-meta>
-<collection-meta collection-type="conf-proceedings-series">
-<title-group>
-<title>OSA Trends in Optics and Photonics Series</title></title-group>
-<volume-in-collection>
-<volume-number>14</volume-number>
-<volume-title>TOPS Volume XIV</volume-title></volume-in-collection></collection-meta>
-<book-meta>
-<book-title-group>
-<book-title>Spatial Light Modulators</book-title></book-title-group>
-<contrib-group>
-<contrib contrib-type="editor">
-<name><surname>Burdge</surname><given-names>Geoffrey</given-names></name></contrib>
-<contrib contrib-type="editor">
-<name><surname>Esener</surname><given-names>Sadik C.</given-names></name></contrib></contrib-group>
-<pub-date publication-format="electronic">
-<day>17</day>
-<month>03</month>
-<year>1997</year></pub-date></book-meta>
-<book-part book-part-type="conf-paper">
-<book-part-meta>
-<title-group>
-<title>The Fast Bit Plane SLM: A New Ferro-Electric Liquid crystal on Silicon Spatial Light Modulator Designed for High Yield and Low Cost Manufacturability</title></title-group>
-<contrib-group>
-<contrib contrib-type="author">
-<name><surname>Crossland</surname><given-names>W.A.</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
-<contrib contrib-type="author">
-<name><surname>Wilkinson</surname><given-names>T.D.</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
-<contrib contrib-type="author">
-<name><surname>Coker</surname><given-names>T.M.</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
-<contrib contrib-type="author">
-<name><surname>Yu</surname><given-names>TCBY</given-names></name><xref rid="aff2" ref-type="aff"><sup>2</sup></xref></contrib>
-<contrib contrib-type="author">
-<name><surname>Stanley</surname><given-names>M.</given-names></name><xref rid="aff3" ref-type="aff"><sup>3</sup></xref></contrib>
-<aff id="aff1">
-<label>1</label>Cambridge University Engineering Department, Trumpington Street, CAMBRIDGE, CB2 IPZ</aff>
-<aff id="aff2">
-<label>2</label>Department of Cybernetics, Reading University, White Knights, READING, Surrey</aff>
-<aff id="aff3">
-<label>3</label>DRA Malvern, St Andrews Road, MALVERN, Worcs</aff></contrib-group>
-<elocation-id>102</elocation-id>
-<permissions>
-<copyright-statement>&#x000A9; 1997 Optical Society of America</copyright-statement>
-<copyright-year>1997</copyright-year>
-<copyright-holder>Optical Society of America</copyright-holder>
-<license license-type="open-access">
-<license-p>closed</license-p></license></permissions>
-<abstract>
-<p>We announce a new VLSI silicon backplane Spatial Light Modulator known as the DRA Fast Bit Plane SLM. The size of the pixel array is 320x240 with a fill factor of 65&#x00025;; the pixel type is single transistor DRAM. With DRA2 liquid crystal &#x0005B;2&#x0005D; the maximum possible frame rate is 22.7kHz. Initial devices have been set up for binary phase modulation using a crystal with a cone angle wider than is optimal for intensity modulation. Even so a contrast ratio of 12:1, averaged over a small array of pixels, has been measured and results from imaging applications are presented. An image has been projected from the un-planarised device and displayed images are plainly visible under ambient illumination; full colour images are possible in a helmet-mounted configuration. In its planarised form the device is considered to be a low cost alternative to the TI DMD for many applications.</p></abstract>
-<kwd-group kwd-group-type="OCIS">
-<title>OCIS codes</title>
-<kwd>Optical Devices - Theory and Technology - Spatial light modulators</kwd>
-<kwd>liquid crystal devices</kwd>
-<kwd>silicon backplane devices</kwd></kwd-group>
-<counts>
-<book-page-count count="5"/></counts></book-part-meta>
-<body>
-<p>GENERAL DESCRIPTION The Fast Bit Plane SLM is a VLSI silicon backplane EASLM of a generic type first reported by Collings et al &#x0005B;31. The pixels are of the sinle transistor DRAM type laid out in a 320x240 array. The data bus is 64 bits wide with 5:1 de-multiplexing whilst the rows are controlled by a token and shift register scheme rather than by line address decoding. The pixel pitch is 34 microns and the overall die size is 4x14mnm. The device has been manufactured by a commercial VLSI process from Austria Mikro Systeme International (AMS). This device is similar in some aspects to the devices reported by Handschy et al &#x0005B;4&#x0005D;.</p>
-<p>DESIGN CRITERIA The principle design criteria were threefold: * High yield and ease of manufacture. * High fill factor and mirror flatness. * Maximum possible addressing speed. The second criterion arose from the requirement that the device should be usable even if un-planarised. This lead almost directly to the use of a DRAM rather than SRAM type pixel but also meant that there could be no circuitry underneath the pixel mirror. At an early point in the design sequence it was also decided that a high voltage 2 micron VLSI process would be used in order to switch the Liquid Crystal as quickly as possible. As a consequence of these two factors the best fill factor that could be achieved was 65&#x00025; - note the Handschy devices achieve a much higher fill factor but this is done by placing the mirror over underlying circuitry. The pixel layout is shown in Fig 1. Given that a 2 micron process was used, this would perhaps limit the speed of the device somewhat. Even so the device is rated at 50MHz, with a 100ns line address time. Coupled with the DRA2 liquid crystal mixture the maximum possible frame rate is 22.7kHz, although this is dependent on the liquid crystal drive scheme. Assembly and Yield. Previous problems encountered in the high yield fabrication of these devices, particularly that of 'front to back' shorts, have been tackled and new, yield enhancing methods for device assembly and glue lane deposition have been employed. Liquid Crystal Drive Schemes. In addition to the criteria mentioned above, the device has also been designed with a novel Liquid Crystal drive scheme in mind. In the past inverse frame is written to the SLM for every image frame and the illumination is modulated appropriately &#x0005B;5&#x0005D;. The scheme the device was designed for is inherently DC balanced and in practice this has meant that extra functionality has been included in the electrical addressing scheme of the SLM. The significance of this scheme is that the SLM is now continuously viewable, unlike the previous 2 schemes. Previously only SRAM type SLMs have had this feature and they have relied on a much more complex pixel circuit and addressing scheme, often accompanied with a reduction in light throughput &#x0005B;6&#x0005D;.</p>
-<p>TESTFEATURES In order to accurately assess devices and to monitor them in actual operation a number of test features have been included in the design. At the end of each row and column line there are 2 MOSFETs (an n channel and ap channel). These are connected together such that, in combination with an external pull-up or pull-down resistor, they form both a wired NOR and a wired NAND gate monitoring the row and column lines. Using this feature, the switching of both row and column lines can be verified. The most useful test feature is the pixel followers Figure 2 - Test outputs. SLMs of this type (ie DRAM) have been driven by holding the potential of the front electrode at a point half way between ground and the maximum potential that the pixel can reach, in this way opposite polarity fields can be applied to the appropriate pixels. In order to maintain DC balance the data is either periodically reversed &#x0005B;41 or an that have been connected to one pixel from each of the 2 bottom rows of the array. Using the outputs from these, the switching of the 2 pixels can be directly observed; this enables such experiments as observing the dipole switching current of the FELC and the effects of high intensity illumination on pixels (before, during and after they switch) to be carried out. Other features include the token buffers at the bottom of each shift register which verify that the complete shift register is operating and a temperature sensor that, in addition to a peltier heater, could be used to accurately control the temperature of the device. A sample of the outputs from these test feature is shown in Figure 2; in this figure the top trace is the output from a token buffer, the next the pixel follower (incidentally this indicates a pixel droop under lab light illumination of around 10ins), trace 4 is one of the clocks and trace 3 is the output from the wired NOR gate connected to one set of row lines, indicating the switching of the rows.</p>
-<p>ASSEMBLY AND YIELD RESULTS Unsurprisingly there are many steps in the total assembly procedure but the 2 principal ones are the coming together of the silicon and glass and wire bonding and packaging. The former process has been carried out in the Class 100 clean room facility at Cambridge University Engineering Department (Photonics and Sensors Group) using a semi- automated system that enables 4 devices to be assembled at once. The packaging and wire bonding has been carried out at DRA Malvern. Table I shows the overall yield and its constituent values. Note that, normally, dice would be probed once, whilst they were on the wafer, and for a second time after the front glass was glued in place. For simplicity and to increase overall yield (as the second probing will itself lead to some devices failing) the first probing is omitted. Consequently the figure for manufacture and assembly includes both the yield on the wafer and the yield of the assembly process. A separate wafer was probe tested initially, the yield on this was 88.5&#x00025; although this is a little misleading as, of a necessity, this test is unable to reveal all faults that may exist on a device. Table I - Manufacturing Yield</p>
-<p>LIQUID CRYSTALS The devices assembled so far have been filled with a high tilt angle material known as MPP3 &#x0005B;2&#x0005D;. In this case it has been aligned by a conventional rubbed nylon layer; both the cover glass and the silicon have been rubbed - unlike the Handschy devices &#x0005B;2&#x0005D; - although the silicon was rubbed more gently! Previously it was thought that rubbing the silicon in this way would damage the circuitry, mainly the pixel transistor gates. However this does not seem to be the case and the devices prepared in this way align extremely well. In theory the liquid crystal can align into I of 2 domains, the difference being the inclination of the smectic layers to the rubbing direction. In practice only single domain structures have been observed both in these devices and simple glass test cells.</p>
-<p>APPLICATIONS RESULTS With MPP3 the maximum observed contrast ratio, averaged over 100 or so pixels, is 12:1; the switching speed is of the order of 100us. However one must remember that MPP3 has a high tilt angle (60 degrees) which is greater than that required for maximum contrast in a display application; the high tilt angle also explains to a certain extent the relatively slow switching speed of this material. A full interface/framestore is nearing completion but was not available to drive the chip for the system described below, consequently the images shown are very simple. The full interface has the capability to drive the chip at its rated speed of 50MHz - a burst data rate of 3.2 Gbit/s - and can store sufficient image data for at least a 4 second full motion video clip &#x0005B;7&#x0005D;. Figure 3 shows an image written to the SLM and viewed under ambient illumination through a single polariser. Figure 4 shows the same image written to the SLM but projected onto a normal slide projector screen. The projected image is plainly visible in this way (albeit in a dimly lit room) although the actual image size is limited to about 40x30 cm (representing an image magnification of about 35 times). A very simple off axis reflection scheme - see Figure 5 - was used to project this image. The optical power incident onto the SLM for this experiment was around 10mW/cm 2 . This is comparable to the figure quoted by Handschy for their Generation I devices. The Generation II devices would appear to be highly resistant to incident radiation, however one would expect this given design (specifically that mirrors are placed over circuitry which acts to protect the circuitry from incident radiation as well as to increase fill factor). A detailed model of how the Fast Bit Plane SLM responds to the incident optical power will be the subject of a later paper. Given that the device is currently unplanarised the performance of the projection display is very good. Figure 3 -Image viewed under ambient illumination through a single polariser. Figure 4 -Projected image. Furthermore the planarised device is expected to be as resistant to high intensity illumination as the Generation II Handschy devices. With this in mind this device must be considered as a viable alternative to the Texas Instruments DMD, but at a fraction of what is assumed to be the cost of ni, Figure 5 - Off axis projection system these devices. A simple variant of the projection display is the helmet-mounted type, replacing the high intensity white light with simple LEDs and viewing the image througha beam splitter. This configuration also lends itself to a full colour imaging system 18&#x0005D;. The images shown here are simple black and white ones, however grey scale is easily achievable, even under fairly intense illumination, by using a temporal averaging or bit plane scheme. This has been demonstrated with simple images in the laboratory, both in projection and viewed directly.</p>
-<p>CONCLUSION The DRA Fast Bit Plane SLM is a silicon VLSI backplane electrically addressed SLM. It has been designed for speed, flexibility, high yield and ease of manufacture. Initial work hasshownthatdevicescanbemadeinquantity,although the overall yield is moderate at the moment. The first devices have been set up for binary phase modulation but even so good intensity contrast has been achieved. With a simple interface and optics a projection display has been constructed, whilst images, both grey scale and black and white. are directly viewable under ambient illumination. The resistance of the device to high intensity illumination in its unplanarised state is very good and consequently it is considered that the planarised device will be a viable, but much lower cost, alternative to the Texas Instruments DMD device. Further work will include trials of the device as a phase hologram source, and the extension of the imaging application to full colour full motion video.</p>
-<p>ACKNOWLEDGEMENTS This SLM was developed for DERA Malvern under contract MAL 1b/2256. Our thanks are due to Drs Meirion Lewis and Brian Lowans of DERA Malvern, Mick Stone of the Engineering Department, Dr Martin Birch of CRL and Dr Ian Underwood of Edinburgh University. TM Coker is an EPSRC student and also has a CASE award from DERA Malvern.</p></body>
-<back>
-<ref-list>
-<ref id="r1"><label>1</label><mixed-citation publication-type="journal"><article-title>TCBY Yu designed and laid out the device whilst at Cambridge under a Croucher Foundation Research Fellowship</article-title>.</mixed-citation></ref>
-<ref id="r2"><label>2</label><mixed-citation publication-type="journal"><article-title>The DRA2 mixture was supplied by DRA Malvern and the MPP3 material by the University of Hull under the LINK DTI programme 'Fast Optical and Electro-Optical Effects in Chiral Liquid Crystals'</article-title>.</mixed-citation></ref>
-<ref id="r3"><label>3</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Collings</surname><given-names>N.</given-names></name><name><surname>Crossland</surname><given-names>W.A.</given-names></name><name><surname>Ayliffe</surname><given-names>P.J.</given-names></name><name><surname>Vass</surname><given-names>D.G.</given-names></name><name><surname>Underwood</surname><given-names>I.</given-names></name></person-group>, "<article-title>Evolutionary development of advanced liquid crystal spatial light modulators</article-title>", <source>Applied Optics</source> <volume>28</volume>(<issue>22</issue> (<day>15</day> <month>Nov</month> <year>1989</year>).<pub-id pub-id-type="doi">10.1364/AO.28.004740</pub-id></mixed-citation></ref>
-<ref id="r4"><label>4</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Handschy</surname><given-names>M.A.</given-names></name><name><surname>Chase</surname><given-names>H.</given-names></name><name><surname>Cotter</surname><given-names>L.K.</given-names></name><name><surname>Cunninham</surname><given-names>J.D.</given-names></name><name><surname>Pattee</surname><given-names>A.M.</given-names></name><name><surname>Drabik</surname><given-names>T.J.</given-names></name><name><surname>Gaalema</surname><given-names>S.D.</given-names></name></person-group>, "<article-title>One transistor DRAM ferro-electric liquid crystal spatial light modulator</article-title>," <source>Proceedings of SPIE 237 - Optical Pattern Recognition V</source>, (<year>1994</year>)<pub-id pub-id-type="doi">10.1117/12.169449</pub-id></mixed-citation></ref>
-<ref id="r5"><label>5</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Radcliffe</surname><given-names>S.</given-names></name><name><surname>Griffith</surname><given-names>M.S.</given-names></name><name><surname>Laycock</surname><given-names>L.C.</given-names></name><name><surname>Worboys</surname><given-names>M.R.</given-names></name></person-group>, "<article-title>Miniature silicon backplane ferro-electric liquid crystal displays for head mounted display applications</article-title>." <source>Ferroelectrics</source> <volume>179</volume>(<issue>2</issue>), (<year>1996</year>)<pub-id pub-id-type="doi">10.1080/00150199608007878</pub-id></mixed-citation></ref>
-<ref id="r6"><label>6</label><mixed-citation publication-type="thesis"><person-group person-group-type="author"><name><surname>Burns</surname><given-names>D.C.</given-names></name></person-group> "<article-title>Design and characterisation of a ferroelectric liquid crystal over silicon spatial light modulator</article-title>," <publisher-name>University of Edinburgh</publisher-name> <source>PhD thesis</source> <year>1994</year></mixed-citation></ref>
-<ref id="r7"><label>7</label><mixed-citation publication-type="journal"><article-title>The frainestore is being designed and constructed by Cambridge University, Computer Laboratory</article-title></mixed-citation></ref>
-<ref id="r8"><label>8</label><mixed-citation publication-type="journal">See, for example &#x0005B;5&#x0005D; or <person-group person-group-type="author"><name><surname>Rankin</surname><given-names>I.D.</given-names></name><name><surname>O&#x02019;Hara</surname><given-names>I Underwood. A</given-names></name><name><surname>Vass</surname><given-names>D.G.</given-names></name><name><surname>Worboys</surname><given-names>M.R.</given-names></name></person-group>, "<article-title>Full colour images on a binary spatial light modulator</article-title>." <source>Ferroelectrics</source> <volume>179</volume>(<issue>2</issue>), (<year>1996</year>)</mixed-citation></ref></ref-list></back></book-part></book-part-wrapper>
+<book-part-wrapper content-type="conf-paper-wrap" dtd-version="2.0"
+    xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <collection-meta collection-type="conf">
+        <conference content-type="conf-name">
+            <conf-name>Spatial Light Modulators</conf-name>
+            <conf-acronym>SLMO</conf-acronym>
+        </conference>
+        <conference content-type="conf-other-meta">
+            <conf-date content-type="start">
+                <day>17</day>
+                <month>03</month>
+                <year>1997</year>
+            </conf-date>
+            <conf-date content-type="end">
+                <day>19</day>
+                <month>03</month>
+                <year>1997</year>
+            </conf-date>
+            <conf-loc>Nevada, <country country="US">United States</country></conf-loc>
+        </conference>
+    </collection-meta>
+    <collection-meta collection-type="conf-session">
+        <title-group>
+            <title>SLM Materials and Sructures</title>
+            <alt-title alt-title-type="conf-session-acronym"/>
+        </title-group>
+    </collection-meta>
+    <collection-meta collection-type="conf-proceedings-series">
+        <title-group>
+            <title>OSA Trends in Optics and Photonics Series</title>
+        </title-group>
+        <volume-in-collection>
+            <volume-number>14</volume-number>
+            <volume-title>TOPS Volume XIV</volume-title>
+        </volume-in-collection>
+    </collection-meta>
+    <book-meta>
+        <book-title-group>
+            <book-title>Spatial Light Modulators</book-title>
+        </book-title-group>
+        <contrib-group>
+            <contrib contrib-type="editor">
+                <name>
+                    <surname>Burdge</surname>
+                    <given-names>Geoffrey</given-names>
+                </name>
+            </contrib>
+            <contrib contrib-type="editor">
+                <name>
+                    <surname>Esener</surname>
+                    <given-names>Sadik C.</given-names>
+                </name>
+            </contrib>
+        </contrib-group>
+        <pub-date publication-format="electronic">
+            <day>17</day>
+            <month>03</month>
+            <year>1997</year>
+        </pub-date>
+    </book-meta>
+    <book-part book-part-type="conf-paper">
+        <book-part-meta>
+            <title-group>
+                <title>The Fast Bit Plane SLM: A New Ferro-Electric Liquid crystal on Silicon
+                    Spatial Light Modulator Designed for High Yield and Low Cost
+                    Manufacturability</title>
+            </title-group>
+            <contrib-group>
+                <contrib contrib-type="author">
+                    <name>
+                        <surname>Crossland</surname>
+                        <given-names>W.A.</given-names>
+                    </name>
+                    <xref rid="aff1" ref-type="aff">
+                        <sup>1</sup>
+                    </xref>
+                </contrib>
+                <contrib contrib-type="author">
+                    <name>
+                        <surname>Wilkinson</surname>
+                        <given-names>T.D.</given-names>
+                    </name>
+                    <xref rid="aff1" ref-type="aff">
+                        <sup>1</sup>
+                    </xref>
+                </contrib>
+                <contrib contrib-type="author">
+                    <name>
+                        <surname>Coker</surname>
+                        <given-names>T.M.</given-names>
+                    </name>
+                    <xref rid="aff1" ref-type="aff">
+                        <sup>1</sup>
+                    </xref>
+                </contrib>
+                <contrib contrib-type="author">
+                    <name>
+                        <surname>Yu</surname>
+                        <given-names>TCBY</given-names>
+                    </name>
+                    <xref rid="aff2" ref-type="aff">
+                        <sup>2</sup>
+                    </xref>
+                </contrib>
+                <contrib contrib-type="author">
+                    <name>
+                        <surname>Stanley</surname>
+                        <given-names>M.</given-names>
+                    </name>
+                    <xref rid="aff3" ref-type="aff">
+                        <sup>3</sup>
+                    </xref>
+                </contrib>
+                <aff id="aff1">
+                    <label>1</label>Cambridge University Engineering Department, Trumpington Street,
+                    CAMBRIDGE, CB2 IPZ</aff>
+                <aff id="aff2">
+                    <label>2</label>Department of Cybernetics, Reading University, White Knights,
+                    READING, Surrey</aff>
+                <aff id="aff3">
+                    <label>3</label>DRA Malvern, St Andrews Road, MALVERN, Worcs</aff>
+            </contrib-group>
+            <elocation-id>102</elocation-id>
+            <permissions>
+                <copyright-statement>&#x000A9; 1997 Optical Society of America</copyright-statement>
+                <copyright-year>1997</copyright-year>
+                <copyright-holder>Optical Society of America</copyright-holder>
+                <license license-type="open-access">
+                    <license-p>closed</license-p>
+                </license>
+            </permissions>
+            <abstract>
+                <p>We announce a new VLSI silicon backplane Spatial Light Modulator known as the DRA
+                    Fast Bit Plane SLM. The size of the pixel array is 320x240 with a fill factor of
+                    65&#x00025;; the pixel type is single transistor DRAM. With DRA2 liquid crystal
+                    &#x0005B;2&#x0005D; the maximum possible frame rate is 22.7kHz. Initial devices
+                    have been set up for binary phase modulation using a crystal with a cone angle
+                    wider than is optimal for intensity modulation. Even so a contrast ratio of
+                    12:1, averaged over a small array of pixels, has been measured and results from
+                    imaging applications are presented. An image has been projected from the
+                    un-planarised device and displayed images are plainly visible under ambient
+                    illumination; full colour images are possible in a helmet-mounted configuration.
+                    In its planarised form the device is considered to be a low cost alternative to
+                    the TI DMD for many applications.</p>
+            </abstract>
+            <kwd-group kwd-group-type="OCIS">
+                <title>OCIS codes</title>
+                <kwd>Optical Devices - Theory and Technology - Spatial light modulators</kwd>
+                <kwd>liquid crystal devices</kwd>
+                <kwd>silicon backplane devices</kwd>
+            </kwd-group>
+            <counts>
+                <book-page-count count="5"/>
+            </counts>
+        </book-part-meta>
+        <body>
+            <p>GENERAL DESCRIPTION The Fast Bit Plane SLM is a VLSI silicon backplane EASLM of a
+                generic type first reported by Collings et al &#x0005B;31. The pixels are of the
+                sinle transistor DRAM type laid out in a 320x240 array. The data bus is 64 bits wide
+                with 5:1 de-multiplexing whilst the rows are controlled by a token and shift
+                register scheme rather than by line address decoding. The pixel pitch is 34 microns
+                and the overall die size is 4x14mnm. The device has been manufactured by a
+                commercial VLSI process from Austria Mikro Systeme International (AMS). This device
+                is similar in some aspects to the devices reported by Handschy et al
+                &#x0005B;4&#x0005D;.</p>
+            <p>DESIGN CRITERIA The principle design criteria were threefold: * High yield and ease
+                of manufacture. * High fill factor and mirror flatness. * Maximum possible
+                addressing speed. The second criterion arose from the requirement that the device
+                should be usable even if un-planarised. This lead almost directly to the use of a
+                DRAM rather than SRAM type pixel but also meant that there could be no circuitry
+                underneath the pixel mirror. At an early point in the design sequence it was also
+                decided that a high voltage 2 micron VLSI process would be used in order to switch
+                the Liquid Crystal as quickly as possible. As a consequence of these two factors the
+                best fill factor that could be achieved was 65&#x00025; - note the Handschy devices
+                achieve a much higher fill factor but this is done by placing the mirror over
+                underlying circuitry. The pixel layout is shown in Fig 1. Given that a 2 micron
+                process was used, this would perhaps limit the speed of the device somewhat. Even so
+                the device is rated at 50MHz, with a 100ns line address time. Coupled with the DRA2
+                liquid crystal mixture the maximum possible frame rate is 22.7kHz, although this is
+                dependent on the liquid crystal drive scheme. Assembly and Yield. Previous problems
+                encountered in the high yield fabrication of these devices, particularly that of
+                'front to back' shorts, have been tackled and new, yield enhancing methods for
+                device assembly and glue lane deposition have been employed. Liquid Crystal Drive
+                Schemes. In addition to the criteria mentioned above, the device has also been
+                designed with a novel Liquid Crystal drive scheme in mind. In the past inverse frame
+                is written to the SLM for every image frame and the illumination is modulated
+                appropriately &#x0005B;5&#x0005D;. The scheme the device was designed for is
+                inherently DC balanced and in practice this has meant that extra functionality has
+                been included in the electrical addressing scheme of the SLM. The significance of
+                this scheme is that the SLM is now continuously viewable, unlike the previous 2
+                schemes. Previously only SRAM type SLMs have had this feature and they have relied
+                on a much more complex pixel circuit and addressing scheme, often accompanied with a
+                reduction in light throughput &#x0005B;6&#x0005D;.</p>
+            <p>TESTFEATURES In order to accurately assess devices and to monitor them in actual
+                operation a number of test features have been included in the design. At the end of
+                each row and column line there are 2 MOSFETs (an n channel and ap channel). These
+                are connected together such that, in combination with an external pull-up or
+                pull-down resistor, they form both a wired NOR and a wired NAND gate monitoring the
+                row and column lines. Using this feature, the switching of both row and column lines
+                can be verified. The most useful test feature is the pixel followers Figure 2 - Test
+                outputs. SLMs of this type (ie DRAM) have been driven by holding the potential of
+                the front electrode at a point half way between ground and the maximum potential
+                that the pixel can reach, in this way opposite polarity fields can be applied to the
+                appropriate pixels. In order to maintain DC balance the data is either periodically
+                reversed &#x0005B;41 or an that have been connected to one pixel from each of the 2
+                bottom rows of the array. Using the outputs from these, the switching of the 2
+                pixels can be directly observed; this enables such experiments as observing the
+                dipole switching current of the FELC and the effects of high intensity illumination
+                on pixels (before, during and after they switch) to be carried out. Other features
+                include the token buffers at the bottom of each shift register which verify that the
+                complete shift register is operating and a temperature sensor that, in addition to a
+                peltier heater, could be used to accurately control the temperature of the device. A
+                sample of the outputs from these test feature is shown in Figure 2; in this figure
+                the top trace is the output from a token buffer, the next the pixel follower
+                (incidentally this indicates a pixel droop under lab light illumination of around
+                10ins), trace 4 is one of the clocks and trace 3 is the output from the wired NOR
+                gate connected to one set of row lines, indicating the switching of the rows.</p>
+            <p>ASSEMBLY AND YIELD RESULTS Unsurprisingly there are many steps in the total assembly
+                procedure but the 2 principal ones are the coming together of the silicon and glass
+                and wire bonding and packaging. The former process has been carried out in the Class
+                100 clean room facility at Cambridge University Engineering Department (Photonics
+                and Sensors Group) using a semi- automated system that enables 4 devices to be
+                assembled at once. The packaging and wire bonding has been carried out at DRA
+                Malvern. Table I shows the overall yield and its constituent values. Note that,
+                normally, dice would be probed once, whilst they were on the wafer, and for a second
+                time after the front glass was glued in place. For simplicity and to increase
+                overall yield (as the second probing will itself lead to some devices failing) the
+                first probing is omitted. Consequently the figure for manufacture and assembly
+                includes both the yield on the wafer and the yield of the assembly process. A
+                separate wafer was probe tested initially, the yield on this was 88.5&#x00025;
+                although this is a little misleading as, of a necessity, this test is unable to
+                reveal all faults that may exist on a device. Table I - Manufacturing Yield</p>
+            <p>LIQUID CRYSTALS The devices assembled so far have been filled with a high tilt angle
+                material known as MPP3 &#x0005B;2&#x0005D;. In this case it has been aligned by a
+                conventional rubbed nylon layer; both the cover glass and the silicon have been
+                rubbed - unlike the Handschy devices &#x0005B;2&#x0005D; - although the silicon was
+                rubbed more gently! Previously it was thought that rubbing the silicon in this way
+                would damage the circuitry, mainly the pixel transistor gates. However this does not
+                seem to be the case and the devices prepared in this way align extremely well. In
+                theory the liquid crystal can align into I of 2 domains, the difference being the
+                inclination of the smectic layers to the rubbing direction. In practice only single
+                domain structures have been observed both in these devices and simple glass test
+                cells.</p>
+            <p>APPLICATIONS RESULTS With MPP3 the maximum observed contrast ratio, averaged over 100
+                or so pixels, is 12:1; the switching speed is of the order of 100us. However one
+                must remember that MPP3 has a high tilt angle (60 degrees) which is greater than
+                that required for maximum contrast in a display application; the high tilt angle
+                also explains to a certain extent the relatively slow switching speed of this
+                material. A full interface/framestore is nearing completion but was not available to
+                drive the chip for the system described below, consequently the images shown are
+                very simple. The full interface has the capability to drive the chip at its rated
+                speed of 50MHz - a burst data rate of 3.2 Gbit/s - and can store sufficient image
+                data for at least a 4 second full motion video clip &#x0005B;7&#x0005D;. Figure 3
+                shows an image written to the SLM and viewed under ambient illumination through a
+                single polariser. Figure 4 shows the same image written to the SLM but projected
+                onto a normal slide projector screen. The projected image is plainly visible in this
+                way (albeit in a dimly lit room) although the actual image size is limited to about
+                40x30 cm (representing an image magnification of about 35 times). A very simple off
+                axis reflection scheme - see Figure 5 - was used to project this image. The optical
+                power incident onto the SLM for this experiment was around 10mW/cm 2 . This is
+                comparable to the figure quoted by Handschy for their Generation I devices. The
+                Generation II devices would appear to be highly resistant to incident radiation,
+                however one would expect this given design (specifically that mirrors are placed
+                over circuitry which acts to protect the circuitry from incident radiation as well
+                as to increase fill factor). A detailed model of how the Fast Bit Plane SLM responds
+                to the incident optical power will be the subject of a later paper. Given that the
+                device is currently unplanarised the performance of the projection display is very
+                good. Figure 3 -Image viewed under ambient illumination through a single polariser.
+                Figure 4 -Projected image. Furthermore the planarised device is expected to be as
+                resistant to high intensity illumination as the Generation II Handschy devices. With
+                this in mind this device must be considered as a viable alternative to the Texas
+                Instruments DMD, but at a fraction of what is assumed to be the cost of ni, Figure 5
+                - Off axis projection system these devices. A simple variant of the projection
+                display is the helmet-mounted type, replacing the high intensity white light with
+                simple LEDs and viewing the image througha beam splitter. This configuration also
+                lends itself to a full colour imaging system 18&#x0005D;. The images shown here are
+                simple black and white ones, however grey scale is easily achievable, even under
+                fairly intense illumination, by using a temporal averaging or bit plane scheme. This
+                has been demonstrated with simple images in the laboratory, both in projection and
+                viewed directly.</p>
+            <p>CONCLUSION The DRA Fast Bit Plane SLM is a silicon VLSI backplane electrically
+                addressed SLM. It has been designed for speed, flexibility, high yield and ease of
+                manufacture. Initial work hasshownthatdevicescanbemadeinquantity,although the
+                overall yield is moderate at the moment. The first devices have been set up for
+                binary phase modulation but even so good intensity contrast has been achieved. With
+                a simple interface and optics a projection display has been constructed, whilst
+                images, both grey scale and black and white. are directly viewable under ambient
+                illumination. The resistance of the device to high intensity illumination in its
+                unplanarised state is very good and consequently it is considered that the
+                planarised device will be a viable, but much lower cost, alternative to the Texas
+                Instruments DMD device. Further work will include trials of the device as a phase
+                hologram source, and the extension of the imaging application to full colour full
+                motion video.</p>
+            <p>ACKNOWLEDGEMENTS This SLM was developed for DERA Malvern under contract MAL 1b/2256.
+                Our thanks are due to Drs Meirion Lewis and Brian Lowans of DERA Malvern, Mick Stone
+                of the Engineering Department, Dr Martin Birch of CRL and Dr Ian Underwood of
+                Edinburgh University. TM Coker is an EPSRC student and also has a CASE award from
+                DERA Malvern.</p>
+        </body>
+        <back>
+            <ref-list>
+                <ref id="r1">
+                    <label>1</label>
+                    <mixed-citation publication-type="journal"><article-title>TCBY Yu designed and
+                            laid out the device whilst at Cambridge under a Croucher Foundation
+                            Research Fellowship</article-title>.</mixed-citation>
+                </ref>
+                <ref id="r2">
+                    <label>2</label>
+                    <mixed-citation publication-type="journal"><article-title>The DRA2 mixture was
+                            supplied by DRA Malvern and the MPP3 material by the University of Hull
+                            under the LINK DTI programme 'Fast Optical and Electro-Optical Effects
+                            in Chiral Liquid Crystals'</article-title>.</mixed-citation>
+                </ref>
+                <ref id="r3">
+                    <label>3</label>
+                    <mixed-citation publication-type="journal"><person-group
+                            person-group-type="author"
+                                    ><name><surname>Collings</surname><given-names>N.</given-names></name><name><surname>Crossland</surname><given-names>W.A.</given-names></name><name><surname>Ayliffe</surname><given-names>P.J.</given-names></name><name><surname>Vass</surname><given-names>D.G.</given-names></name><name><surname>Underwood</surname><given-names>I.</given-names></name></person-group>,
+                            "<article-title>Evolutionary development of advanced liquid crystal
+                            spatial light modulators</article-title>", <source>Applied
+                            Optics</source>
+                        <volume>28</volume>(<issue>22</issue> (<day>15</day>
+                        <month>Nov</month>
+                        <year>1989</year>).<pub-id pub-id-type="doi"
+                        >10.1364/AO.28.004740</pub-id></mixed-citation>
+                </ref>
+                <ref id="r4">
+                    <label>4</label>
+                    <mixed-citation publication-type="journal"><person-group
+                            person-group-type="author"
+                                    ><name><surname>Handschy</surname><given-names>M.A.</given-names></name><name><surname>Chase</surname><given-names>H.</given-names></name><name><surname>Cotter</surname><given-names>L.K.</given-names></name><name><surname>Cunninham</surname><given-names>J.D.</given-names></name><name><surname>Pattee</surname><given-names>A.M.</given-names></name><name><surname>Drabik</surname><given-names>T.J.</given-names></name><name><surname>Gaalema</surname><given-names>S.D.</given-names></name></person-group>,
+                            "<article-title>One transistor DRAM ferro-electric liquid crystal
+                            spatial light modulator</article-title>," <source>Proceedings of SPIE
+                            237 - Optical Pattern Recognition V</source>, (<year>1994</year>)<pub-id
+                            pub-id-type="doi">10.1117/12.169449</pub-id></mixed-citation>
+                </ref>
+                <ref id="r5">
+                    <label>5</label>
+                    <mixed-citation publication-type="journal"><person-group
+                            person-group-type="author"
+                                    ><name><surname>Radcliffe</surname><given-names>S.</given-names></name><name><surname>Griffith</surname><given-names>M.S.</given-names></name><name><surname>Laycock</surname><given-names>L.C.</given-names></name><name><surname>Worboys</surname><given-names>M.R.</given-names></name></person-group>,
+                            "<article-title>Miniature silicon backplane ferro-electric liquid
+                            crystal displays for head mounted display applications</article-title>."
+                            <source>Ferroelectrics</source>
+                        <volume>179</volume>(<issue>2</issue>), (<year>1996</year>)<pub-id
+                            pub-id-type="doi">10.1080/00150199608007878</pub-id></mixed-citation>
+                </ref>
+                <ref id="r6">
+                    <label>6</label>
+                    <mixed-citation publication-type="thesis"><person-group
+                            person-group-type="author"
+                                    ><name><surname>Burns</surname><given-names>D.C.</given-names></name></person-group>
+                            "<article-title>Design and characterisation of a ferroelectric liquid
+                            crystal over silicon spatial light modulator</article-title>,"
+                            <publisher-name>University of Edinburgh</publisher-name>
+                        <source>PhD thesis</source>
+                        <year>1994</year></mixed-citation>
+                </ref>
+                <ref id="r7">
+                    <label>7</label>
+                    <mixed-citation publication-type="journal">
+                        <article-title>The frainestore is being designed and constructed by
+                            Cambridge University, Computer Laboratory</article-title>
+                    </mixed-citation>
+                </ref>
+                <ref id="r8">
+                    <label>8</label>
+                    <mixed-citation publication-type="journal">See, for example &#x0005B;5&#x0005D;
+                        or <person-group person-group-type="author"
+                                    ><name><surname>Rankin</surname><given-names>I.D.</given-names></name><name><surname>O&#x02019;Hara</surname><given-names>I
+                                    Underwood.
+                                    A</given-names></name><name><surname>Vass</surname><given-names>D.G.</given-names></name><name><surname>Worboys</surname><given-names>M.R.</given-names></name></person-group>,
+                            "<article-title>Full colour images on a binary spatial light
+                            modulator</article-title>." <source>Ferroelectrics</source>
+                        <volume>179</volume>(<issue>2</issue>), (<year>1996</year>)</mixed-citation>
+                </ref>
+            </ref-list>
+        </back>
+    </book-part>
+</book-part-wrapper>

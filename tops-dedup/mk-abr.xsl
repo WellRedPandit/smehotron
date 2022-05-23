@@ -10,9 +10,9 @@
  </xsl:template>
 
   <xsl:template match="//title-group/title">
-  <action>
+  <ACTION>
    <xsl:apply-templates select="node()|@*"/>
-  </action>
+  </ACTION>
  </xsl:template>
 
 </xsl:stylesheet>

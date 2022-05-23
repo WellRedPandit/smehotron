@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book-part-wrapper PUBLIC "-//OSA//DTD OSA BITS Conference DTD v1.0 20170715//EN" "OSA-BITS-conference.dtd">
+<book-part-wrapper content-type="conf-paper-wrap" dtd-version="2.0" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+<collection-meta collection-type="conf">
+<conference content-type="conf-name"><conf-name>Spatial Light Modulators</conf-name><conf-acronym>SLMO</conf-acronym></conference>
+<conference content-type="conf-other-meta"><conf-date content-type="start">
+<day>17</day>
+<month>03</month>
+<year>1997</year></conf-date><conf-date content-type="end">
+<day>19</day>
+<month>03</month>
+<year>1997</year></conf-date><conf-loc>Nevada, 
+<country country="US">United States</country></conf-loc></conference></collection-meta>
+<collection-meta collection-type="conf-session">
+<title-group>
+<title>SLM Materials and Sructures</title>
+<alt-title alt-title-type="conf-session-acronym"/></title-group></collection-meta>
+<collection-meta collection-type="conf-proceedings-series">
+<title-group>
+<title>OSA Trends in Optics and Photonics Series</title></title-group>
+<volume-in-collection>
+<volume-number>14</volume-number>
+<volume-title>TOPS Volume XIV</volume-title></volume-in-collection></collection-meta>
+<book-meta>
+<book-title-group>
+<book-title>Spatial Light Modulators</book-title></book-title-group>
+<contrib-group>
+<contrib contrib-type="editor">
+<name><surname>Burdge</surname><given-names>Geoffrey</given-names></name></contrib>
+<contrib contrib-type="editor">
+<name><surname>Esener</surname><given-names>Sadik C.</given-names></name></contrib></contrib-group>
+<pub-date publication-format="electronic">
+<day>17</day>
+<month>03</month>
+<year>1997</year></pub-date></book-meta>
+<book-part book-part-type="conf-paper">
+<book-part-meta>
+<title-group>
+<title>Photorefractive Materials for Lightwave Manipulation</title></title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name><surname>WADA</surname><given-names>TATSUO</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>SASABE</surname><given-names>HIROYUKI</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
+<aff id="aff1">
+<label>1</label>CREST (Core Research for Evolution Science and Technology), JST and Frontier Research Program, The Institute of Physical and Chemical Research (RIKEN), 2-1 Hirosawa, Wako, Saitama 351-01, 
+<country country="JP">Japan</country> Phone: +81-48-462-1111, Fax: +81-48-462-4695</aff></contrib-group>
+<elocation-id>124</elocation-id>
+<permissions>
+<copyright-statement>&#x000A9; 1997 Optical Society of America</copyright-statement>
+<copyright-year>1997</copyright-year>
+<copyright-holder>Optical Society of America</copyright-holder>
+<license license-type="open-access">
+<license-p>closed</license-p></license></permissions>
+<abstract>
+<p>Photorefractive materials are the key materials in future lightwave manipulation systems based on real-time holography. Typical photorefractive materials are ferroelectric crystals, such as BaTiO<sub>3</sub> and KNbO<sub>3</sub>. These crystalline materials have a unique set of principal axes, and must be used in bulk form<italic>. </italic>Therefore they require very careful growth and processing before they can be used. For this reason there has been excitement by the recent development of new organic materials which can be easily made into thin films, and after poling exhibit photorefractive properties.</p></abstract>
+<counts>
+<book-page-count count="3"/></counts></book-part-meta>
+<body>
+<p>INTRODUCTION Photorefractive materials are the key materials in future lightwave manipulation systems based on real-time holography. Typical photorefractive materials are ferroelectric crystals, such as BaTiO3 and KNbO3. These crystalline materials have a unique set of principal axes, and must be used in bulk form. Therefore they require very careful growth and processing before they can be used. For this reason there has been excitement by the recent development of new organic materials which can be easily made into thin films, and after poling exhibit photorefractive properties. In order to exhibit photorefractive effects, materials must meet several requirements such as second-order optical nonlinearity to provide electro-optic response, and photoconductivity to create a space charge. Photorefractive effects were firstly observed in organic charge-transfer complex crystals: noncentrosymmetric organic crystals slightly doped with an electron acceptor.1 After this demonstration, several research groups reported photorefractive effects in poled polymers. 2 Photorefractive polymers generally consist of three components: the first is a nonlinear optically active chromophore to provide an electro-optic response, the second is a hole transporting molecule and the third is a photosensitizer. The last two components provide photoconductive properties. Although these multicomponent systems have film-forming properties, they have multi-step carrier hopping processes which reduce the carrier mobility due to various traps. In order to create effective space charge modulation, efficient photocarrier generation and large drift mobilities are two of key factors which should be addressed. Moreover, there is a limitation of the maximum concentration of chromophores due to the phase separation in the multicomponent systems.</p>
+<p>MONOLITHIC PHOTOREFRACTIVE MATERIALS We have applied multifunctional chromophores to a new class of organic photorefractive materials.3 They fulfill all the requirements for photorefraction and enable the development of "monolithic" photorefractive materials as shown in Scheme 1. As a building block, we selected acceptor-substituted carbazoles which are served as photoconductivity and electro-optic moieties. Highly branched structure with long alkyl chain offers film-forming property and glassy state with glass-rubber transition. It should be noted that an alternative to our approach is through fully functionalized polymers. Although functionalized polymers have been developed as a macroscopic material, they have distributions of molecular weight, number and size of free volume, and molecular structures. On the other hand these molecular systems including the carbazole oligomers, can be considered as a perfectly defined structure. SCHEME1 Multicomponent and monolithic photorefractive materials. FIGURE 1 Multifunctional chromophores for monolithic photorefractive materials. Carbazole starburst dendrimers and conjugated trimers have film-forming properties and as well as a glass-transition. The glass-transition temperature (Tg) changed depending on the length of a spacer, acceptor groups, and the number of carbazole rings. Amorphous molecular solid films were made without a support matrix by spin-coating from a solution. These thin films could be poled at above Tg to achieve the noncentrosymmetric alignment required for an electro-optic response.</p>
+<p>PHASE CONJUGATION Photorefractive effects in poled monolithic materials were confirmed by the two beam coupling and four-wave mixing measurements. 4 An asymmetric optical energy exchange in the two beams has been observed. Optical image reconstruction of distorted images using phase conjugation was demonstrated. Figure 2 shows the phase conjugation demonstration via four-wave mixing. We have developed "monolithic photorefractive materials" using multifunctional chromophores and demonstrated their capability to manipulate the lightwave propagation using low power laser sources. FIGURE 2 Phase conjugation via four-wave mixing for the correction of distorted images: (a) input image, (b) distorted image and (c) conjugated image.</p></body>
+<back>
+<ref-list>
+<ref id="r1"><label>1</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Sutter</surname><given-names>K.</given-names></name><name><surname>Hulliger</surname><given-names>J.</given-names></name><name><surname>G&#x000FC;nter</surname><given-names>P.</given-names></name></person-group>, <source>Solid State Commun</source> <volume>74</volume>, <fpage>867</fpage>, (<year>1990</year>)<pub-id pub-id-type="doi">10.1016/0038-1098(90)90952-8</pub-id></mixed-citation></ref>
+<ref id="r2"><label>2</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Ducharme</surname><given-names>S.</given-names></name><name><surname>Scott</surname><given-names>J.C.</given-names></name><name><surname>Twieg</surname><given-names>R.J.</given-names></name><name><surname>Moerner</surname><given-names>W.E.</given-names></name></person-group>, <source>Phys Rev Lett</source>,<volume>66</volume>, <fpage>1846</fpage>, (<year>1991</year>)<pub-id pub-id-type="doi">10.1103/PhysRevLett.66.1846</pub-id></mixed-citation></ref>
+<ref id="r3"><label>3</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Wada</surname><given-names>T.</given-names></name><name><surname>Wang</surname><given-names>L.</given-names></name><name><surname>Zhang</surname><given-names>Y.</given-names></name><name><surname>Tian</surname><given-names>M.</given-names></name><name><surname>Sasabe</surname><given-names>H.</given-names></name></person-group>, <source>Nonlinear Optics</source> <volume>15</volume>, <fpage>103</fpage>, (<year>1996</year>)</mixed-citation></ref>
+<ref id="r4"><label>4</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Wang</surname><given-names>L.</given-names></name><name><surname>Zhang</surname><given-names>Y.</given-names></name><name><surname>Wada</surname><given-names>T.</given-names></name><name><surname>Sasabe</surname><given-names>H.</given-names></name></person-group>, <source>Appl Phys Lett</source>,<volume>69</volume>, <fpage>728</fpage>, (<year>1996</year>)<pub-id pub-id-type="doi">10.1063/1.117872</pub-id></mixed-citation></ref></ref-list></back></book-part></book-part-wrapper>

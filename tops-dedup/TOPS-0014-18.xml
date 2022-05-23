@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book-part-wrapper PUBLIC "-//OSA//DTD OSA BITS Conference DTD v1.0 20170715//EN" "OSA-BITS-conference.dtd">
+<book-part-wrapper content-type="conf-paper-wrap" dtd-version="2.0" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+<collection-meta collection-type="conf">
+<conference content-type="conf-name"><conf-name>Spatial Light Modulators</conf-name><conf-acronym>SLMO</conf-acronym></conference>
+<conference content-type="conf-other-meta"><conf-date content-type="start">
+<day>17</day>
+<month>03</month>
+<year>1997</year></conf-date><conf-date content-type="end">
+<day>19</day>
+<month>03</month>
+<year>1997</year></conf-date><conf-loc>Nevada, 
+<country country="US">United States</country></conf-loc></conference></collection-meta>
+<collection-meta collection-type="conf-session">
+<title-group>
+<title>VLSI-based SLMs</title>
+<alt-title alt-title-type="conf-session-acronym"/></title-group></collection-meta>
+<collection-meta collection-type="conf-proceedings-series">
+<title-group>
+<title>OSA Trends in Optics and Photonics Series</title></title-group>
+<volume-in-collection>
+<volume-number>14</volume-number>
+<volume-title>TOPS Volume XIV</volume-title></volume-in-collection></collection-meta>
+<book-meta>
+<book-title-group>
+<book-title>Spatial Light Modulators</book-title></book-title-group>
+<contrib-group>
+<contrib contrib-type="editor">
+<name><surname>Burdge</surname><given-names>Geoffrey</given-names></name></contrib>
+<contrib contrib-type="editor">
+<name><surname>Esener</surname><given-names>Sadik C.</given-names></name></contrib></contrib-group>
+<pub-date publication-format="electronic">
+<day>17</day>
+<month>03</month>
+<year>1997</year></pub-date></book-meta>
+<book-part book-part-type="conf-paper">
+<book-part-meta>
+<title-group>
+<title>High Throughput Opto-electronic VLSI Switching Chips</title></title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name><surname>Lentine</surname><given-names>A. L.</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Goossen</surname><given-names>K. W.</given-names></name><xref rid="aff2" ref-type="aff"><sup>2</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Walker</surname><given-names>J. A.</given-names></name><xref rid="aff2" ref-type="aff"><sup>2</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Cunningham</surname><given-names>J. E.</given-names></name><xref rid="aff2" ref-type="aff"><sup>2</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Woodward</surname><given-names>T. K.</given-names></name><xref rid="aff2" ref-type="aff"><sup>2</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Krishnamoorthy</surname><given-names>A. V.</given-names></name><xref rid="aff2" ref-type="aff"><sup>2</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Tseng</surname><given-names>B. J.</given-names></name><xref rid="aff3" ref-type="aff"><sup>3</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Hui</surname><given-names>S. P.</given-names></name><xref rid="aff3" ref-type="aff"><sup>3</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Leibenguth</surname><given-names>R. E.</given-names></name><xref rid="aff4" ref-type="aff"><sup>4</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Chirovsky</surname><given-names>L. M. F.</given-names></name><xref rid="aff3" ref-type="aff"><sup>3</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Novotny</surname><given-names>R. A.</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Buchholz</surname><given-names>D. B.</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Morrison</surname><given-names>R. L.</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
+<aff id="aff1">
+<label>1</label>Bell Laboratories, Lucent Technologies Naperville IL 60566</aff>
+<aff id="aff2">
+<label>2</label>Bell Laboratories, Lucent Technologies Holmdel NJ 07733</aff>
+<aff id="aff3">
+<label>3</label>Bell Laboratories, Lucent Technologies Murray Hill NJ 07974</aff>
+<aff id="aff4">
+<label>4</label>Bell Laboratories, Lucent Technologies Breiningsville PA 18031</aff></contrib-group>
+<elocation-id>18</elocation-id>
+<permissions>
+<copyright-statement>&#x000A9; 1997 Optical Society of America</copyright-statement>
+<copyright-year>1997</copyright-year>
+<copyright-holder>Optical Society of America</copyright-holder>
+<license license-type="open-access">
+<license-p>closed</license-p></license></permissions>
+<abstract>
+<p>We describe chips containing 8 &#x000D7; 8 and 4 &#x000D7; 8 arrays of 16 input, 16 output switching networks operating from 600 Mb/s - 900 Mb/s per channel using MQW modulators and detectors flip-chip bonded to silicon CMOS.</p></abstract>
+<kwd-group kwd-group-type="OCIS">
+<title>OCIS codes</title>
+<kwd>Integrated Optoelectronic Circuits</kwd>
+<kwd>Optoelectronics</kwd>
+<kwd>Optical Interconnects</kwd>
+<kwd>Quantum Well Devices</kwd></kwd-group>
+<counts>
+<book-page-count count="5"/></counts></book-part-meta>
+<body>
+<p>As the demand for telecommunications services contin- ues to increase, the need to switch large bandwidths of data becomes important. While purely electronic solutions are possible, photonic solutions, using the integration of elec tronics with optical I/O (smart pixels), provides the potential for smaller physical volume, lower latency, lower power dissipation, and lower cost. We describe initial results from two opto-electronic switching chips, one with 1024 differ ential optical inputs and 1024 differential optical outputs with individual channels tested above 600 Mb/s and a sec ond with 512 differential optical inputs and outputs with individual channels tested up to 900 Mb/s. The technology for the chip consists of flip-chip bonding of 850 nm GaAs/ AlGaAs multiple quantum well (MQW) detectorsand mod ulators onto silicon CMOS with substrate removal to allow access to the optical devices &#x0005B;1&#x0005D; (see Fig. la). Table 1 Characteristics of previous chip and the two new chips. (*limited by test equipment) Fie. La) Side view pictorial ofOptoelectronic VLSI b) Photograph of 1.0 pin CMOS chip &#x0005B;41, (0.8 pm CMOS chip has sune layout),and c) 0.35 pin chip. Rectangles (- 20 pm x 50 pin) are optical modulators and detectors on 80 pmn centers in b) and 35/70 pmn cen ters in c. The switching chip implements part of a simplified dis- trihutionfl.bric fchipimpleepatoAsnitiddi3- Previously an opto-electronicchip41andsystem foragsl ~ . roabcepacketa sich&#x0005B;21 arranged in a been demonstrated implementing this architecture. That chip, designed using 1 pm CMOS, contained two hundred fifty-six 16 xl nodes (or sixteen 16 x 16 switches with opti- cal fan-out) operating at a maximum speed of 450 Mb/s. The system operated at 208 Mb/s as a time multiplexed switch, capable of routing ATM cells at OC-3c rates (155 Mb/s) with an appropriate out-of-band controller. Fig. 2. (a) Block diagnun of chip. Each square in repre-sents a 16 x 16 switch. (b) Each switch is implemented using sixteen 16 xI multiplexers with electrical fan-out of receiver outputs (arrows). (c) optical differential receivers (light color) and transmitters (dark color) that are overlaid on top of the switches. Receivers are mapped by number to honzonal fan-out lines (arrows) and trans- inittersare mapped from multiplexers (column numbers) The current chips. designed in 0.8 pm and 0.35 pm CMOS, contain sixty-fourand thirty two 16 x 16 switches respectively (Fig. 2.). The 16 x 16 switches are imple-mnented by fanning out the electrical outputs from 16 differ- a nureivstoixen1xImlipxreahwha receivers to sixteen 16 xlmultiplexers, each with differential optical output. The optical inputs an outputs are on top of the chipsiselectronic. multiplexers. The combination increased density, the use of a third level metal with cir- cuitry underneath the flip-chip bonding pads &#x0005B;6&#x0005D;, and elec- trical fan-out allows four (0.8 pim) to ten (0.35 pim) times the functional circuitry in the same area. Table I gives a summary of the characteristics of the previous chip &#x0005B;4&#x0005D; and the two new chips. The receiver for chip 2 (Fig. 3a.) uses a modiied design of that described in &#x0005B;8&#x0005D;. The sensitivity versus hit-rate (Fig. 3b.) was measured fora single receiver. The perfornance is not quite as good as that in &#x0005B;8&#x0005D;, one reason for this, is that an imbalance was intentionally introduced in the stage following the receiver before a large electrical fan-out driver to reduce the static dissipation. A second reason is that the receiver outputs from neighboring 16 x 16 switches were inadvertently pair-wise connected and testing was done by driving both receivers in tandem using aIx 2 binary phase grating. Unequal powers on the receivers may cause signal distortion in the common line. Our previous chip with sin- gle ended receivers showed good uniformity (&lt;+/-400 ps gate delay variations) across the chip &#x0005B;4&#x0005D;. We expect the variations in these circuits to be comparable or less. Fig. 3. (a) receiver schematic and (b) sensitivity ver- sus bit-rate for the switching nodes in chip 2. The large number of active receivers leads to a static power dissipation of almost 5W. The exciton shift due to thermal heating of the circuit was found to be almost 10 nmn both at the center and at the edges of the array (Fig. 4). Using a shift of0.28 nm/ OC, the thermal resistance of the package was found to be &lt; 7 oC/W. The uniformity of the position of the exciton peak in reflectivity while dissipating 5W indicates the temperature uniformity across the array is within a few degrees. The chip mount was specifically designed for temperature uniformity 19. dissipations, from top: OW, 14W and 5W, achieved by adjusting receiver bias voltage. b) Dissipated Power vs. Optimum wavelength. c) Reflectivity at the four corners and in the center of the array showing little temperature dependenceevidencedbylocationsoftheindicated pointsofinflection. There are 16,384 (64 x 16 x 16) paths through the switching chip. Sixteen paths were measured ata data rate of 625 Mb/s (Fig. 5). sampling the upper left 16 x 16 switch, exercising each receiver and each modulator driver from that switch. Due to the architecture of the chip, we would not expect large delay variations between inputs, this was indeed the case on our earlier chip that was more thoroughly characterized &#x0005B;4&#x0005D;. Care was not taken to ensure uniformity of photocurrent throughout this set of measurements, so there might be some power dependent variations in delay. Individual channels had bit error rates below 10 at 600 Mb/s and below 10- at 625 Mb/s. While all paths weren't measured, all but 7 MQW diodes lumi-nesced under forward bias. Thus, if there are no additional problems in the silicon circuit, nearly all paths should be operational. Fig. 5. Sixteen outputs from the upper left 16 x 16 switch with output i selecting input i at 625 Mb/s with a bit ternof01000111forchip2.Thezerolineisaccurate,i.e. th contrastratioisapproximately2:1. Crosstalk was measured by operating one path of the switch at one frequency and a second path at a slightly dif- ferent frequency. When looking at the eye diagram, no noticeable eye closure was seen. However, on a spectrum analyzer, one can see the undesired signal as shown in Fig. 6. Its magnitude greatly depended on the value of the feed- back resistor, getting substantially worse than that shown, for receivers biased for maximum sensitivity. The chip was redesigned in 0.35 pin CMOS. Because of the decreased feature sizes, another factor of 2.5 in density was achieved (see Fig. lbc). The receiver design elimi- nated the second stage gain broadening transistors and included clamps in the feedback path. Elimination of the gain broadening transistors reduces the static power dissi- pation at the expense of increased sensitivity. If the feed back FET is gated off, the clamps further reduce power dissipation and allow dynamic operation, which has not yet been tested on this chip. Fig 6. Desired and undesired signals through one path of the 0.8 Im switching chip. This chip had a few minor design errors, which are currently being corrected. We were still able to pass signals through many paths of the chip and control many of the nodes. Fig. 7 shows operation of a single channel at 800, 900, and 1000 Mb/s with pseudorandom (10-2 )bit patterns. Bit error rates were measured up to 790 Mb/s which was the maximum rate that the BER receiver would respond to a direct laser input. (The specification for the BER receiver was 700 Mb/s). We might expect operation above 900 Mb/s judging by the eye diagrams and this will be investigated further. We have described initial characteristics of opto-elec- tronicswitchingchipswithpotentiallygreaterthan1Ter- spatial variations under dynamic operation, and delay varia tions need to be rigorously characterized before this I/O bandwidth can be utilized in a system, these chips further illustrate the potential of hybrid opto-electronic VLSI smart pixel technologies. This work was partially funded by ARPA under Rome Labs contract number F30602-93-C-1016. Fig 7.Operation of the 0.35 pm switching chipat 800, 900, and 1000 Mb/s. Optical power was roughly 250 iW per beam.</p></body>
+<back>
+<ref-list>
+<ref id="r1"><label>1</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Goossen</surname><given-names>K.W.</given-names></name><etal/></person-group>, <source>IEEE Photon Technol Lett</source> <volume>7</volume>, <fpage>360</fpage>-<lpage>362</lpage>, (<year>1995</year>)<pub-id pub-id-type="doi">10.1109/68.376802</pub-id></mixed-citation></ref>
+<ref id="r2"><label>2</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Eng</surname><given-names>K.Y.</given-names></name><name><surname>Karol</surname><given-names>M.J.</given-names></name><name><surname>Yeh</surname><given-names>Y.S.</given-names></name></person-group>, <source>IEEE Trans on Commun</source> <volume>40</volume>, <fpage>423</fpage>-<lpage>430</lpage>, (<year>1994</year>)<pub-id pub-id-type="doi">10.1109/26.129204</pub-id></mixed-citation></ref>
+<ref id="r3"><label>3</label><mixed-citation publication-type="patent"><person-group person-group-type="author"><name><surname>Cloonan</surname><given-names>T.J.</given-names></name><name><surname>Richards</surname><given-names>G.W.</given-names></name></person-group>, <source>US patent number</source> <volume>5</volume>(<issue>537</issue>) <fpage>403</fpage></mixed-citation></ref>
+<ref id="r4"><label>4</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Lentine</surname><given-names>A.L.</given-names></name><etal/></person-group>, <source>IEEE J Selected topics in Quantum Electronics</source> <volume>2</volume>, <fpage>77</fpage>-<lpage>84</lpage>, (<year>1996</year>)<pub-id pub-id-type="doi">10.1109/2944.541876</pub-id></mixed-citation></ref>
+<ref id="r5"><label>5</label><mixed-citation publication-type="confproc"><person-group person-group-type="author"><name><surname>Lentine</surname><given-names>A.L.</given-names></name><etal/></person-group>, <conf-name>IEEE LEOS Annual meeting, Post-deadline papers</conf-name>, (<year>1996</year>) <source>Applied Optics</source> (to be published)</mixed-citation></ref>
+<ref id="r6"><label>6</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Krishnamoorthy</surname><given-names>A.V.</given-names></name><etal/></person-group>, <source>IEEE Photon Technol Lett</source> <volume>7</volume>, (<year>1995</year>)<pub-id pub-id-type="doi">10.1109/68.473474</pub-id></mixed-citation></ref>
+<ref id="r7"><label>7</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Lentine</surname><given-names>A.L.</given-names></name><etal/></person-group>, <source>IEEE Topical meeting on smart pixels</source>, postdeadline paper #2</mixed-citation></ref>
+<ref id="r8"><label>8</label><mixed-citation publication-type="journal"><person-group person-group-type="author"><name><surname>Woodward</surname><given-names>T.K.</given-names></name><etal/></person-group>, <source>IEEE Photon Technol Lett</source> <volume>7</volume>, (<year>1996</year>)</mixed-citation></ref>
+<ref id="r9"><label>9</label><mixed-citation publication-type="confproc"><person-group person-group-type="author"><name><surname>Buchholz</surname><given-names>D.B.</given-names></name><etal/></person-group>, <conf-name>Topical meeting on photonics in switching</conf-name>, <fpage>118</fpage>-<lpage>120</lpage>, (<year>1995</year>)</mixed-citation></ref></ref-list></back></book-part></book-part-wrapper>

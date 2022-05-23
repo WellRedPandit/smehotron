@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book-part-wrapper PUBLIC "-//OSA//DTD OSA BITS Conference DTD v1.0 20170715//EN" "OSA-BITS-conference.dtd">
+<book-part-wrapper content-type="conf-paper-wrap" dtd-version="2.0" xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+<collection-meta collection-type="conf">
+<conference content-type="conf-name"><conf-name>Spatial Light Modulators</conf-name><conf-acronym>SLMO</conf-acronym></conference>
+<conference content-type="conf-other-meta"><conf-date content-type="start">
+<day>17</day>
+<month>03</month>
+<year>1997</year></conf-date><conf-date content-type="end">
+<day>19</day>
+<month>03</month>
+<year>1997</year></conf-date><conf-loc>Nevada, 
+<country country="US">United States</country></conf-loc></conference></collection-meta>
+<collection-meta collection-type="conf-session">
+<title-group>
+<title>SLM Applications</title>
+<alt-title alt-title-type="conf-session-acronym"/></title-group></collection-meta>
+<collection-meta collection-type="conf-proceedings-series">
+<title-group>
+<title>OSA Trends in Optics and Photonics Series</title></title-group>
+<volume-in-collection>
+<volume-number>14</volume-number>
+<volume-title>TOPS Volume XIV</volume-title></volume-in-collection></collection-meta>
+<book-meta>
+<book-title-group>
+<book-title>Spatial Light Modulators</book-title></book-title-group>
+<contrib-group>
+<contrib contrib-type="editor">
+<name><surname>Burdge</surname><given-names>Geoffrey</given-names></name></contrib>
+<contrib contrib-type="editor">
+<name><surname>Esener</surname><given-names>Sadik C.</given-names></name></contrib></contrib-group>
+<pub-date publication-format="electronic">
+<day>17</day>
+<month>03</month>
+<year>1997</year></pub-date></book-meta>
+<book-part book-part-type="conf-paper">
+<book-part-meta>
+<title-group>
+<title>Silicon Spatial Light Modulator Fabrication</title></title-group>
+<contrib-group>
+<contrib contrib-type="author">
+<name><surname>Burns</surname><given-names>Brent E.</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Ionescu</surname><given-names>Adrian C.</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Geneczko</surname><given-names>Jeannie M.</given-names></name><xref rid="aff1" ref-type="aff"><sup>1</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Grasso</surname><given-names>Robert J.</given-names></name><xref rid="aff2" ref-type="aff"><sup>2</sup></xref></contrib>
+<contrib contrib-type="author">
+<name><surname>Davidson</surname><given-names>Steve F.</given-names></name><xref rid="aff2" ref-type="aff"><sup>2</sup></xref></contrib>
+<aff id="aff1">
+<label>1</label>Northrop Grumman ESID M/S 5113/A8-1 P.O. Box 5032 Hawthorne, CA 90250 213-600-5526, 213-600-3702 FAX</aff>
+<aff id="aff2">
+<label>2</label>Northrop Grumman ESID 600 Hicks Road Rolling Meadows, IL 60013 847-259-9600, 847-818-5792 FAX</aff></contrib-group>
+<elocation-id>215</elocation-id>
+<permissions>
+<copyright-statement>&#x000A9; 1997 Optical Society of America</copyright-statement>
+<copyright-year>1997</copyright-year>
+<copyright-holder>Optical Society of America</copyright-holder>
+<license license-type="open-access">
+<license-p>closed</license-p></license></permissions>
+<abstract>
+<p>Spatial light modulators (SLM) are utilized in systems which compensate for distortion of a laser beam caused by transmission through a distorting medium. The Northrop Grumman linear beam cleanup system &#x0005B;1&#x0005D; uses an SLM to modify the phase front of the input beam to cancel the phase changes produced along the transmission path. At longer wavelengths these phase changes may not be achievable with current liquid crystal or lead lanthanum zirconate titanate (PLZT) modulators. High laser power levels may also produce adverse effects in these materials if operated in transmission mode. The silicon SLM (Si-SLM) produces a phase change by reflection of the laser from the surface of moveable pixels. The all silicon construction of the Si-SLM reduces the effects of temperature changes on the flatness of the reflecting surface.</p></abstract>
+<kwd-group kwd-group-type="OCIS">
+<title>OCIS codes</title>
+<kwd>Spatial light modulators</kwd>
+<kwd>MicroElectrical-Mechanical Systems (MEMS)</kwd>
+<kwd>Atmospheric turbulence</kwd></kwd-group>
+<counts>
+<book-page-count count="5"/></counts></book-part-meta>
+<body>
+<p>Description The 32x32 Si-SLM &#x0005B;2&#x0005D; is composed of two silicon wafers - a thin diaphragm wafer bonded to a thick backplate wafer (Fig. 1). The highly polished front surface of the 250 mil thick backplate wafer provides support and serves as a flat reference plane for the reflective diaphragm. An array of ultrasonically ground and laser drilled through-holes provides electrical access from the backside to frontside and also serves to vent air from underneath the diaphragm. An insulating standoff grid on the backplate provides a support to which the diaphragm is bonded. Low Pressure Chemical Vapor Deposited (LPCVD) polysilicon on the backplate forms interconnected pixel actuation electrodes, through-hole conductors, and backside contacts. A silicon wafer pre-thinned to ~ 4 pm is bonded to the standoff grid on the backplate using a sputtered layer of bonding glass as an adhesive. The diaphragm is coated with metal to increase reflectivity. When a voltage is applied between the polysilicon electrodes and the diaphragm, the diaphragm is pulled down via an electrostatic attractive force. The portion of the laser beam reflected from a pixel deflected downward a distance, d, will experience a phase change equal to 27 (2d/X). Flexures etched into the diaphragm allow a piston-like up and down motion of the pixels. Each pixel is addressed individually via an ASIC driver assembly attached to the backside of the Si-SLM. .Figure . 1. Top c (a) and cross section (b) views of Design The flatness of the individual pixels is expected to be U/10. A full membrane diaphragm would exhibit a parabolic shape in the deflected mode. Taking the useful area of the pixel to be the area within the range of the desired deflection +/- X/20, the fill factor for the pixel is reduced by - (.48)2 . To increase the fill factor, the Si-SLM pixel consists of a flat plate suspended by compliant flexures at each corner. A comparison between the shapes for a full membrane and the Si-SLM in the deflected mode is shown in Fig. 2. The plate with flexures allows a range of deflections in the on mode. Figure 2. Deflected shape of uniform membrane vs diaphragm withflexures. The resonant frequency of the Si-SLM structure is determined by the thickness (i.e. mass) of the plate and the strength of the flexures. For higher operating frequencies the stronger flexures require higher voltages to deflect the membrane. To maintain the flatness of the pixel in the deflected mode with stronger flexures means that the center plate must be made stiffer (i.e. thicker). Given that the resonant frequency is proportional to the square root of the stiffness of the flexures divided by the mass of the plate, a maximum operating frequency can be derived for a given maximum drive voltage. As shown in Fig. 3, the electrostatic force, Fe, the electrode exerts on the pixel's diaphragm is given by: Fe= (soAV 2 }/{2 (do - Xd) 2 1 () where so is the permittivity of the air gap, A is the electrode area, V is the applied voltage, do is the initial electrode to diaphragm gap, and xd is the displacement. The displacement, which is equal to the force Fe divided by the flexure spring constant, k, is then: = {oAV2}/{2k(do- xd)2} (2) Figure 3. Cross section of single pixel showing initial gap, do, and displacement, xd As the pixel diaphragm approaches electrode, the electrostatic force will eventually overcome the flexures' restoring force and the diaphragm will collapse onto the electrode. This occurs when xd satisfies the following condition: Xd &gt; do/ 3 (3) Thus for stable operation, the maximum displace ment must be less than given in Eq. (3). For the Si-SLM, xd maximum was set at do / 5. Given the conditions above for minimum gap, pixel flatness, and a maximum deflection of 1/4 the operating voltage can be calculated as a function of resonance frequency, Fig. 4. Figure 4. Plot of voltagefor /4 deflection vs resonance frequencyfor A = 5pm.</p>
+<p>Backplate Fabrication The backplate fabrication begins with the polishing of a 3 inch diameter, 250 mil thick single-crystal silicon wafer. The side which will face the silicon diaphragm (frontside) is polished to /10 (HeNe) and the opposite side (backside) is given a standard commercial wafer polish. Vent channels etched into the frontside of the backplate funneltair trapped between the diaphragm and backplate to athrough-hole at the center of the pixel as the diaphragm deflects downward. The channels are patterned using IC standard photolithography techniques and the silicon is etched from the channels using an RIE etch with nitrogen triflouride (NF3) and argon as process gases. The size of the mesas formed by this channel etch determine the amount of squeeze film damping on the diaphragm. A mesa size was chosen to give critical damping for a pixel resonance frequency of 16 kHz. At the same time the channels are formed, an array of wells are etched into the backside to serve as alignment guides for the ultrasonic through-hole machinin-. Registration of front and backside patterns to each other is accomplished using a hinged fixture which clamps the backplate wafer between two pre-aligned photomasks. A 32x32 array of blind holes, 20mil x 20mil, are then ultrasonically ground from the backside to within -10 mil of the front surface. A Nd-YAG laser completes the through-holes by drilling 4 mil diameter holes from the frontside to intersect with the center of the blind holes. A -7 tm thick, thermally grown silicon-dioxide layer is photolithographically patterned to form the stand-off grid on the frontside. Further thermal oxidation produces a 3 pm thick field oxide on all backplate wafer surfaces which electrically isolates a subsequently deposited polysilicon layer from the backplate substrate. A thick layer of field oxide was used to reduce the polysilicon electrode parasitic capacitances which act as an added load on the ASIC driver circuits. An LPCVD deposited layer of polysilicon (~ 5000 angstroms) uniformly coats both front and back surfaces and inside the through-holes on the backplate wafer. A Reactive Ion Etch (RIE) patterning of the polysilicon produces individual backside contact pads, through-wafer conductors, and frontside excitation electrodes at each pixelsite,Fig.5. TheRIEetchwasperformedusing nitrogen triflouride (NF.) and argon as process gases. The backside polysilicon contacts are coated with TiW/gold metallization to aid in bump contacting to the ASIC driver assembly. In preparation for attachment of the diaphragm wafer, a thin (1200 angstrom) layer of Corning 7556 low-temperature, bonding glass is selectively sputter deposited on top of the oxide grid on the frontside of the backplate.</p>
+<p>Diaphragm Fabrication A heavily boron-doped epitaxial silicon layer (-4 rim) grown on a 3 inch diameter, 12 mil thick, (100) silicon substrate forms the diaphragm of the Si-SLM. The substrate material in the diaphragm area of the wafer Figure 5. Photo of frontside of backplate following patterning of vent channels, oxide grid, and polysilicon electrodes. is removed using a KOH etch. The boron doping in the epitaxial layer serves as an etch-stop for the KOH. Extremely uniform and close tolerance thickness across the diaphragm is achieved using this technique. The side of the diaphragm wafer to be bonded to the backplate is protected during the etch with an LPCVD deposited layer of silicon nitride. After wafer thinning, the silicon nitride isremovedpriortobonding.</p>
+<p>Bonding Before assembly, the backplate and diaphragm wafers are cleaned and given a final isopropyl alcohol vapor bath to remove particles and any contaminants which might interferewiththewettingofthebondingglasstothe silicon diaphragm. The bonding is done at a temperature of 570 C for 60 minutes in a N, ambient. A slight vacuum (-3.5 inches of HO) applied through the holes in thebackplateservestoholdthediaphragmincontactwith the glass during the bonding cycle.</p>
+<p>Flexure Etching After bonding, the diaphragm is metallized with -300A of sputter deposited aluminum. The aluminum is photographically patterned and etched to form openings for etching flexures into the silicon diaphragm (Fig. 6). The diaphragm is etched with an NF,-argon RIE etch using the photoresist and aluminum as masks. The photoresist increases the anisotropy of the RIE etch producing flexures with straight sidewalls and minimal undercutting. The spring constant of the flexures, and hence the pixels resonance frequency and voltage sensitivity, is determined by the flexure lateral dimensions and the diaphragm thickness. A spring constant for the Si-SLM was chosen to give a resonance frequency of 16 kHz and a deflection of 1.25 Vm at ~ 40 volts. Figure 6. SEM of one corner of pixel showing etched flexures. Measurements The resonant frequency of the Si-SLM was measured in a vacuum using a fiber optic probe, I Fig. n0.0 7. The measured value of 13.5 kHz agreed very well with the 13.1 kHz value calculated from flexure width and diaphragm thickness measurements. The displacement vs. electrode voltage was measured using a HeNe interferometer. A voltage of 25 V was needed to achieve a 1.25 pm displacement, Fig. 8. Packaging Si-SL isconnectedtotheASICdriver via Th a ceramic, , multilayer e, metal, interconnect nctcute sandwiched between the backside of the SLMV and the sndwchedheiteontebckbstheessanthe Figure 7. Aluminum coated SLM pixel array, (1.05 mm) 2 showingflexure etch pattern. Fiber optic probe usedfor frequency response measurements also shown. spatially redistribute the outputs from the ASIC driver to match the bonding pads on the backside of the SLM. The ASIC chip is attached to the interconnect substrate using a solder bump flip-chip bond. The Si-SLM is attached to the opposite side using conductive polymeric bumps. The ceramic substrate's thermal expansion coefficient is closely matched to that of silicon to reduce stress on the bump bonds due to temperature changes. Figure8. PlotofdeflectionvsvoltageforSi-SLpixel.</p>
+<p>Discussion The frequency and voltage response of several Si-SLM's have been measured and agree well with calculated values. The flatness of the pixels after flexure etch was found to be a strong function of the uniformity of the boron doping in the diaphragm wafer's epitaxial layer. A special etch sequence during thinning was used to remove the upper and lower boundaries of the epitaxial diaphragm to leave a region of constant boron doping. Also, any high temperature processing on the diaphragm wafer prior to thinning was avoided because the processes precipitated defects in the epitaxial layer. The defects produced a non-uniform stress distribution (and hence pixel bowing) in the diaphragm.</p></body>
+<back>
+<ref-list>
+<ref id="r1"><label>1</label><mixed-citation publication-type="journal"><article-title>Final report, Active Tracking System - Phase I, DARPA Contract #DAAB-07-90-C-F417</article-title>.</mixed-citation></ref>
+<ref id="r2"><label>2</label><mixed-citation publication-type="patent"><source>US Patent</source> <patent># 5,170, 283</patent> <month>Dec.</month> <year>1992</year></mixed-citation></ref></ref-list></back></book-part></book-part-wrapper>

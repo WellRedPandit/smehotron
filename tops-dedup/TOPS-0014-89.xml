@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book-part-wrapper PUBLIC "-//OSA//DTD OSA BITS Conference DTD v1.0 20170715//EN" "OSA-BITS-conference.dtd">
+<book-part-wrapper content-type="conf-paper-wrap" dtd-version="2.0"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <collection-meta collection-type="conf">
+    <conference content-type="conf-name">
+      <conf-name>Spatial Light Modulators</conf-name>
+      <conf-acronym>SLMO</conf-acronym>
+    </conference>
+    <conference content-type="conf-other-meta">
+      <conf-date content-type="start"> <day>17</day> <month>03</month> <year>1997</year></conf-date>
+      <conf-date content-type="end"> <day>19</day> <month>03</month> <year>1997</year></conf-date>
+      <conf-loc>Nevada, <country country="US">United States</country></conf-loc>
+    </conference>
+  </collection-meta>
+  <collection-meta collection-type="conf-session">
+    <title-group>
+      <title>SLM Materials and Sructures</title>
+      <alt-title alt-title-type="conf-session-acronym"/>
+    </title-group>
+  </collection-meta>
+  <collection-meta collection-type="conf-proceedings-series">
+    <title-group>
+      <title>OSA Trends in Optics and Photonics Series</title>
+    </title-group>
+    <volume-in-collection>
+      <volume-number>14</volume-number>
+      <volume-title>TOPS Volume XIV</volume-title>
+    </volume-in-collection>
+  </collection-meta>
+  <book-meta>
+    <book-title-group>
+      <book-title>Spatial Light Modulators</book-title>
+    </book-title-group>
+    <contrib-group>
+      <contrib contrib-type="editor">
+        <name>
+          <surname>Burdge</surname>
+          <given-names>Geoffrey</given-names>
+        </name>
+      </contrib>
+      <contrib contrib-type="editor">
+        <name>
+          <surname>Esener</surname>
+          <given-names>Sadik C.</given-names>
+        </name>
+      </contrib>
+    </contrib-group>
+    <pub-date publication-format="electronic">
+      <day>17</day>
+      <month>03</month>
+      <year>1997</year>
+    </pub-date>
+  </book-meta>
+  <book-part book-part-type="conf-paper">
+    <book-part-meta>
+      <title-group>
+        <title>A new high resolution FLCVLSI Spatial Light Modulator</title>
+      </title-group>
+      <contrib-group>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Rankin</surname>
+            <given-names>I. D.</given-names>
+          </name>
+          <xref rid="aff4" ref-type="aff"><sup>1</sup></xref>
+        </contrib>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Burns</surname>
+            <given-names>D. C.</given-names>
+          </name>
+          <xref rid="aff4" ref-type="aff"><sup>1</sup></xref>
+          <xref rid="aff1" ref-type="aff"><sup>*</sup></xref>
+        </contrib>
+        <contrib contrib-type="author">
+          <name>
+            <surname>O&#x02019;Hara</surname>
+            <given-names>A.</given-names>
+          </name>
+          <xref rid="aff4" ref-type="aff"><sup>1</sup></xref>
+          <xref rid="aff2" ref-type="aff"><sup>**</sup></xref>
+        </contrib>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Bodammer</surname>
+            <given-names>G.</given-names>
+          </name>
+          <xref rid="aff4" ref-type="aff"><sup>1</sup></xref>
+          <xref rid="aff2" ref-type="aff"><sup>**</sup></xref>
+        </contrib>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Stevenson</surname>
+            <given-names>J. T. M.</given-names>
+          </name>
+          <xref rid="aff4" ref-type="aff"><sup>1</sup></xref>
+        </contrib>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Underwood</surname>
+            <given-names>I.</given-names>
+          </name>
+          <xref rid="aff4" ref-type="aff"><sup>1</sup></xref>
+        </contrib>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Vass</surname>
+            <given-names>D. G.</given-names>
+          </name>
+          <xref rid="aff4" ref-type="aff"><sup>1</sup></xref>
+          <xref rid="aff2" ref-type="aff"><sup>**</sup></xref>
+        </contrib>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Worboys</surname>
+            <given-names>M. R.</given-names>
+          </name>
+          <xref rid="aff4" ref-type="aff"><sup>1</sup></xref>
+          <xref rid="aff3" ref-type="aff"><sup>***</sup></xref>
+        </contrib>
+        <aff id="aff1"> <label>*</label>Now at Xilinx Development Corporation, 44 Mortonhall Gate,
+          Edinburgh, <country country="GB">U.K.</country></aff>
+        <aff id="aff2"> <label>**</label>Department of Physics and Astronomy, The University of
+          Edinburgh</aff>
+        <aff id="aff3"> <label>*</label>GEC-Marconi Research Centre, West Hanningfield Road,
+          Chelmsford, Essex, <country country="GB">U.K.</country></aff>
+        <aff id="aff4"> <label>1</label>Department of Electrical Engineering, The University of
+          Edinburgh, The Kings Buildings, Mayfield Road, Edinburgh, EH9 3JL, <country country="GB"
+          >U.K.</country></aff>
+      </contrib-group>
+      <elocation-id>89</elocation-id>
+      <permissions>
+        <copyright-statement>&#x000A9; 1997 Optical Society of America</copyright-statement>
+        <copyright-year>1997</copyright-year>
+        <copyright-holder>Optical Society of America</copyright-holder>
+        <license license-type="open-access">
+          <license-p>closed</license-p>
+        </license>
+      </permissions>
+      <abstract>
+        <p>Recent advances in custom silicon design, post-processing technology and the use of new
+          commercially available ferroelectric liquid crystal (FLC) mixtures has led us to develop a
+          faster and higher resolution backplane. The backplane does not only have uses in
+          incoherent illumination systems such as displays&#x0005B;1&#x0005D; but in coherent
+          systems such as optical computing where a high optical through-put is desired.</p>
+      </abstract>
+      <kwd-group kwd-group-type="OCIS">
+        <title>OCIS codes</title>
+        <kwd>SLM</kwd>
+        <kwd>VLSI</kwd>
+        <kwd>FLC</kwd>
+        <kwd>DRAM pixel</kwd>
+        <kwd>display</kwd>
+      </kwd-group>
+      <counts>
+        <book-page-count count="5"/>
+      </counts>
+    </book-part-meta>
+    <body>
+      <p>Introduction The 512SLM was designed by Burns&#x0005B;2&#x0005D; and fabricated in 1996 by
+        AMS using a 1.2&#x0005B;tm 5.5V n-well CAE (epitaxial wafer, n-well, double polysilicon and
+        double metal) CMOS process. This device incorporates an enhanced DRAM pixel, which
+        drastically reduces the effects of pixel charge leakage and a better addressing architecture
+        to simplify real-time digital video preprocessing. The device uses essentially the same
+        peripheral addressing circuitry as the SBS256 SRAM-XOR SLM&#x0005B;3&#x0005D; making its
+        implementation quick and reliable. With the device having the same physical dimensions as
+        the SBS256 SRAM-XOR SLM, permitted the utilisation of many of the optical / packaging
+        components already available. The 512SLM consists of a 512 x 512 array of enhanced DRAM
+        style pixels. Each pixel is enlarged using the in-house CMP post processing technique which
+        increases the pixel mirror dimensions to I8.4tm x 18.4&#x0005B;tm on a 20pm pitch (see
+        figure 1). This corresponds to an array area of 1.0486cm (10.24mm x 10.24mm) with a pixel
+        fill factor of 85&#x00025;. The backplane addressing circuitry (figure 2) is based on a
+        modified multiple serial shift register architecture, consisting of 64 x 8 bit shift
+        registers and a decoder to write an assembled column of data (512 pixels) onto the array.
+        The device has 64 data lines and 15 control lines controlling its operation. Instead of the
+        rolling '0' (active low) column shift register, as used by the 176SLM, a column address
+        decoder exists. This means that the device can be addressed on a column-by-column basis for
+        a digital video sequential scan or in an interlaced format suiting analogue PAL and NTSC
+        video. Data can be loaded onto the array at clock speeds of up to 48MHz (1.92GBits/s),
+        giving rise to an electrical frame address rate of 8kHz. The backplane also includes support
+        circuitry for image inversion which is necessary when addressing FLC in a DC charge
+        balancing mode. Figure 1: SEM micrographs showing the 512SLM before /after in-house CMP
+        planarisation. Enhanced DRAM pixel Each pixel incorporates a pMOS pass transistor and a pMOS
+        storage transistor capacitor along with the appropriate data, address and power lines.
+        Figure 3 demonstrates the MOS model of the pixel and its silicon implementation. Figure 4
+        shows a diagrammatic cross sectional view of the enhanced DRAM pixel. The motivation for
+        this particular pixel design was driven by the desire to have a quick array addressing time
+        whilst storing enough charge and furthermore, to compensate for leakage effects fully switch
+        the liquid crystal at a single pixel. Figure 3: Enhanced DRAM pixel MOS model and its
+        silicon implementation. Figure 4: Cross sectional view of the enhanced DRAM pixel. The
+        concept of using what is essentially a dual transistor pixel is not new since a MOS storage
+        transistor capacitance is the largest attainable. Previous implementations of this design
+        suffered severely from the photoelectric effect since generated electron-hole pairs make the
+        transistor active regions more 'leaky'. The enhanced DRAM pixel overcomes these problems by
+        embedding the whole pixel array in an n-well on top of a grounded p-substrate. The following
+        points detail and summarise the advantage of the enhanced DRAM pixel design. * Pixel
+        capacitance is large due to the large gate oxide of the pMOS storage capacitor. * Grounded
+        p-substrate acts as a charge collector absorbing the photoelectric carriers deep within the
+        substrate. * n-well eliminates all leakage currents associated with the substrate wafer. *
+        Planarised pixel mirrors shield the MOS capacitor and the address and data lines. *
+        Parasitic capacitances do not degrade the effectiveness of the storage capacitance since
+        storage capacitance is much larger. The amount of charge required within a pixel gate time
+        period (typically 30ns) to fully switch the liquid crystal can be obtained experimentally by
+        measuring the amount of current required to reverse the polarisation state of the liquid
+        crystal material. Qswach 2APs &#x0005B;1&#x0005D; Equation 1 describes this operation and
+        thus it was calculated that 240fC was required to switch the liquid crystal over a single 2
+        0 tm x 20pm pixel; A = area (20m x 20ptm) and Ps = liquid crystal spontaneous polarisation
+        (-30nC/cm or 0.3fC/ .m 2 ).The overall storage capacitance of the enhanced pixel is
+        approximately 200fF of which the pMOS capacitor contributes 175fF, the VDD / GATE / MIRROR
+        capacitance's contribute 15fF and the FLC pixel capacitance contributes 10fF (assuming a
+        2.4g.m cell gap). If 5 Volts can be applied across the pMOS storage capacitor, the amount of
+        charge stored is approximatelyl1000fC, fours times that required forotheparticular fo h
+        atclr-Cmteilue.Ti FLC materialused. This isgood sgo of a planarised 512SLM (array fully
+        considering that for any image degradation to occur, the pixel will have had to have lost
+        three quarters of its full charge capacity.</p>
+      <p>512SLM - An optical characterisation Figure 5 depicts the charging and discharging
+        characteristics of a planarised 512SLM under a continuous 0.5mW/cm2 He-Ne illumination. The
+        measurements where taken using a simple optical arrangement and a fast 10MHz calibrated
+        photodiode/amplifier. The optical system consists of a collimated 5mW He-Ne laser, a
+        polarising beamsplitter, 1/2 wave plate, SLM and lense with the photodiode at its focal
+        point. Figure 6 shows the effect of array charge leakage (FWHM) under different illumination
+        levels. When compared to the 176SLM, the 512SLM is approximately 250 (&#x000B1;10&#x00025;)
+        times slower at half image discharge, under a continuous 0.5mW/cm2 He-Ne illumination. In
+        contrast, a SPICE 'dark' simulation showed that the enhanced pixels natural electrical
+        discharge time was extremely long. The device also performs well with respect to its charge
+        storage capability during the positive and negative addressing cycles Figure 5: Image
+        degradation effects (charge leakage) during the -ve and +ve addressing cycles
+        oaaarised51'2SLMarrayfullyON '', Figure 6: Effect of Photo-induced charge leakage on a
+        planarised 512SLM.(100&#x00025; laser transmission corresponds to 0.5mW/cm 2 )
+        512SLMperformance Figure 7demonstratesthefunctionality of the
+        SLM.ThedevicedemonstratedhasaarrayCRof approximately 12:1 under a He-Ne illumination. Figure
+        7: Single bitplane images on a planarised 512SLM. (a: A single bitplane image; b: A single
+        dithered bitplane image)</p>
+      <p>Conclusion From the DRAM devices analysed, the 512SLM performed best under high intensity
+        illumination. It Itiexpctdthtawomtaplaarsaton that a two metal planarisation is expected
+        process would make the device as robust as SRAMbaseddevices. Figure8comparesthe planarised
+        176SLM and 512SLM half image degradation times versus illumination intensity on a log scale.
+        As you would expect with the photoelectric effect, the image degradation is inversely
+        proportional to the illumination intensity (1/I). Extrapolation of this graph enables the
+        determination of the 512SLMs performance under higher illumination intensities outwith the
+        region tested. Figure 8: Image degradation comparison of a 176 and 512 SLM. (100&#x00025;
+        Laser Transmission corresponds to 0.5mW/cm 2 )</p>
+      <p>Acknowledgments The 512 x512 display backplane was designed Z by D.C.Burns and developed at
+        the University of Edinburgh through the UK Engineering and Physical Science Research
+        Councils SCIOS Programme. I.D.Rankin acknowledges his suethpfo h KEa sineering n
+        PhysicalScienceResearchCouncilandhisCASE sponsorship from GEC-Marconi Research Centre.</p>
+    </body>
+    <back>
+      <ref-list>
+        <ref id="r1">
+          <label>1</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Rankin</surname>
+            <given-names>I.D.</given-names>
+            </name><etal/></person-group>, &#x0201C;<article-title>Full colour miniature
+            display</article-title>&#x0201D;, <source>Proc SPIE</source>
+            <volume>2651</volume>(<issue>1196</issue>)
+            <fpage>16</fpage>-<lpage>24</lpage></mixed-citation>
+        </ref>
+        <ref id="r2">
+          <label>2</label>
+          <mixed-citation publication-type="confproc"><person-group person-group-type="author"><name>
+            <surname>Underwood</surname>
+            <given-names>I.</given-names>
+            </name><etal/></person-group>, &#x0201C;<article-title>Advances in pixel design and
+            wafer fabrication for LC over silicon SLMs</article-title>&#x0201D;, <conf-name>Digest
+            of IEEE/LEOS Summer Topical Meeting on Smart Pixels</conf-name>,
+            (<year>1996</year>)</mixed-citation>
+        </ref>
+        <ref id="r3">
+          <label>3</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Rankin</surname>
+            <given-names>I.D.</given-names>
+            </name><etal/></person-group>, &#x0201C;<article-title>Full Colour Images on a Binary
+            Spatial Light Modulator</article-title>&#x0201D;, <conf-name>Conference Digest for
+            FLC&#x02019;95</conf-name>, <conf-date>23-27th July 1995</conf-date>,
+            <fpage>231</fpage>-<lpage>2</lpage>.</mixed-citation>
+        </ref>
+      </ref-list>
+    </back>
+  </book-part>
+</book-part-wrapper>

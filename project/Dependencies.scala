@@ -2,20 +2,20 @@ import sbt._
 
 object V {
   val betterFiles = "3.1.0"
-  val commonsIo = "2.8.0"
-  val typesafeConfig = "1.4.1"
+  val commonsIo = "2.13.0"
+  val typesafeConfig = "1.4.2"
   val hashids = "1.0.3"
-  val jdom = "2.0.6"
-  val logback = "1.2.3"
-  val scala = "2.13.5"
-  val scalaCheck = "1.15.3"
-  val scalaLogging = "3.9.3"
-  val scalaTest = "3.2.6"
-  val scalaXml = "1.3.0"
-  val scopt = "4.0.1"
-  val slf4j = "1.7.30"
+  val jdom = "2.0.6.1"
+  val logback = "1.2.12"
+  val scala = "2.13.11"
+  val scalaCheck = "1.17.0"
+  val scalaLogging = "3.9.5"
+  val scalaTest = "3.2.16"
+  val scalaXml = "2.2.0"
+  val scopt = "4.1.0"
+  val slf4j = "2.0.7"
 
-  val scalaXmlDiff = "2.0.4"
+  val scalaXmlDiff = "3.0.1"
   val scalaXmlCompare = "2.0.0"
 
   val tron = "1.13.1"
@@ -26,8 +26,9 @@ object Dependencies {
   val typesafeConfig = "com.typesafe" % "config" % V.typesafeConfig
   val slf4j = "org.slf4j" % "slf4j-api" % V.slf4j
   val logback = Seq(
-    "ch.qos.logback" % "logback-classic" % V.logback,
-    "ch.qos.logback" % "logback-core" % V.logback)
+    "ch.qos.logback" % "logback-classic" % V.logback
+//    "ch.qos.logback" % "logback-core" % V.logback
+  )
   val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % V.scalaLogging
   val scalaCheck = "org.scalacheck" %% "scalacheck" % V.scalaCheck
   val scalaTest = "org.scalatest" %% "scalatest" % V.scalaTest

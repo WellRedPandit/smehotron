@@ -39,17 +39,17 @@ lazy val tron = Project(id = "smehotron", base = file("."))
     libraryDependencies ++=
       depsCompile(typesafeConfig ++ slf4j ++ logback ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml ++ jdom ++ hashids ++ scalaXmlDiff ++ scalaXmlCompare) ++
         depsTest(scalaCheck ++ scalaTest),
-    initialCommands in(Test, console) := """import wrp.smehotron._""",
-    initialCommands in console :=
+    Test / console / initialCommands := """import wrp.smehotron._""",
+    console / initialCommands :=
       """
         |import wrp.smehotron._
         |import scala.concurrent.ExecutionContext.Implicits.global
         |import scala.util._
       """.stripMargin)
   // assembly, dist
-  .settings(assemblyJarName in assembly := "smehotron.jar",
-    mainClass in assembly := Some("wrp.smehotron.Main"),
-    sbt.Keys.test in assembly := {},
+  .settings(assembly / assemblyJarName := "smehotron.jar",
+    assembly / mainClass := Some("wrp.smehotron.Main"),
+    assembly / sbt.Keys.test := {},
     dist := {
       import java.nio.file._
       import java.nio.file.attribute.PosixFilePermission._

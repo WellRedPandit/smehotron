@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE book-part-wrapper PUBLIC "-//OSA//DTD OSA BITS Conference DTD v1.0 20170715//EN" "OSA-BITS-conference.dtd">
+<book-part-wrapper content-type="conf-paper-wrap" dtd-version="2.0"
+  xmlns:mml="http://www.w3.org/1998/Math/MathML" xmlns:xlink="http://www.w3.org/1999/xlink">
+  <collection-meta collection-type="conf">
+    <conference content-type="conf-name">
+      <conf-name>Spatial Light Modulators</conf-name>
+      <conf-acronym>SLMO</conf-acronym>
+    </conference>
+    <conference content-type="conf-other-meta">
+      <conf-date content-type="start"> <day>17</day> <month>03</month> <year>1997</year></conf-date>
+      <conf-date content-type="end"> <day>19</day> <month>03</month> <year>1997</year></conf-date>
+      <conf-loc>Nevada, <country country="US">United States</country></conf-loc>
+    </conference>
+  </collection-meta>
+  <collection-meta collection-type="conf-session">
+    <title-group>
+      <title>Integration and Packaging Techniques</title>
+      <alt-title alt-title-type="conf-session-acronym"/>
+    </title-group>
+  </collection-meta>
+  <collection-meta collection-type="conf-proceedings-series">
+    <title-group>
+      <title>OSA Trends in Optics and Photonics Series</title>
+    </title-group>
+    <volume-in-collection>
+      <volume-number>14</volume-number>
+      <volume-title>TOPS Volume XIV</volume-title>
+    </volume-in-collection>
+  </collection-meta>
+  <book-meta>
+    <book-title-group>
+      <book-title>Spatial Light Modulators</book-title>
+    </book-title-group>
+    <contrib-group>
+      <contrib contrib-type="editor">
+        <name>
+          <surname>Burdge</surname>
+          <given-names>Geoffrey</given-names>
+        </name>
+      </contrib>
+      <contrib contrib-type="editor">
+        <name>
+          <surname>Esener</surname>
+          <given-names>Sadik C.</given-names>
+        </name>
+      </contrib>
+    </contrib-group>
+    <pub-date publication-format="electronic">
+      <day>17</day>
+      <month>03</month>
+      <year>1997</year>
+    </pub-date>
+  </book-meta>
+  <book-part book-part-type="conf-paper">
+    <book-part-meta>
+      <title-group>
+        <title>Wafer Bonding of InP to Si for Optoelectronic Integration</title>
+      </title-group>
+      <contrib-group>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Wada</surname>
+            <given-names>Hiroshi</given-names>
+          </name>
+          <xref rid="aff1" ref-type="aff"><sup>1</sup></xref>
+          <xref rid="cor1" ref-type="corresp"><sup>*</sup></xref>
+        </contrib>
+        <contrib contrib-type="author">
+          <name>
+            <surname>Kamijoh</surname>
+            <given-names>Takeshi</given-names>
+          </name>
+          <xref rid="aff1" ref-type="aff"><sup>1</sup></xref>
+        </contrib>
+        <aff id="aff1"> <label>1</label>Optoelectronics Oki Laboratory, Real World Computing
+          Partnership c/o Semiconductor Technology Laboratory, Oki Electric Industry Co., Ltd. 550-5
+          Higashi-asakawa, Hachioji, Tokyo 193, Japan</aff>
+      </contrib-group>
+      <author-notes>
+        <corresp id="cor1"> <label>*</label>e-mail: <email>wada@hlabs.oki.co.jp</email></corresp>
+      </author-notes>
+      <elocation-id>58</elocation-id>
+      <permissions>
+        <copyright-statement>&#x000A9; 1997 Optical Society of America</copyright-statement>
+        <copyright-year>1997</copyright-year>
+        <copyright-holder>Optical Society of America</copyright-holder>
+        <license license-type="open-access">
+          <license-p>closed</license-p>
+        </license>
+      </permissions>
+      <abstract>
+        <p>InGaAsP/InP optical devices have been successfully fabricated on Si wafers by using wafer
+          bonding technology. Room temperature CW operation of edge-emitting lasers and photo-pumped
+          operation of surface-emitting lasers have been achieved. A novel bonding process which
+          allows integration of optical devices on structured wafers has also been proposed.</p>
+      </abstract>
+      <kwd-group kwd-group-type="OCIS">
+        <title>OCIS codes</title>
+        <kwd>Integrated optics- optoelectronics</kwd>
+        <kwd>Diode lasers</kwd>
+        <kwd>Optical interconnects</kwd>
+        <kwd>Integrated optical devices</kwd>
+      </kwd-group>
+      <counts>
+        <book-page-count count="7"/>
+      </counts>
+    </book-part-meta>
+    <body>
+      <p>Introduction Optical interconnections between Si LSI chips have been attracting increasing
+        interest as a key technology to overcome communication bottlenecks in future LSI systems
+        and/or to realize new functional LSI systems &#x0005B;1-3&#x0005D;. Figure I schematically
+        illustrates the structure of the optically interconnected LSIs. InP lasers, preferably
+        surface emitting lasers, are integrated on LSI chips and the optical signals are emitted
+        through the transparent Si substrate to another LSI chip. InP lasers are suitable for this
+        purpose because Si is transparent at the emission wavelength. Optionally, diffractive
+        optical elements (DOEs) such as diffractive lens and beam diffractors can be integrated on
+        backside of the Si wafer. In two-dimensional integration, the LSIs with lasers are mounted
+        on a waveguide substrate such as glass or Si and are optically interconnected using DOEs
+        fabricated on the Si back surface and the waveguide Z:4 substrates. . In order to implement
+        the interconnections, a technique has to be developed to integrate high-quality InP lasers
+        on Si. Several approaches have been investigated for this purpose, including solder bonding
+        141, lattice-mismatched epitaxial growth &#x0005B;5-6&#x0005D;, and wafer
+        bonding&#x0005B;7-9&#x0005D;. Solder bonding with metals such as AuSn is the most
+        straightforward method &#x0005B;41, but it is not suitable for vertical interconnections as
+        shown in Fig. I (a) because the metals interrupt the surface-normal light propagation.
+        Lattice- mismatched epitaxial growth has been widely investigated and room-temperature CW
+        operation of the InP lasers has been successfully demonstrated &#x0005B;5-6&#x0005D;.
+        However, there are some problems in this growth technique, such as high dislocation density
+        (&gt; 5x106 cm ) and high growth temperature (typically &gt; 900 'C for thermal pre-cleaning
+        of Siand&gt;550'Cforepitaxialgrowth).Thelatterseemstobe Fig. 1: Optically interconnected
+        LSIs. more problematic for the device integration because the fully processed LSIs,
+        especially aluminum interconnection metals, will be degraded when they are exposed to the
+        temperature higher than 500 'C &#x0005B;10-11&#x0005D;. Wafer bonding is another promising
+        candidate. It is a technique to bond different wafers by contacting the flat surfaces
+        face-to-face after appropriate surface cleaning without using any adhesives. It is possible
+        to bond wafers at low temperatures (even at room temperature) through Van
+        derWaalsforce&#x0005B;7&#x0005D;and/orhydrogenbondingbetween surface OH-groups
+        &#x0005B;12&#x0005D;. Therefore, we can integrate InGaAsP/InP materials on fully processed
+        LSI wafers without degradation of the LSIs. Additionally, optical devices can be fabricated
+        using photolithography after waferbondingbecausethebondscanbestrongenoughto endure following
+        device fabrication t__ process. This will facilitate alignment of large number of small
+        optical devices with Si circuits, resulting in a potentially inexpensive .nertd ytm In this
+        paper, we report on wafer bonding of InP to Si and fabrication of InGaAsP/InP lasers on Si
+        substrates. Room temperature CW operation of edge-emitting lasers and photo-pumped operation
+        of surface emitting lasers are discussed. In addition, a novel bonding process, which allows
+        integration of optical devices on structured wafers, is also reported.</p>
+      <p>Wafer bonding process Bonding process starts with chemical cleaning of wafer surfaces with
+        HySO4 :H2 O,:HyO solution, followed by rinse in de-ionized (DI) water. After this cleaning.
+        the surfaces show hydrophilic. which has been reported to be preferable for achieving strong
+        bonds at relatively low temperatures &#x0005B;13-14&#x0005D;. The wafers are then spin dried
+        and their surfaces are placed in contact at room temperature under some pressure applied on
+        the wafers to ensure the surface contact. The wafers adhered to each other at this stage,
+        though the adhesion is not very strong. Finally, the wafers are annealed at 400 'C for 30
+        min in an H- atmosphere to increase the bonding strength. Bonding mechanism has been
+        extensively discussed for Si-to-Si wafer bonding &#x0005B;12&#x0005D;&#x0005B;151, and the
+        similar mechanism is thought to be responsible also in the case of InP-to-Si. The proposed
+        mechanism is schematically summarized in Fig. 2. First of all, OH-groups are absorbed on the
+        wafer surface during the cleaning process with H-SO 4 :HO,:HO (Fig. 2 (a)), which is thought
+        to be an origin of the hydrophilicity. When the cleaned surfaces are brought into contact at
+        room temperature, the wafers adhere by hydrogen bonding between the OH-groups (Fig. 2 (b)).
+        In the following heat treatment at moderate temperatures (200 'C &lt; T &lt; 400 OC), water
+        molecules start to escape from the interface and the hydrogen bonds are replaced by bonds
+        like InP-O-Si (Fig. 2 (c)). This bond is usually stronger than hydrogen bond, which causes
+        increased strength at higher temperatures. When the wafers are annealed at even higher
+        temperatures (T &gt; 500 'C), evaporation of phosphorus from InP and migration of indium
+        atoms become pronounced and this can cause atomic rearrangement at the interface and result
+        in stronger bonds (Fig. 2 (d)). A unique feature in the case of InP-to-Si bonding is that
+        thermal expansion coefficients are different between the materials and it causes thermal
+        stress which may produce cracks or even separate the wafers during annealing under
+        someconditions&#x0005B;9&#x0005D;&#x0005B;16&#x0005D;.Therefore,theactualbonding mechanism
+        should be more complicated than that described above. In addition, the bonding properties
+        should also depend on other characteristics such as surface morphology, wt under.s nd
+        thcnsmmoeifficut.Fther understanding of the mechanism more difficult. Further investigation
+        is required to describe the mechanism more clearly. Fig.2: Proposedbondingmechanism As is
+        suggested from the model described above, the bonding temperature strongly affects bonding
+        properties, so is very important parameter. The temperature has been optimized in terms
+        of(i) quality of the bonded InP crystals. (ii) bonding strength, and (iii) compatibility
+        with device processes. The higher temperature limit is imposed by the degradation of InP
+        crystal quality and Si LSI circuits. The quality of the bonded materials has been evaluated
+        by measuring photoluminescence (PL) intensity and found to be degraded when the bonding
+        temperature was higher than 600 'C &#x0005B;17&#x0005D;, which can be attributed to the
+        thermal stress induced by different thermal expansion between InP and Si. Therefore, the
+        temperature has to be lower than 550 'C. Moreover, bonding below 500 'C is desirable to
+        avoid the degradation . . of previously completed Si LSIs. On the other hand, the lower
+        temperature limit is imposed by laser fabrication process following the wafer bonding. The
+        formation of ohmic contacts on InGaAs(P)/ InP device requires to anneal the wafers at about
+        400 'C in the laser fabrication, as will be described in the next section. Additionally,
+        higher bonding temperature is preferable in terms of bonding strength because bonds usually
+        strengthen at higher temperatures &#x0005B;9&#x0005D; and the stronger bonds will facilitate
+        the following device fabrication. On consideration of these factors, the bonding temperature
+        has been determined to be 400 'C in this work.</p>
+      <p>InP edge-emitting lasers on Si In order to demonstrate the possibility ofwafer bonding. we
+        have first fabricated InGaAsP/InP edge-emitting lasers on Si. Figure 3 shows the laser
+        fabrication process. First of all, a double-heterostructure (DH) was grown by metalorganic
+        vapor phase epitaxy (MOVPE) on a 350- pm-thick p-type (100) InP substrate. It was composed
+        of a 0.2-pm InGaAs etch-stop layer, a 1.5-pm p-InP cladding layer, a 0.15-pm InGaAsP bulk
+        active layer (Xgap = 1.3 pm). a 1.5-Fm n-InP cladding layer, and a 0 .1-pm n-InGaAs cap
+        layer. The epitaxial wafer, with a typical size of 10 x 10 mm .was then stuck on a glass
+        plate with black wax for mechanical support (Fig. 3 (a)). Next. the p-InP substrate and
+        InGaAs etch-stop layer were selectively etched to leave a thin DH film on a glass plate. The
+        exposed surface of the p-InP surfceothe-Incladinlayrwatheclenedith claddg layer was then
+        cleaned with HS04: HO-: HO. The surface of a Si substrate was also cleaned with HIS04: HO0:
+        HO. After a DI water rinse, the wafers were spin dried and their surfaces were placed in
+        contact under a pressure of 4 kg/cm at room temperature (Fig. 3 (b)). The wafers adhered to
+        each other at this stage, though the bonding was not very strong. Then, the bonded wafers
+        were immersed in warn organic solvent to dissolve the wax completely and detach the glass
+        plate from the wafers. The wafers remained still bonded after this wax dissolving. The
+        sample was then annealed at 400 'C for 30 min in an H- atmosphere (Fig. 3 (c)) to increase
+        the bonding strength. A weight of 30gcn 2 was applied on the wafers during the heat
+        treatment. After this wafer bonding, 8-pm-wide mesa stripes were formed using standard
+        photolithography and wet etching. The active layer was slightly undercut to reduce the
+        active width to 6 pm. Finally, AuGeNi and AuZn were evaporated and alloyed at 400 'C to form
+        n- and p-type ohmic contacts to Fig. 3: Fabrication process of InGaAsP/InP ede- rs on Si
+        usiwaerbondin. AfterthinningtheSisubstratedowntoabout100pm. the lasers were cleaved into
+        300-Fm-long cavities and mounted on Si heat sinks with junction-up configuration. For
+        comparison, the same laser structure was fabricated on a p-InP substrate. The light-current
+        (L-1) characteristics of the devices were measured at room temperature (RT) without any
+        facet coatings. A typical pulsed threshold current and corresponding current density were 36
+        mA and 2kAkm.whichwereidenticaltothoseof lasersonInP substrates. The slope efficiency was
+        0.25 W/A. RT CW operation has been achieved with these devices as shown in Fig. 4. In this
+        figure, the L-I curves of 3 lasers on Si are shown, together with those ofconventional
+        lasers on InP for comparison. The kinks in the L-I curves are due to multiple
+        transverse-mode operation of the lasers with 6 jim-wide active regions. The threshold
+        currents are about the same (Ith = 39 mA) for both structures, and higher output powers were
+        obtained with lasers on Si. This can be attributed to lower thermal conductivity of Si
+        substrates, which is one of the advantages of fabricating the lasers on Si. These results
+        indicate that the wafer bonding is promising technique to integrate high-quality InP lasers
+        on Si wafers. Fig. 4: L-I characteristics of the lasers fabricated on Si under
+        room-temperature CW operation. . s fe ii In order to implement the optical interconnections
+        between LSI chips illustrated in Fig. 1. InP surface-emitting lasers (SELs) are required to
+        be integrated on Si wafers. We have tried to fabricate the InP SELs on Si by wafer bonding
+        and achieved room temperature photo-pumped operation. In this section, the fabrication and
+        characteristics of the InP SELs are discussed. Figure 5 shows the structure of the SEL. The
+        cavity was formed by wafer bonding of an InGaAs(P)/InP epitaxial wafer to 3.5-pair Al2 O3/Si
+        stacked mirror previously sputtered on a Si substrate. The InGaAs(P) / InP epitaxial wafer
+        was grown by MOVPE on a p-type (100) InP substrate and was composed of a 0.1-pm p-InGaAsP
+        (g= 1.3 pm) etch stop layer, a 1.1-pm p-InP cladding layer. an undoped multiple quantum well
+        (MQW) active layer. a 0.25-pm n-InP cladding layer, and a 40.5-pair n-InGaAsP (Xg= 1.42 pm)
+        / InP quarter-wavelength stacked mirror. The MQW active layer consisted of 12 unstrained
+        InGaAs wells (7 nm-thick) and II InGaAsP barriers (6 nm-thick. gap = 1.2 pm), embedded in 38
+        nm-thick InGaAsP (gap = 1.2 pm) separate confinement layers on both sides. The fabrication
+        process is similar to that for the edge- emitting lasers and summarized as follows. The
+        InGaAs(P)/ InP epitaxial wafer was first stuck on a glass plate with black wax and the InP
+        substrate and InGaAsP etch stop layer were selectively etched. The surfaces of the exposed
+        p-InPandAl 2O 3 top layer in the 3.5-pair A103 / Si mirror were then cleaned with HS04 : HO2
+        : HO. After rinse and spin-dry, the surfaces were placed in contact under a pressure of 4
+        kg/cm 2 at room temperature to result in adhesion of the wafers through hydrogen bonding
+        between surface OH-groups. Finally, the bonded wafers were immersed in warm solvent to
+        dissolve the wax completely and detach the glass plate from the wafers. 5: Schematic
+        structure of InP surface-emitting laer fbiaeonS. fabricated structure was optically pumped
+        by a 1.49-pm semiconductor laser through the 40.5-pair InGaAsP/InP mirror, as indicated in
+        Fig. 5. The pumping laser was operated under a pulsed condition with 1--ps duration at 1-kHz
+        repetition. The pumping light was focused on the sample surface using a hemispherical fiber
+        with a measured spot size of 15 pm in diameter. Since 1.49- pm is out ofthe stop-band ofthe
+        semiconductor mirror, the active layers can be optically pumped by the 1.49-pm laser diode.
+        The reflectivities of both the InGaAsP / InP and A10 / Si mirrors were measured to be higher
+        than 99/ at 1.55-pm wavelength. The resonant light of the cavity. whose wavelength was about
+        1.587 pm. was collected through the Si substrate and detected using a Ge photodetector with
+        a lock-in amplifier. Figure 6 shows light output versus input power characteristic at room
+        temperature. A distinct lasing threshold (Pth) is clearly observed at the input power of
+        14.4 mW. Polarization-resolved characteristics are also shown in the figure. Above the
+        lasing threshold, about 9 0c/&#x00025; of the emitted light is confirmed to be linearly
+        polarized along the (110) orientation. Full width at halfmaximum (FWHM) of the emission
+        spectrum was confirmed to be reduced from 4.8 nm at the pumping level of 0.85 Pth to 1.6 nm
+        above Pth. The relatively broad spectrum above the lasing threshold (1.6 nm) can be
+        attributed mainly to thermally induced chirping caused by instantaneous temperature rise
+        during the pulse excitation. The multi-transverse mode emission may be an additional reason
+        for the broad spectrum. Fig. 6: Output power vs. input power characteristics of the SEL
+        under room-temperature photo- pumped operation. From this threshold pumping power, we can
+        roughly estimate the corresponding threshold current density. Since 60&#x00025; of the
+        pumping light was measured tobe reected by the total cavity. 40&#x00025; of the pumping
+        light is thought to be absorbed in the laser structure.RHalfof that is estimated to be
+        absorbed in the InGaAsP/InP mirror, and half in the active region. The pumping efficiency
+        is. therefore. approximately 20&#x00025;. Assuming this pumping efficiency and beam diameter
+        of 15 pm,the threshold power density can be estimated to be 1.6 kW/cm-.From this value, the
+        corresponding current density can be calculated to be around 2kA/cm.This result indicates
+        that the cavity of high quality can be realized by the wafer bonding. Fabrication of
+        electrically pumped SELs is now in progress.</p>
+      <p>Selective-area wafer bonding In the previous sections, we have shown that high-quality
+        InPlansers canbhefabricated onSi substratesowever, Si LSI wafers, on which the lasers are
+        required to be integrated, have many structures and steps on their surfaces. In this
+        section, we propose a bonding process which allows the integration on such structured
+        surfaces. Figure 7 illustrates the proposed integration process. First, Si LSI wafers with
+        some vacant spaces allocated for optical devices are designed and fabricated (Fig. 7 (a)).
+        InP DH thin films are also prepared as described previously (Fig. 7(b)), and the islands are
+        formed in the thin films by and etching with the same pattern as the vacant spaces on the
+        LSI wafers (Fig. 7(c)). The surfaces of wafers are then cleaned, and the islands are aligned
+        to vacant spaces and directly bonded at room temperature described above (Fig. 7(d)).
+        removing the glass plate and annealing at 400 OC (Fig. 7(e)), optical devices are fabricated
+        on the DH islands the lithography and the interconnection metals are and patterned (Fig.
+        7(f)). Since small optical devices can be fabricated at this step, the DHislands and
+        thecvacant spaces may be much bigger, which greatly facilitates the alignment at bondigin
+        the step of Fig. 7(d). As apreliminary trial, we have fabricated InP LED arrays on bare Si
+        substrates using this selective-area bonding. Figure 8shows an example of the fabricated
+        LEDs. InP DHislands.200pm x 3mm, are bonded on Si and arrays of active regions 20 tm in
+        diameter are fabricated in the islands. The ohmic contacts and interconnection metals are
+        deposited and patterned after wafer bonding. As can be seen from this example, alarge number
+        of small devices can be fabricated after bonding of relatively large size of DHislands. The
+        alignment tolerance at bonding are determined by the relative size of the DR islands and
+        vacant spaces on LSI wafers as shown in Fig. 7 (d). and can be made large by appropriate
+        design. As illustrated in Fig. 7,we still can bond the DHislands even if there are Si LSI
+        patterns on the wafers and make the optical devices aligned to the Si circuits by
+        photolithography. In the example of Fig. 8, LEDs are located like electrical contact pads in
+        LSIs, but, needless to say, optical devices can be fabricated anywhere in the LSI patterns
+        by appropriate design. A typical L-I characteristic of the fabricated LED is shown in Fig.
+        9, together with aschematic cross-section of the device. The emission wavelength was 1.3pm
+        and the light emitted through the Si substrates were detected. Output power more than 100jaW
+        has been obtained.RHigher outputpnower will be obtained by using SELs in the future. Fig. 7:
+        Schematic illustration of the process which allows to integrate optical devices on Si LSI
+        wafers. Fig. 8: An example of the fabricated LED arrays on Si wafer. Fig.9:
+        AtypicalL-IcharacteristicsoftheLEDfabri- catedonSi.</p>
+      <p>Conclusion Wafer bonding of InP to Si has been investigated as an integration technique to
+        implement optical interconnection between Si LSI chips and InGaAsP/InP optical devices have
+        been successfully fabricated on Si wafers. Room temperature CW operation of edge-emitting
+        lasers and photo-pumped operation of surface-emitting lasers have been achieved. A novel
+        bonding process which allows integration of optical devices on structured wafers has also
+        been proposed.</p>
+    </body>
+    <back>
+      <ref-list>
+        <ref id="r1">
+          <label>1</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Goodman</surname>
+            <given-names>J.W.</given-names>
+            </name><name>
+            <surname>Leonberger</surname>
+            <given-names>F.I.</given-names>
+            </name><name>
+            <surname>Kung</surname>
+            <given-names>S-Y</given-names>
+            </name><name>
+            <surname>Athale</surname>
+            <given-names>R.A.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Optical interconnections for VLSI
+            systems</article-title>,&#x0201D; <source>Proc IEEE</source> <volume>72</volume>,
+            <fpage>850</fpage>-<lpage>866</lpage>, (<year>1984</year>)<pub-id pub-id-type="doi"
+            >10.1109/PROC.1984.12943</pub-id></mixed-citation>
+        </ref>
+        <ref id="r2">
+          <label>2</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Koyanagi</surname>
+            <given-names>M.</given-names>
+            </name><name>
+            <surname>Takata</surname>
+            <given-names>H.</given-names>
+            </name><name>
+            <surname>Mori</surname>
+            <given-names>H.</given-names>
+            </name><name>
+            <surname>Iba</surname>
+            <given-names>J.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Design of 4-k bit &#x000D7; 4-layer
+            optically coupled three-dimensional common memory for parallel processor
+            system</article-title>,&#x0201D; <source>IEEE J. Solid-State Circuits</source>, vol.
+            <volume>SC-25</volume>, <fpage>109</fpage>-<lpage>116</lpage>,
+            (<year>1990</year>)<pub-id pub-id-type="doi">10.1109/4.50292</pub-id></mixed-citation>
+        </ref>
+        <ref id="r3">
+          <label>3</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Hayashi</surname>
+            <given-names>I.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Optoelectronic devices and material
+            technologies for photo-electronic integrated systems</article-title>,&#x0201D;
+            <source>Jpn J Appl Phys</source> <volume>32</volume>,
+            <fpage>266</fpage>-<lpage>271</lpage>, (<year>1993</year>)<pub-id pub-id-type="doi"
+            >10.1143/JJAP.32.266</pub-id></mixed-citation>
+        </ref>
+        <ref id="r4">
+          <label>4</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Shieh</surname>
+            <given-names>C.L.</given-names>
+            </name><name>
+            <surname>Chi</surname>
+            <given-names>J.Y.</given-names>
+            </name><name>
+            <surname>Armiento</surname>
+            <given-names>C.A.</given-names>
+            </name><name>
+            <surname>Haugsjaa</surname>
+            <given-names>P.O.</given-names>
+            </name><name>
+            <surname>Negri</surname>
+            <given-names>A.</given-names>
+            </name><name>
+            <surname>Wang</surname>
+            <given-names>W.I.</given-names>
+            </name></person-group>, &#x0201C;<article-title>1.3 &#x003BC;m InGaAsP ridge waveguide
+            laser on GaAs and Silicon substrates by thin-film transfer</article-title>.&#x0201D;
+            <source>Electron Lett</source> <volume>27</volume>,
+            <fpage>850</fpage>-<lpage>851</lpage>, (<year>1991</year>)<pub-id pub-id-type="doi"
+            >10.1049/el:19910532</pub-id></mixed-citation>
+        </ref>
+        <ref id="r5">
+          <label>5</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Razeghi</surname>
+            <given-names>M.</given-names>
+            </name><name>
+            <surname>Defour</surname>
+            <given-names>M.</given-names>
+            </name><name>
+            <surname>Blondeau</surname>
+            <given-names>R.</given-names>
+            </name><name>
+            <surname>Omnes</surname>
+            <given-names>F.</given-names>
+            </name><name>
+            <surname>Maurel</surname>
+            <given-names>P.</given-names>
+            </name><name>
+            <surname>Acher</surname>
+            <given-names>O.</given-names>
+            </name><name>
+            <surname>Brillouet</surname>
+            <given-names>F.</given-names>
+            </name><name>
+            <surname>C-Fan</surname>
+            <given-names>J.C.</given-names>
+            </name><name>
+            <surname>Salerno</surname>
+            <given-names>J.</given-names>
+            </name></person-group>&#x0201D;<article-title>First cw operation of GaInAsP-InP laser on
+            a silicon substrate</article-title>,&#x0201D; <source>Appl Phys Lett</source>
+            <volume>53</volume>, <fpage>2389</fpage>-<lpage>2390</lpage>, (<year>1988</year>)<pub-id
+            pub-id-type="doi">10.1063/1.100239</pub-id></mixed-citation>
+        </ref>
+        <ref id="r6">
+          <label>6</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Sugo</surname>
+            <given-names>M.</given-names>
+            </name><name>
+            <surname>Mori</surname>
+            <given-names>H.</given-names>
+            </name><name>
+            <surname>Tachikawa</surname>
+            <given-names>M.</given-names>
+            </name><name>
+            <surname>Itoh</surname>
+            <given-names>Y.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Room-temperature operation of an InGaAsP
+            double-heterostructure laser emitting at 1.55 &#x003BC;m on a Si
+            substrate</article-title>,&#x0201D; <source>Appl Phys Lett</source> <volume>57</volume>,
+            <fpage>593</fpage>-<lpage>585</lpage></mixed-citation>
+        </ref>
+        <ref id="r7">
+          <label>7</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Yablonovitch</surname>
+            <given-names>E.</given-names>
+            </name><name>
+            <surname>Hwang</surname>
+            <given-names>D.M.</given-names>
+            </name><name>
+            <surname>Gmitter</surname>
+            <given-names>T.J.</given-names>
+            </name><name>
+            <surname>Florez</surname>
+            <given-names>L.T.</given-names>
+            </name><name>
+            <surname>Harbison</surname>
+            <given-names>J.P.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Van der Waals bonding of GaAs epitaxial
+            liftoff films onto arbitrary substrates</article-title>,&#x0201D; <source>Appl Phys
+            Lett</source> <volume>56</volume>, <fpage>2419</fpage>-<lpage>2421</lpage>,
+            (<year>1990</year>)<pub-id pub-id-type="doi">10.1063/1.102896</pub-id></mixed-citation>
+        </ref>
+        <ref id="r8">
+          <label>8</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Mori</surname>
+            <given-names>K.</given-names>
+            </name><name>
+            <surname>Tokutome</surname>
+            <given-names>K.</given-names>
+            </name><name>
+            <surname>Sugou</surname>
+            <given-names>S.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Low-threshold pulsed operation of
+            long-wavelength lasers on Si fabricated by direct bonding</article-title>,&#x0201D;
+            <source>Electron Lett</source> <volume>31</volume>,
+            <fpage>284</fpage>-<lpage>285</lpage>, (<year>1995</year>)<pub-id pub-id-type="doi"
+            >10.1049/el:19950179</pub-id></mixed-citation>
+        </ref>
+        <ref id="r9">
+          <label>9</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Wada</surname>
+            <given-names>H.</given-names>
+            </name><name>
+            <surname>Kamijoh</surname>
+            <given-names>T.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Room-temperature CW operation of InGaAsP
+            lasers on Si fabricated by wafer bonding</article-title>,&#x0201D; <source>IEEE Photon
+            Technol Lett</source> <volume>8</volume>, <fpage>173</fpage>-<lpage>175</lpage>,
+            (<year>1996</year>)<pub-id pub-id-type="doi">10.1109/68.484231</pub-id></mixed-citation>
+        </ref>
+        <ref id="r10">
+          <label>10</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Tewksbury</surname>
+            <given-names>S.T.</given-names>
+            </name><name>
+            <surname>Hornak</surname>
+            <given-names>L.A.</given-names>
+            </name><name>
+            <surname>Nariman</surname>
+            <given-names>H.E.</given-names>
+            </name><name>
+            <surname>McGinnis</surname>
+            <given-names>S.P.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Co-integration of optoelectronics and
+            submicrometer CMOS</article-title>,&#x0201D; <source>IEEE Trans Comp Hybrids Manuf
+            Technol</source> <volume>7</volume>, <fpage>674</fpage>-<lpage>685</lpage>,
+            (<year>1993</year>)<pub-id pub-id-type="doi">10.1109/33.257867</pub-id></mixed-citation>
+        </ref>
+        <ref id="r11">
+          <label>11</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Shenoy</surname>
+            <given-names>K.V.</given-names>
+            </name><name>
+            <surname>Fonstad</surname>
+            <given-names>C.G.</given-names>
+            </name><name>
+            <surname>Mikkelson</surname>
+            <given-names>J.M.</given-names>
+            </name></person-group>, &#x0201C;<article-title>High-temperature stability of
+            refractory-metal VLSI GaAs MESFET's</article-title>,&#x0201D; <source>IEEE Electron Dev
+            Lett</source> <volume>15</volume>, <fpage>106</fpage>-<lpage>108</lpage>,
+            (<year>1994</year>)<fpage>106</fpage>-<lpage>08</lpage>(99.<pub-id pub-id-type="doi"
+            >10.1109/55.285387</pub-id></mixed-citation>
+        </ref>
+        <ref id="r12">
+          <label>12</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Shimbo</surname>
+            <given-names>M.</given-names>
+            </name><name>
+            <surname>Furukawa</surname>
+            <given-names>K.</given-names>
+            </name><name>
+            <surname>Fukuda</surname>
+            <given-names>K.</given-names>
+            </name><name>
+            <surname>Tanzawa</surname>
+            <given-names>K.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Silicon-to-silicon direct bonding
+            method</article-title>,&#x0201D; <source>J Appl Phys</source> <volume>60</volume>,
+            <fpage>2987</fpage>-<lpage>2989</lpage>, (<year>1986</year>)<pub-id pub-id-type="doi"
+            >10.1063/1.337750</pub-id></mixed-citation>
+        </ref>
+        <ref id="r13">
+          <label>13</label>
+          <mixed-citation publication-type="confproc"><person-group person-group-type="author"><name>
+            <surname>Spierings</surname>
+            <given-names>GACM</given-names>
+            </name><name>
+            <surname>Haisma</surname>
+            <given-names>J.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Diversity and interfacial phenomena in
+            direct bonding</article-title>,&#x0201D; <conf-name>Proceedings of First International
+            Symposium on Semiconductor Wafer Bonding: Science, Technology, and
+            Applications</conf-name> (<publisher-name>Electrochemical Society</publisher-name>,
+            <conf-loc>Pennington, NJ</conf-loc>) Vol. 927<fpage>18</fpage>-<lpage>32</lpage>,
+            (<year>1992</year>)</mixed-citation>
+        </ref>
+        <ref id="r14">
+          <label>14</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Tong</surname>
+            <given-names>Q.-Y</given-names>
+            </name><name>
+            <surname>Schmidt</surname>
+            <given-names>E.</given-names>
+            </name><name>
+            <surname>Gosele</surname>
+            <given-names>U.</given-names>
+            </name><name>
+            <surname>Reiche</surname>
+            <given-names>M.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Hydrophobic silicon wafer
+            bonding</article-title>,&#x0201D; <source>Appl Phys Lett</source> <volume>64</volume>,
+            <fpage>625</fpage>-<lpage>627</lpage>, (<year>1994</year>)<pub-id pub-id-type="doi"
+            >10.1063/1.111070</pub-id></mixed-citation>
+        </ref>
+        <ref id="r15">
+          <label>15</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Bengtsson</surname>
+            <given-names>S.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Semiconductor Wafer Bonding: A review of
+            interfacial properties and applications</article-title>,&#x0201D; <source>J Electronic
+            Materials</source> <volume>21</volume>, <fpage>841</fpage>-<lpage>862</lpage>,
+            (<year>1992</year>)</mixed-citation>
+        </ref>
+        <ref id="r16">
+          <label>16</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Lehmann</surname>
+            <given-names>V.</given-names>
+            </name><name>
+            <surname>Mitani</surname>
+            <given-names>K.</given-names>
+            </name><name>
+            <surname>Stengl</surname>
+            <given-names>R.</given-names>
+            </name><name>
+            <surname>Mii</surname>
+            <given-names>T.</given-names>
+            </name><name>
+            <surname>G&#x000F6;sele</surname>
+            <given-names>U.</given-names>
+            </name></person-group>&#x0201D;<article-title>Bubble-free wafer bonding of GaAs and InP
+            on silicon in a microcleanroom</article-title>,&#x0201D; <source>Jpn J Appl
+            Phys</source> <volume>28</volume>, <fpage>L2141</fpage>-<lpage>L2143</lpage>,
+            (<year>1989</year>)<pub-id pub-id-type="doi"
+            >10.1143/JJAP.28.L2141</pub-id></mixed-citation>
+        </ref>
+        <ref id="r17">
+          <label>17</label>
+          <mixed-citation publication-type="journal"><person-group person-group-type="author"><name>
+            <surname>Wada</surname>
+            <given-names>H.</given-names>
+            </name><name>
+            <surname>Kamijoh</surname>
+            <given-names>T.</given-names>
+            </name></person-group>, &#x0201C;<article-title>Effects of heat treatment on bonding
+            properties in InP-to-Si direct wafer bonding</article-title>,&#x0201D; <source>Jpn J
+            Appl Phys</source> <volume>33</volume>, <fpage>4878</fpage>-<lpage>4879</lpage>,
+            (<year>1994</year>)<pub-id pub-id-type="doi"
+            >10.1143/JJAP.33.4878</pub-id></mixed-citation>
+        </ref>
+      </ref-list>
+    </back>
+  </book-part>
+</book-part-wrapper>

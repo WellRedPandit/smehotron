@@ -1,22 +1,21 @@
 import sbt._
 
 object V {
+//  val scala = "2.13.11"
+  val scala = "3.3.0"
+
   val betterFiles = "3.1.0"
   val commonsIo = "2.13.0"
   val typesafeConfig = "1.4.2"
   val hashids = "1.0.3"
   val jdom = "2.0.6.1"
   val logback = "1.2.12"
-  val scala = "2.13.11"
   val scalaCheck = "1.17.0"
   val scalaLogging = "3.9.5"
   val scalaTest = "3.2.16"
   val scalaXml = "2.2.0"
   val scopt = "4.1.0"
   val slf4j = "2.0.7"
-
-  val scalaXmlDiff = "3.0.1"
-  val scalaXmlCompare = "2.0.0"
 
   val tron = "1.13.1"
 }
@@ -37,9 +36,6 @@ object Dependencies {
   val jdom = "org.jdom" % "jdom2" % V.jdom
   val betterFiles = "com.github.pathikrit" %% "better-files" % V.betterFiles
   val hashids = "org.hashids" % "hashids" % V.hashids
-
-  val scalaXmlDiff = "com.github.andyglow" %% "scala-xml-diff" % V.scalaXmlDiff
-  val scalaXmlCompare = "software.purpledragon.xml" %% "xml-compare" % V.scalaXmlCompare
 
   def depsCompile(deps: Seq[ModuleID]): Seq[ModuleID] = deps map (_ % "compile")
 

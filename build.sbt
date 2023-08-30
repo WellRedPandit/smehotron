@@ -37,7 +37,7 @@ lazy val tron = Project(id = "smehotron", base = file("."))
   .settings(commonProjectSettings: _*)
   .settings(name := "smehotron",
     libraryDependencies ++=
-      depsCompile(typesafeConfig ++ slf4j ++ logback ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml ++ jdom ++ hashids ++ scalaXmlDiff ++ scalaXmlCompare) ++
+      depsCompile(typesafeConfig ++ slf4j ++ logback ++ scalaLogging ++ commonsIo ++ scopt ++ scalaXml ++ jdom ++ hashids) ++
         depsTest(scalaCheck ++ scalaTest),
     Test / console / initialCommands := """import wrp.smehotron._""",
     console / initialCommands :=

@@ -10,9 +10,8 @@ import org.jdom2.output.{Format, XMLOutputter}
 import org.slf4j.LoggerFactory
 
 import scala.annotation.tailrec
-import scala.collection.JavaConverters._
+import scala.jdk.CollectionConverters._
 import scala.xml.XML
-
 
 case class MainArgs(cfg: Option[File] = None,
                     root: Option[File] = None,
@@ -55,27 +54,6 @@ object Main extends LazyLogging {
       .text("log level (case insensitive): OFF, ERROR (default), WARN, INFO, DEBUG, TRACE, ALL")
   }
 
-  private def mkConfigForRulesXmlPair(rules: File, xml: File) = {
-    val r = rules.getAbsolutePath
-    val x = xml.getAbsolutePath
-    <smehotron>
-      <go>
-        <module name="_phony_">
-          <sch-driver>
-            {r}
-          </sch-driver>
-          <input-controls>
-            <input-control>
-              <source>
-                {x}
-              </source>
-            </input-control>
-          </input-controls>
-        </module>
-      </go>
-    </smehotron>
-  }
-
   @tailrec
   def findBase(e: Element): Option[String] = {
     val base = Option(e.getAttributeValue("base"))
@@ -115,8 +93,6 @@ object Main extends LazyLogging {
   }
 
   def main(args: Array[String]): Unit = {
-    wrp.smehotron.utils.WrpXmlDiff.compare()
-    wrp.smehotron.utils.WrpXmlDiff.diff()
     parser.parse(args, MainArgs()) match {
       case Some(opts) =>
         LoggerFactory.getILoggerFactory().asInstanceOf[LoggerContext].getLogger("wrp.smehotron").setLevel(opts.logLevel)

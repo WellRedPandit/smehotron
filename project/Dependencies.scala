@@ -1,7 +1,6 @@
 import sbt._
 
 object V {
-//  val scala = "2.13.11"
   val scala = "3.3.0"
 
   val betterFiles = "3.1.0"
@@ -9,7 +8,7 @@ object V {
   val typesafeConfig = "1.4.2"
   val hashids = "1.0.3"
   val jdom = "2.0.6.1"
-  val logback = "1.2.12"
+  val logback = "1.4.11"
   val scalaCheck = "1.17.0"
   val scalaLogging = "3.9.5"
   val scalaTest = "3.2.16"
@@ -25,8 +24,8 @@ object Dependencies {
   val typesafeConfig = "com.typesafe" % "config" % V.typesafeConfig
   val slf4j = "org.slf4j" % "slf4j-api" % V.slf4j
   val logback = Seq(
-    "ch.qos.logback" % "logback-classic" % V.logback
-//    "ch.qos.logback" % "logback-core" % V.logback
+    "ch.qos.logback" % "logback-classic" % V.logback,
+    "ch.qos.logback" % "logback-core" % V.logback
   )
   val scalaLogging = "com.typesafe.scala-logging" %% "scala-logging" % V.scalaLogging
   val scalaCheck = "org.scalacheck" %% "scalacheck" % V.scalaCheck

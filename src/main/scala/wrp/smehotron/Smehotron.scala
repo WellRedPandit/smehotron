@@ -39,7 +39,6 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>, keep: Boole
   }
 
   lazy val cats = (cfg \ "catalogs" \ "catalog").map(_.text)
-  val gashish = new org.hashids.Hashids("smehotron")
 
   def processModules() = {
     val goms = processGoModules()
@@ -207,7 +206,7 @@ class Smehotron(val theRoot: Option[Path], cfg: Elem = <smehotron/>, keep: Boole
       base ++ Vector(s"-catalog:${cats.mkString(";")}")
   }
 
-  private def log[T](value: T, f: T => String = { x: T => x.toString }) = {
+  private def log[T](value: T, f: T => String = { (x: T) => x.toString }) = {
     logger.debug(f(value))
     value
   }

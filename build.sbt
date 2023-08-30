@@ -5,16 +5,9 @@ import Dependencies._
 
 lazy val sharedScalacSettings = Seq(
   "-encoding", "UTF-8"
-  , "-g:vars"
   , "-feature"
   , "-unchecked"
   , "-deprecation"
-  , "-target:jvm-1.8"
-  , "-Xlog-reflective-calls"
-  //, "-Xlint"
-  , "-Ywarn-unused:-imports"
-  , "-Ywarn-value-discard"
-  //"-Xfatal-warnings" // be good!
 )
 
 val prompt = (state: State) => "%s> ".format(Project.extract(state).currentProject.id)
@@ -53,7 +46,7 @@ lazy val tron = Project(id = "smehotron", base = file("."))
     dist := {
       import java.nio.file._
       import java.nio.file.attribute.PosixFilePermission._
-      import scala.collection.JavaConverters._
+      import scala.jdk.CollectionConverters._
       import sys.process._
 
       val releaseDir = s"smehotron-${V.tron}"
